@@ -1,108 +1,245 @@
 class Character extends MovableObject {
 
-    height = 300;
-    width = 133;
-    y = 136;
-    speed = 7;
+    height = 120;
+    width = 137;
+    y = 310;
+    x = 222;
+    speed = 6;
+
+    // Hitbox
+    // offset = {
+    //     top: 12,
+    //     bottom: 15,
+    //     left: 88,
+    //     right: 70
+    // }
 
     offset = {
-        top: 120,
-        bottom: 30,
-        left: 40,
-        right: 30
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
     }
+
+    IMAGES_IDLE = [
+        'img/character/idle/idle-00.png',
+        'img/character/idle/idle-01.png',
+        'img/character/idle/idle-02.png',
+        'img/character/idle/idle-03.png',
+        'img/character/idle/idle-04.png',
+        'img/character/idle/idle-05.png',
+        'img/character/idle/idle-06.png',
+        'img/character/idle/idle-07.png',
+        'img/character/idle/idle-08.png',
+        'img/character/idle/idle-09.png',
+        'img/character/idle/idle-10.png',
+        'img/character/idle/idle-11.png',
+        'img/character/idle/idle-12.png',
+        'img/character/idle/idle-13.png',
+        'img/character/idle/idle-14.png',
+        'img/character/idle/idle-15.png',
+        'img/character/idle/idle-16.png',
+        'img/character/idle/idle-17.png',
+        'img/character/idle/idle-18.png',
+        'img/character/idle/idle-19.png',
+        'img/character/idle/idle-20.png',
+        'img/character/idle/idle-21.png',
+        'img/character/idle/idle-22.png',
+        'img/character/idle/idle-23.png',
+        'img/character/idle/idle-24.png'
+    ];
 
     IMAGES_WALKING = [
-        'img/2_character_pepe/2_walk/W-21.png',
-        'img/2_character_pepe/2_walk/W-22.png',
-        'img/2_character_pepe/2_walk/W-23.png',
-        'img/2_character_pepe/2_walk/W-24.png',
-        'img/2_character_pepe/2_walk/W-25.png',
-        'img/2_character_pepe/2_walk/W-26.png'
+        'img/character/walk/walk-00.png',
+        'img/character/walk/walk-01.png',
+        'img/character/walk/walk-02.png',
+        'img/character/walk/walk-03.png',
+        'img/character/walk/walk-04.png',
+        'img/character/walk/walk-05.png',
+        'img/character/walk/walk-06.png',
+        'img/character/walk/walk-07.png',
+        'img/character/walk/walk-08.png',
+        'img/character/walk/walk-09.png',
+        'img/character/walk/walk-10.png',
+        'img/character/walk/walk-11.png',
+        'img/character/walk/walk-12.png',
+        'img/character/walk/walk-13.png',
+        'img/character/walk/walk-14.png',
+        'img/character/walk/walk-15.png'
     ];
-
 
     IMAGES_JUMPING = [
-        'img/2_character_pepe/3_jump/J-31.png',
-        'img/2_character_pepe/3_jump/J-32.png',
-        'img/2_character_pepe/3_jump/J-33.png',
-        'img/2_character_pepe/3_jump/J-34.png',
-        'img/2_character_pepe/3_jump/J-35.png',
-        'img/2_character_pepe/3_jump/J-36.png',
-        'img/2_character_pepe/3_jump/J-37.png',
-        'img/2_character_pepe/3_jump/J-38.png',
-        'img/2_character_pepe/3_jump/J-39.png'
+        'img/character/jump/jump-00.png',
+        'img/character/jump/jump-01.png',
+        'img/character/jump/jump-02.png',
+        'img/character/jump/jump-03.png',
+        'img/character/jump/jump-04.png',
+        'img/character/jump/jump-05.png',
+        'img/character/jump/jump-06.png',
+        'img/character/jump/jump-07.png',
+        'img/character/jump/jump-08.png',
+        'img/character/jump/jump-09.png',
+        'img/character/jump/jump-10.png',
+        'img/character/jump/jump-11.png'
     ];
 
-    
-    IMAGES_DEAD = [
-        'img/2_character_pepe/5_dead/D-51.png',
-        'img/2_character_pepe/5_dead/D-52.png',
-        'img/2_character_pepe/5_dead/D-53.png',
-        'img/2_character_pepe/5_dead/D-54.png',
-        'img/2_character_pepe/5_dead/D-55.png',
-        'img/2_character_pepe/5_dead/D-56.png',
-        'img/2_character_pepe/5_dead/D-57.png'
+    IMAGES_THROW = [
+        'img/character/throw/throw-00.png',
+        'img/character/throw/throw-01.png',
+        'img/character/throw/throw-02.png',
+        'img/character/throw/throw-03.png',
+        'img/character/throw/throw-04.png',
+        'img/character/throw/throw-05.png',
+        'img/character/throw/throw-06.png',
+        'img/character/throw/throw-07.png',
+        'img/character/throw/throw-08.png',
+        'img/character/throw/throw-09.png'
     ];
 
+    IMAGES_PUNCH = [
+        'img/character/punch/punch-00.png',
+        'img/character/punch/punch-01.png',
+        'img/character/punch/punch-02.png',
+        'img/character/punch/punch-03.png',
+        'img/character/punch/punch-04.png',
+        'img/character/punch/punch-05.png',
+        'img/character/punch/punch-06.png',
+        'img/character/punch/punch-07.png',
+        'img/character/punch/punch-08.png',
+        'img/character/punch/punch-09.png'
+    ];
+
+    IMAGES_SHOOT = [
+        'img/character/shoot/shoot-00.png',
+        'img/character/shoot/shoot-01.png',
+        'img/character/shoot/shoot-02.png',
+        'img/character/shoot/shoot-03.png',
+        'img/character/shoot/shoot-04.png',
+        'img/character/shoot/shoot-05.png',
+        'img/character/shoot/shoot-06.png',
+        'img/character/shoot/shoot-07.png',
+        'img/character/shoot/shoot-08.png',
+        'img/character/shoot/shoot-09.png'
+    ];
+
+    IMAGES_DEFENSE = [
+        'img/character/defense/defense-00.png',
+        'img/character/defense/defense-01.png',
+        'img/character/defense/defense-02.png',
+        'img/character/defense/defense-03.png',
+        'img/character/defense/defense-04.png',
+        'img/character/defense/defense-05.png',
+        'img/character/defense/defense-06.png',
+        'img/character/defense/defense-07.png'
+    ];
 
     IMAGES_HURT = [
-        'img/2_character_pepe/4_hurt/H-41.png',
-        'img/2_character_pepe/4_hurt/H-42.png',
-        'img/2_character_pepe/4_hurt/H-43.png'
+        'img/character/hurt/hurt-00.png',
+        'img/character/hurt/hurt-01.png',
+        'img/character/hurt/hurt-02.png',
+        'img/character/hurt/hurt-03.png',
+        'img/character/hurt/hurt-04.png'
+    ];
+
+    IMAGES_DEAD = [
+        'img/character/die/die-00.png',
+        'img/character/die/die-01.png',
+        'img/character/die/die-02.png',
+        'img/character/die/die-03.png',
+        'img/character/die/die-04.png'
     ];
 
 
-    world;
+    
 
     constructor() {
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage('img/character/idle/idle-00.png');
 
+        this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_THROW);
+        this.loadImages(this.IMAGES_PUNCH);
+        this.loadImages(this.IMAGES_SHOOT);
+        this.loadImages(this.IMAGES_DEFENSE);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
+
         this.applyGravity();
-        this.animate();
 
+        this.intervals();
     }
 
-    animate() {
 
-        setInterval(() => {
-
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
-                this.characterMoveRight();
-            }
-            if (this.world.keyboard.LEFT && this.x > -500) {
-                this.characterMoveLeft();
-            }
-            
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.characterJump();
-            }
-
-            this.world.cameraX = -this.x + 100;
-        }, 1000 / 60);
-
-
-        setInterval(() => { 
-
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
-            }
-        }, 140);
+    intervals() {
+        setInterval(() => this.moveCharacter(), 1000 / 60);
+        setInterval(() => this.characterAnimation(), 80);
     }
 
+
+
+    moveCharacter() {
+
+        if (this.possibleMoveRight()) {
+            this.otherDirection = true;
+            this.moveRight();
+        }
+
+        if (this.possibleMoveLeft()) {
+            this.otherDirection = false;
+            this.moveLeft();
+        }
+
+        if (this.possibleJump()) {
+            this.jump();
+        }
+
+        this.world.cameraX = -this.x + 100;
+    }
+
+
+    possibleMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX && !this.lifePoints == 0;
+    }
+
+
+    possibleMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > -500 && !this.lifePoints == 0;
+    }
+
+
+    possibleJump() {
+        return this.world.keyboard.SPACE && !this.isAboveGround() && !this.lifePoints == 0;
+    }
+
+
+    characterAnimation() {
+
+        this.playAnimation(this.IMAGES_IDLE);
+        if (this.isDead()) {
+            this.dead();
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_JUMPING);
+        } else {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }
+    }
+
+    dead() {
+        this.playAnimationOneTime(this.IMAGES_DEAD);
+        this.speed = 0;
+    }
  
+
+
+    jump() {
+        this.speedY = 20;
+    }
+
 
 
 }

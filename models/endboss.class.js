@@ -1,18 +1,19 @@
 class Endboss extends MovableObject {
 
-    height = 300;
-    width = 270;
-    y = 145;
+    height = 320;
+    width = 280;
+    y = 130;
 
+    
     IMAGES_WALKING = [
-        'img/4_enemie_boss_chicken/2_alert/G5.png',
-        'img/4_enemie_boss_chicken/2_alert/G6.png',
-        'img/4_enemie_boss_chicken/2_alert/G7.png',
-        'img/4_enemie_boss_chicken/2_alert/G8.png',
-        'img/4_enemie_boss_chicken/2_alert/G9.png',
-        'img/4_enemie_boss_chicken/2_alert/G10.png',
-        'img/4_enemie_boss_chicken/2_alert/G11.png',
-        'img/4_enemie_boss_chicken/2_alert/G12.png'
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_000.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_001.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_002.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_003.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_004.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_005.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_006.png',
+        'img/alien-green/walk/__friendly_alien_green_skin_walk_007.png'
     ];
 
     constructor() {
@@ -25,7 +26,7 @@ class Endboss extends MovableObject {
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
-        }, 222);
+        }, 140);
     }
 
 }

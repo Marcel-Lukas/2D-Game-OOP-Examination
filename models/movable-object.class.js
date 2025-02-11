@@ -1,7 +1,7 @@
 class MovableObject extends DrawableObject {
 
     speed = 0.15;
-    otherDirection = false;
+    otherDirection = true;
     speedY = 0;
     acceleration = 1;
     lifePoints = 100;
@@ -27,7 +27,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) { // Throwable object should always fall
             return true;
         } else {
-        return this.y < 136;
+        return this.y < 310;
         }
     }
 
@@ -40,7 +40,7 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.lifePoints -= 2;
+        this.lifePoints -= 5;
         if(this.lifePoints < 0) {
             this.lifePoints = 0;
         } else {
@@ -66,31 +66,25 @@ class MovableObject extends DrawableObject {
     }
 
 
-    characterMoveRight() {
+    playAnimationOneTime(images) {
+        if (this.currentImage < images.length - 1) {
+            let path = images[this.currentImage];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        } else {
+            // Letztes Bild anzeigen und beibehalten
+            let path = images[images.length - 1];
+            this.img = this.imageCache[path];
+        }
+    }
+
+    
+    moveRight() {
         this.x += this.speed;
-        this.otherDirection = false;
     }
 
-    characterMoveLeft() {
+    moveLeft() {
         this.x -= this.speed;
-        this.otherDirection = true;
-    }
-
-    characterJump() {
-        this.speedY = 20;
-    }
-
-
-    enemiesMoveLeft() {
-        setInterval(() => {
-            this.x  -=this.speed;
-        },1000 / 60);
-    }
-
-    cloudMoveLeft() {
-        setInterval(() => {
-            this.x  -=this.speed;
-        },1000 / 180);
     }
 
 
