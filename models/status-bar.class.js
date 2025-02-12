@@ -1,13 +1,30 @@
 class StatusBar extends DrawableObject{
 
+
     IMAGES = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
+        'img/lifebar/lifebar-000.png',
+        'img/lifebar/lifebar-005.png',
+        'img/lifebar/lifebar-010.png',
+        'img/lifebar/lifebar-015.png',
+        'img/lifebar/lifebar-020.png',
+        'img/lifebar/lifebar-025.png',
+        'img/lifebar/lifebar-030.png',
+        'img/lifebar/lifebar-035.png',
+        'img/lifebar/lifebar-040.png',
+        'img/lifebar/lifebar-045.png',
+        'img/lifebar/lifebar-050.png',
+        'img/lifebar/lifebar-055.png',
+        'img/lifebar/lifebar-060.png',
+        'img/lifebar/lifebar-065.png',
+        'img/lifebar/lifebar-070.png',
+        'img/lifebar/lifebar-075.png',
+        'img/lifebar/lifebar-080.png',
+        'img/lifebar/lifebar-085.png',
+        'img/lifebar/lifebar-090.png',
+        'img/lifebar/lifebar-095.png',
+        'img/lifebar/lifebar-100.png'
     ];
+    
 
     percentage = 100;
 
@@ -15,9 +32,9 @@ class StatusBar extends DrawableObject{
         super();
         this.loadImages(this.IMAGES);
         this.x = 8;
-        this.y = -8;
-        this.width = 200;
-        this.height = 50;
+        this.y = 5;
+        this.width = 190;
+        this.height = 40;
         this.setPercentage(100);
     }
 
@@ -30,24 +47,12 @@ class StatusBar extends DrawableObject{
 
 
     resolveImageIndex() {
-        if(this.percentage == 100) {
-            return 5;
-        } else if (this.percentage > 80) {
-            return 4;
-        } else if (this.percentage > 60) {
-            return 3;
-        } else if (this.percentage > 40) {
-            return 2;
-        } else if (this.percentage > 20) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-
+        let index = Math.floor(this.percentage / 5);
+        if (index < 0) index = 0;
+        if (index > 20) index = 20;
     
-
+        return index;
+    }
 
 
 }
