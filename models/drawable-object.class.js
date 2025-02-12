@@ -21,9 +21,9 @@ class DrawableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof GreenAlien || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof BrainAlien || this instanceof GreenAlien || this instanceof Endboss) {
             ctx.beginPath();
-            ctx.lineWidth = "2";
+            ctx.lineWidth = "1";
             ctx.strokeStyle = "red";
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();

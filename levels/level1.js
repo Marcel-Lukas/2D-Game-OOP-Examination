@@ -9,9 +9,14 @@ function initLevel() {
         [
             new GreenAlien(),
             new GreenAlien(),
+            new BrainAlien(),
+            new GreenAlien(),
+            new BrainAlien(),
             new GreenAlien(),
             new GreenAlien(),
-            new GreenAlien(),
+            new BrainAlien(),
+            new BrainAlien(),
+            new BrainAlien(),
             new Endboss()
         ],
 
