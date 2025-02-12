@@ -7,6 +7,7 @@ class World {
     keyboard;
     cameraX = 0;
     statusBar = new StatusBar();
+    bossStatusBar = new BossStatusBar();
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -61,6 +62,7 @@ class World {
         this.ctx.translate(-this.cameraX, 0); // Baack
         // -------- Space for fixed objects --------
         this.addToMap(this.statusBar);
+        this.addToMap(this.bossStatusBar);
         this.ctx.translate(this.cameraX, 0); // Forwards
 
         this.addToMap(this.character);
