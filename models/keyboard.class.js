@@ -1,9 +1,8 @@
 class Keyboard {
-    LEFT = false;
     RIGHT = false;
-    UP = false;
+    LEFT = false;
     DOWN = false;
     SPACE = false;
-    D = false;
-
+    SHOOT = false;
+    THROW = false;
 }

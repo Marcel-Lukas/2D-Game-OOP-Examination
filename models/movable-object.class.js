@@ -58,6 +58,7 @@ class MovableObject extends DrawableObject {
         return this.lifePoints == 0;
     }
 
+
     playAnimation(images) {
         let index = this.currentImage % images.length;
         let path = images[index];

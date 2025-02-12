@@ -6,20 +6,14 @@ class Character extends MovableObject {
     x = 222;
     speed = 6;
 
-    // Hitbox
-    // offset = {
-    //     top: 12,
-    //     bottom: 15,
-    //     left: 88,
-    //     right: 70
-    // }
 
     offset = {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
+        top: 12,
+        bottom: 15,
+        left: 88,
+        right: 70
     }
+
 
     IMAGES_IDLE = [
         'img/character/idle/idle-00.png',
@@ -172,13 +166,12 @@ class Character extends MovableObject {
 
 
     intervals() {
-        setInterval(() => this.moveCharacter(), 1000 / 60);
+        setInterval(() => this.characterControls(), 1000 / 60);
         setInterval(() => this.characterAnimation(), 80);
     }
 
 
-
-    moveCharacter() {
+    characterControls() {
 
         if (this.possibleMoveRight()) {
             this.otherDirection = true;
@@ -213,33 +206,32 @@ class Character extends MovableObject {
     }
 
 
+
     characterAnimation() {
 
         this.playAnimation(this.IMAGES_IDLE);
         if (this.isDead()) {
-            this.dead();
+            this.playAnimationOneTime(this.IMAGES_DEAD); 
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
+        } else if (this.world.keyboard.THROW) {
+            this.playAnimation(this.IMAGES_THROW);
         } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            if (this.characterWalking()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }
     }
 
-    dead() {
-        this.playAnimationOneTime(this.IMAGES_DEAD);
-        this.speed = 0;
-    }
  
-
+    characterWalking() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+    }
 
     jump() {
-        this.speedY = 20;
+        this.speedY = 17;
     }
-
-
-
+    
 }

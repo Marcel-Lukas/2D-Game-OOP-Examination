@@ -12,48 +12,91 @@ function init() {
 
 
 window.addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case "d":
+            keyboard.RIGHT = true;
+            break;
+        case "a":
+            keyboard.LEFT = true;
+            break;
+        case "s":
+            keyboard.DOWN = true;
+            break;
 
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = true;
+
+        case "ArrowRight":
+            keyboard.RIGHT = true;
+            break;
+        case "ArrowLeft":
+            keyboard.LEFT = true;
+            break;
+        case "ArrowDown":
+            keyboard.DOWN = true;
+            break;
+
+
+        case "r":
+            keyboard.SHOOT = true;
+            break;
+        case "f":
+            keyboard.THROW = true;
+            break;
+
+
+        case " ":
+            keyboard.SPACE = true;
+            break;
+        case "ArrowUp":
+            keyboard.SPACE = true;
+            break;
+        case "w":
+            keyboard.SPACE = true;
+            break;
+
     }
-    if (event.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if (event.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if (event.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-    if (event.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-    if (event.keyCode == 68) {
-        keyboard.D = true;
-    }
-    
 });
 
 
 window.addEventListener("keyup", (event) => {
+    switch (event.key) {
+        case "d":
+            keyboard.RIGHT = false;
+            break;
+        case "a":
+            keyboard.LEFT = false;
+            break;
+        case "s":
+            keyboard.DOWN = false;
+            break;
 
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = false;
+
+        case "ArrowRight":
+            keyboard.RIGHT = false;
+            break;
+        case "ArrowLeft":
+            keyboard.LEFT = false;
+            break;
+        case "ArrowDown":
+            keyboard.DOWN = false;
+            break;
+
+
+        case "r":
+            keyboard.SHOOT = false;
+            break;
+        case "f":
+            keyboard.THROW = false;
+            break;
+
+
+        case " ":
+            keyboard.SPACE = false;
+            break;
+        case "ArrowUp":
+            keyboard.SPACE = false;
+            break;
+        case "w":
+            keyboard.SPACE = false;
+            break;
     }
-    if (event.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if (event.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if (event.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    if (event.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if (event.keyCode == 68) {
-        keyboard.D = false;
-    }
-    
 });
