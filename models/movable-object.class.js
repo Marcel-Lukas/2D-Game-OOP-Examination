@@ -2,6 +2,7 @@ class MovableObject extends DrawableObject {
 
     speed = 0.15;
     otherDirection = true;
+    static throwOtherDirection = false;
     speedY = 0;
     acceleration = 1;
     lifePoints = 100;
@@ -14,6 +15,7 @@ class MovableObject extends DrawableObject {
         right: 0
     }
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -24,8 +26,8 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // Throwable object should always fall
-            return true;
+        if (this instanceof ThrowableObject) {
+            return this.y < 355;
         } else {
         return this.y < 310;
         }

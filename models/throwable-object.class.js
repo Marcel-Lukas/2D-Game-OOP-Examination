@@ -1,4 +1,5 @@
 class ThrowableObject extends MovableObject{
+    world;
 
 
     IMAGES_EXPLOSION = [
@@ -14,7 +15,7 @@ class ThrowableObject extends MovableObject{
         'img/explosion/explosion-09.png'
     ];
 
-    
+
     IMAGES_ROTATION = [
         'img/grenade/grenade-00.png',
         'img/grenade/grenade-01.png',
@@ -31,24 +32,77 @@ class ThrowableObject extends MovableObject{
         'img/grenade/grenade-12.png'
     ];
 
+    isGrenadeExploded = false;
+    isGrenadeExplodedOnEnemy = false;
+    isGrenadeExplodedOnEndboss = false;
 
-    constructor(x, y) {
+
+    collisionBoxOffsetY = 20;
+    collisionBoxOffsetX = 20;
+    collisionBoxWidth = 20;
+    collisionBoxHeight = 20;
+
+
+    explosionHeight = 180;
+    explosionWidth = 235;
+
+    explosionHeightOnEnemy = 85;
+    explosionWidthOnEnemy = 111;
+
+    rotationHeight = 100;
+    rotationWidth = 70;
+
+    constructor(x, y, speed) {
         super().loadImage('img/grenade/grenade-12.png');
+        this.loadImages(this.IMAGES_EXPLOSION);
+        this.loadImages(this.IMAGES_ROTATION);
+
         this.x = x;
         this.y = y;
-        this.height = 70;
-        this.width = 60;
-        this.trow();
+
+        this.height = this.rotationHeight;
+        this.width = this.rotationWidth;
+
+        this.speed = speed;
+        this.speedY = 20;
+
+        this.applyGravity();
+        this.throw();
     }
     
 
-    trow() {
-        this.speedY = 20;
-        this.applyGravity();
+    throw() {
         setInterval( () => {
             this.x += 16;
         }, 65);
     }
+
+
+    // throw() {
+
+    //     this.lastInt = setInterval(() => {
+    //         this.throwAndAnimateGrenade(true); 
+    //     }, 65)
+    // }
+
+
+    // throwAndAnimateGrenade(throwDirection = true) {
+    //     if (throwDirection === false && !this.isGrenadeExploded) {
+    //         this.x += (this.speed + 1);
+    //         this.playAnimation(this.IMAGES_ROTATION);
+    //     } else if (throwDirection === true && !this.isGrenadeExploded) {
+    //         this.x -= (this.speed + 1);
+    //         this.playAnimation(this.IMAGES_ROTATION);
+    //     } else if (this.isGrenadeExploded === true && this.isGrenadeExplodedOnEndboss === true ) {
+    //         this.height = this.explosionHeight;
+    //         this.width = this.explosionWidth;
+    //         this.playAnimation(this.IMAGES_EXPLOSION);
+    //     } else if ( this.isGrenadeExplodedOnEnemy === true) {
+    //         this.height = this.explosionHeightOnEnemy;
+    //         this.width = this.explosionWidthOnEnemy;
+    //         this.playAnimation(this.IMAGES_EXPLOSION);
+    //     }
+    // }
 
 
 
