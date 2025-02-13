@@ -4,9 +4,10 @@ class Character extends MovableObject {
     width = 137;
     y = 310;
     x = 1030;
-    speed = 6;
+    speed = 22;
 
 
+    // Hitbox
     collisionBoxOffsetY = 10;
     collisionBoxOffsetX = 38;
     collisionBoxWidth = 50;

@@ -1,5 +1,5 @@
 class BrainAlien extends MovableObject {
-
+    world;
     y = 246;
     height = 190;
     width = 146;

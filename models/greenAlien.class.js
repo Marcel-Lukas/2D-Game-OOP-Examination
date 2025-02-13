@@ -1,5 +1,5 @@
 class GreenAlien extends MovableObject {
-
+    world;
     y = 288;
     height = 144;
     width = 116;

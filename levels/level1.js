@@ -2,13 +2,32 @@ let level1;
 
 function initLevel() { 
     level1 = new Level(
-        // endBoss =[new Endboss()],
-        placedItems = [],
+        enemies = [new GreenAlien(), new BrainAlien()],
+        endBoss = [new Endboss()],
         clouds = [],
-        backgroundObjects = []);
+        placedItems = [],
+        backgroundObjects = []
+        );
         
         createBackgroundObjects();
         createCloudObjects();
+        createGrenades();
+}
+
+
+function createGrenades() {
+    let repetitions = 3;
+    let offset = 1000;
+    for (let i = 0; i < repetitions; i+=2) {
+        this.placedItems.push(
+            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+1) * offset + 180),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+1) * offset + 470),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+1) * offset + 825),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+2) * offset, 360),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+2) * offset + 500),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+2) * offset + 680)
+        )
+    }
 }
 
 

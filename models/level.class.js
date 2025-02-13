@@ -1,17 +1,22 @@
 class Level {
     enemies;
+    endBoss;
+    placedItems;
     clouds;
     backgroundObjects;
-    endBoss;
     
     levelEndX = 5622;
     levelStartX = 222;
 
     
-    constructor(enemies, clouds, backgroundObjects, endBoss) {
+    constructor(enemies, endBoss, placedItems, clouds, backgroundObjects) {
         this.enemies = enemies;
-        this.clouds = clouds;
-        this.backgroundObjects = backgroundObjects;
         this.endBoss = endBoss;
+        this.placedItems = placedItems;
+        this.clouds = clouds;
+        this.backgroundObjects = backgroundObjects; 
     }
+
+
+
 }

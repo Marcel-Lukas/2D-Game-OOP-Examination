@@ -97,6 +97,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endBoss);
 
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
@@ -109,6 +110,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.bossStatusBar);
         this.addToMap(this.collectedGrenadeBar);
+        
     }
 
 
