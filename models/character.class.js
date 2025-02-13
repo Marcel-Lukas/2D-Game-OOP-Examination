@@ -3,7 +3,7 @@ class Character extends MovableObject {
     height = 120;
     width = 137;
     y = 310;
-    x = 222;
+    x = 1030;
     speed = 6;
 
 
@@ -197,7 +197,7 @@ class Character extends MovableObject {
 
 
     possibleMoveLeft() {
-        return this.world.keyboard.LEFT && this.x > -500 && !this.lifePoints == 0;
+        return this.world.keyboard.LEFT && this.x > this.world.level.levelStartX && !this.lifePoints == 0;
     }
 
 
