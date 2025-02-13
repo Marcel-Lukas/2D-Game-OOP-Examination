@@ -9,13 +9,6 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     currentImageLastPic = 0;
 
-    offset = {
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
-    }
-
 
     setThrowOtherDirection(boolean) {
         MovableObject.throwOtherDirection = boolean;
@@ -40,12 +33,20 @@ class MovableObject extends DrawableObject {
     }
 
 
-    isColliding(mo) {
-        return  this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-                this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-                this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-                this.y + this.offset.top < mo.y + mo.height -mo.offset.bottom
+    isColliding(obj) {
+        let thisRight = this.x + this.collisionBoxOffsetX + this.collisionBoxWidth;
+        let thisBottom = this.y + this.collisionBoxOffsetY + this.collisionBoxHeight;
+        let objRight = obj.x + obj.collisionBoxOffsetX + obj.collisionBoxWidth;
+        let objBottom = obj.y + obj.collisionBoxOffsetY + obj.collisionBoxHeight;
+    
+        return (
+            thisRight >= obj.x + obj.collisionBoxOffsetX &&
+            this.x + this.collisionBoxOffsetX <= objRight &&
+            thisBottom >= obj.y + obj.collisionBoxOffsetY &&
+            this.y + this.collisionBoxOffsetY <= objBottom
+        );
     }
+
 
     hit() {
         this.lifePoints -= 5;

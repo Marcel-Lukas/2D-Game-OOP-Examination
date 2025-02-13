@@ -4,7 +4,13 @@ class Endboss extends MovableObject {
     width = 280;
     y = 130;
 
-    
+    // Hitbox
+    collisionBoxOffsetY = 46;
+    collisionBoxOffsetX = 90;
+    collisionBoxWidth = 110;
+    collisionBoxHeight = 250;
+
+
     IMAGES_IDLE = [
         'img/endboss/idle/__grey_alien_black_jump_suit_idle_000.png',
         'img/endboss/idle/__grey_alien_black_jump_suit_idle_001.png',
@@ -110,6 +116,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
 
         this.x = 5425;
+
 
         this.animate();
     }

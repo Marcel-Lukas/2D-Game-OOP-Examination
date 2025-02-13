@@ -4,6 +4,13 @@ class BrainAlien extends MovableObject {
     height = 190;
     width = 146;
 
+
+    // Hitbox
+    collisionBoxOffsetY = 25;
+    collisionBoxOffsetX = 45;
+    collisionBoxWidth = 65;
+    collisionBoxHeight = 150;
+
     IMAGES_WALKING = [
         'img/brain_alien/walk/__green_alien_walk_000.png',
         'img/brain_alien/walk/__green_alien_walk_001.png',

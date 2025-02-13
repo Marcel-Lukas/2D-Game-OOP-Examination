@@ -3,6 +3,11 @@ class ThrowableObject extends MovableObject{
     height = 55;
     width = 55;
 
+    collisionBoxOffsetY = 0;
+    collisionBoxOffsetX = 0;
+    collisionBoxWidth = 55;
+    collisionBoxHeight = 55;
+
     IMAGES_EXPLOSION = [
         'img/explosion/explosion-00.png',
         'img/explosion/explosion-01.png',
@@ -35,10 +40,6 @@ class ThrowableObject extends MovableObject{
     ];
 
 
-    explosionHeight = 180;
-    explosionWidth = 220;
-
-
     constructor(x, y, speed) {
         super().loadImage('img/grenade/grenade-12.png');
         this.loadImages(this.IMAGES_EXPLOSION);
@@ -64,6 +65,8 @@ class ThrowableObject extends MovableObject{
     }
 
 
+    explosionHeight = 200;
+    explosionWidth = 200;
 
     throwAndAnimateGrenade(throwDirection) {
         if (throwDirection === false) {
@@ -74,6 +77,7 @@ class ThrowableObject extends MovableObject{
                 this.x -= 16;
                 // this.height = this.explosionHeight;
                 // this.width = this.explosionWidth;
+                // this.y -= 145;
                 this.playAnimationGrenade(this.IMAGES_EXPLOSION, 33);
             }
         } else {

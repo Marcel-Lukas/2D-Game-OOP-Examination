@@ -7,12 +7,10 @@ class Character extends MovableObject {
     speed = 6;
 
 
-    offset = {
-        top: 12,
-        bottom: 15,
-        left: 88,
-        right: 70
-    }
+    collisionBoxOffsetY = 10;
+    collisionBoxOffsetX = 38;
+    collisionBoxWidth = 50;
+    collisionBoxHeight = 100;
 
 
     IMAGES_IDLE = [

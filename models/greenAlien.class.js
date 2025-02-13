@@ -4,6 +4,14 @@ class GreenAlien extends MovableObject {
     height = 144;
     width = 116;
 
+
+    // Hitbox
+    collisionBoxOffsetY = 25;
+    collisionBoxOffsetX = 35;
+    collisionBoxWidth = 55;
+    collisionBoxHeight = 110;
+
+
     IMAGES_WALKING = [
         'img/alien-green/walkgun/__friendly_alien_green_skin_walk_with_gun_000.png',
         'img/alien-green/walkgun/__friendly_alien_green_skin_walk_with_gun_001.png',
@@ -23,6 +31,7 @@ class GreenAlien extends MovableObject {
 
         this.x = 720 + Math.random() * 4444;
         this.speed = 0.15 + Math.random() * 0.25;
+
 
         this.animate();
     }
