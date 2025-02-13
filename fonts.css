@@ -1,0 +1,9 @@
+/* KuaiLe Regular */
+
+@font-face {
+    font-display: swap;
+    font-family: 'KuaiLe';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/ZCOOLKuaiLe-Regular.ttf') format('woff2');
+}

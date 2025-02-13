@@ -7,12 +7,18 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     lifePoints = 100;
     lastHit = 0;
+    currentImageLastPic = 0;
 
     offset = {
         top: 0,
         bottom: 0,
         left: 0,
         right: 0
+    }
+
+
+    setThrowOtherDirection(boolean) {
+        MovableObject.throwOtherDirection = boolean;
     }
 
 
@@ -27,7 +33,7 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            return this.y < 355;
+            return this.y < 358;
         } else {
         return this.y < 310;
         }
@@ -68,7 +74,24 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    
+    playAnimationGrenade(images, runthrough) {
+        if (this.runCount === undefined) {
+            this.runCount = 0;
+        }
+    
+        if (this.runCount < runthrough) {
+            let index = this.currentImage % images.length;
+            let path = images[index];
+            this.img = this.imageCache[path];
+            
+            this.currentImage++;
+            this.runCount++;
+        }
+    }
 
+
+    // for die animation
     playAnimationOneTime(images) {
         if (this.currentImage < images.length - 1) {
             let path = images[this.currentImage];

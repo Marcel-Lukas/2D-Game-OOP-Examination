@@ -175,11 +175,13 @@ class Character extends MovableObject {
 
         if (this.possibleMoveRight()) {
             this.otherDirection = true;
+            this.setThrowOtherDirection(false);
             this.moveRight();
         }
 
         if (this.possibleMoveLeft()) {
             this.otherDirection = false;
+            this.setThrowOtherDirection(true);
             this.moveLeft();
         }
 
@@ -216,7 +218,7 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
-        } else if (this.world.keyboard.THROW) {
+        } else if (this.world.keyboard.THROW && !this.world.collectedGrenadeBar.collectedGrenades.length == 0) {
             this.playAnimation(this.IMAGES_THROW);
         } else {
             if (this.characterWalking()) {
