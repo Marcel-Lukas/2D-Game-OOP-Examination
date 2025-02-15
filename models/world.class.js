@@ -39,7 +39,7 @@ class World {
     possibleToThrow() {
         return this.keyboard.THROW && 
         !this.character.lifePoints == 0 && 
-        !this.hasThrownGrenade && 
+        !this.hasThrownGrenade &&
         this.collectedGrenadeBar.collectedGrenades.length > 0;
     }
 
@@ -96,10 +96,10 @@ class World {
         this.ctx.translate(this.cameraX, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.grenadeAmmunition);
         this.addObjectsToMap(this.level.pistolAmmunition);
         this.addObjectsToMap(this.level.health);
-        this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
 
         this.addObjectsToMap(this.throwableObjects);

@@ -89,19 +89,6 @@ class Character extends MovableObject {
         'img/character/throw/throw-09.png'
     ];
 
-    IMAGES_PUNCH = [
-        'img/character/punch/punch-00.png',
-        'img/character/punch/punch-01.png',
-        'img/character/punch/punch-02.png',
-        'img/character/punch/punch-03.png',
-        'img/character/punch/punch-04.png',
-        'img/character/punch/punch-05.png',
-        'img/character/punch/punch-06.png',
-        'img/character/punch/punch-07.png',
-        'img/character/punch/punch-08.png',
-        'img/character/punch/punch-09.png'
-    ];
-
     IMAGES_SHOOT = [
         'img/character/shoot/shoot-00.png',
         'img/character/shoot/shoot-01.png',
@@ -143,8 +130,6 @@ class Character extends MovableObject {
     ];
 
 
-    
-
     constructor() {
         super().loadImage('img/character/idle/idle-00.png');
 
@@ -152,23 +137,53 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_THROW);
-        this.loadImages(this.IMAGES_PUNCH);
         this.loadImages(this.IMAGES_SHOOT);
         this.loadImages(this.IMAGES_DEFENSE);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
 
         this.applyGravity();
-
-        this.intervals();
+        this.run();
     }
 
 
-    intervals() {
-        setInterval(() => this.characterControls(), 1000 / 60);
-        setInterval(() => this.characterAnimation(), 80);
+    run() {
+        setInterval(() => {
+            this.characterControls();
+            this.characterAnimation();
+        }, 1000 / 60);
     }
 
+
+    characterjump() {
+        this.speedY = 17;
+    }
+
+
+    possibleMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX && !this.lifePoints == 0;
+    }
+
+
+    possibleMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > this.world.level.levelStartX && !this.lifePoints == 0;
+    }
+
+
+    possibleJump() {
+        return this.world.keyboard.SPACE && !this.isAboveGround() && !this.lifePoints == 0 && !this.isHurt();
+    }
+
+
+    possibleToShoot() {
+        return this.world.keyboard.SHOOT && !this.isHurt() && !this.lifePoints == 0 && !this.isHurt();
+    }
+
+
+    possibleToDefens() {
+        return this.world.keyboard.DOWN && !this.isHurt() && !this.lifePoints == 0;
+    }
+    
 
     characterControls() {
 
@@ -185,54 +200,99 @@ class Character extends MovableObject {
         }
 
         if (this.possibleJump()) {
-            this.jump();
+            this.characterjump();
+        }
+
+        if (this.possibleToShoot()) {
+            this.isCharacterShooting();
+        }
+
+        if (this.possibleToDefens()) {
+            this.isCharacterDefense();
         }
 
         this.world.cameraX = -this.x + 100;
     }
 
 
-    possibleMoveRight() {
-        return this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX && !this.lifePoints == 0;
-    }
+    lastFrameTime = 0;
+    currentImage = 0;
+
+    animationSpeeds = {
+        idle: 70,
+        walking: 36,
+        jumping: 101,
+        throw: 58,
+        shoot: 76,
+        defense: 111,
+        hurt: 99
+    };
 
 
-    possibleMoveLeft() {
-        return this.world.keyboard.LEFT && this.x > this.world.level.levelStartX && !this.lifePoints == 0;
-    }
+    playAnimationCharacter(images, animationKey) {
+        let speed = this.animationSpeeds[animationKey];
+        let now = Date.now();
 
-
-    possibleJump() {
-        return this.world.keyboard.SPACE && !this.isAboveGround() && !this.lifePoints == 0;
-    }
-
-
-
-    characterAnimation() {
-
-        this.playAnimation(this.IMAGES_IDLE);
-        if (this.isDead()) {
-            this.playAnimationOneTime(this.IMAGES_DEAD); 
-        } else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
-        } else if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_JUMPING);
-        } else if (this.world.keyboard.THROW && !this.world.collectedGrenadeBar.collectedGrenades.length == 0) {
-            this.playAnimation(this.IMAGES_THROW);
-        } else {
-            if (this.characterWalking()) {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
+        if (now - this.lastFrameTime > speed) {
+            this.lastFrameTime = now;
+            
+            let index = this.currentImage % images.length;
+            let path = images[index];
+            this.img = this.imageCache[path];
+            this.currentImage++;
         }
     }
 
- 
-    characterWalking() {
+
+    characterAnimation() {
+        if (this.isDead()) {
+            this.playAnimationOneTime(this.IMAGES_DEAD);
+
+        } else if (this.isHurt()) {
+            this.speed = 1;
+            this.playAnimationCharacter(this.IMAGES_HURT, 'hurt');
+
+        } else if (this.isAboveGround()) {
+            this.playAnimationCharacter(this.IMAGES_JUMPING, 'jumping');
+
+        } else if (this.isCharacterThrowing()) {
+            this.playAnimationCharacter(this.IMAGES_THROW, 'throw');
+
+        } else if (this.isCharacterWalking()) {
+            this.speed = 6;
+            this.playAnimationCharacter(this.IMAGES_WALKING, 'walking');
+
+        } else if (this.isCharacterShooting()) {
+            this.playAnimationCharacter(this.IMAGES_SHOOT, 'shoot');
+
+        } else if (this.isCharacterDefense()) {
+            this.playAnimationCharacter(this.IMAGES_DEFENSE, 'defense');
+
+        } else {
+            this.playAnimationCharacter(this.IMAGES_IDLE, 'idle');
+        }
+    }
+
+
+    isCharacterWalking() {
         return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
     }
 
-    jump() {
-        this.speedY = 17;
+
+    isCharacterShooting() {
+        return this.world.keyboard.SHOOT;
+    }
+
+
+    isCharacterDefense() {
+        return this.world.keyboard.DOWN;
+    }
+
+
+    isCharacterThrowing() {
+        return this.world.keyboard.THROW && this.world.collectedGrenadeBar.collectedGrenades.length > 0;
     }
     
+
+
 }

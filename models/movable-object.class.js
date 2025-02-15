@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-
     speed = 0.15;
     otherDirection = true;
     static throwOtherDirection = false;
@@ -53,7 +52,6 @@ class MovableObject extends DrawableObject {
     }
       
 
-
     hit() {
         this.lifePoints -= 5;
         if(this.lifePoints < 0) {
@@ -63,11 +61,13 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
-        timepassed = timepassed / 1000; // Difference in s
-        return timepassed < 0.600;
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 0.777;
     }
+
 
     isDead() {
         return this.lifePoints == 0;
