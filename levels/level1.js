@@ -1,61 +1,102 @@
-let level1; 
+let level1;
 
-function initLevel() { 
+function initLevel() {
+
     level1 = new Level(
-        enemies = [new GreenAlien(), new BrainAlien()],
-        endBoss = [new Endboss()],
-        clouds = [],
-        placedItems = [],
-        backgroundObjects = []
-        );
-        
-        createBackgroundObjects();
-        createCloudObjects();
-        createGrenades();
-}
+        [
+            new GreenAlien(1630),
+            new GreenAlien(2000),
+            new GreenAlien(2150),
+            new GreenAlien(2600),
+            new BrainAlien(2700),
+            new GreenAlien(3200),
+            new GreenAlien(3450),
+            new GreenAlien(3700),
+            new BrainAlien(3750),
+            new BrainAlien(3850),
+            new GreenAlien(4300),
+            new BrainAlien(4400),
+            new GreenAlien(4800),
+            new GreenAlien(5050),
+            new BrainAlien(5150),
+            new GreenAlien(5250),
+            new BrainAlien(5400),
+            new GreenAlien(5650),
+            new GreenAlien(5800),
+            new GreenAlien(5950),
+            new BrainAlien(6100),
+            new GreenAlien(6280),
+            new BrainAlien(6420),
+            new GreenAlien(6540),
+            new GreenAlien(6700),
+            new BrainAlien(6900),
+            new Endboss()
+        ],
+        [
+            new Cloud('img/background/4_clouds/2.png', 300),
+            new Cloud('img/background/4_clouds/1.png', 900),
+            new Cloud('img/background/4_clouds/2.png', 1500),
+            new Cloud('img/background/4_clouds/1.png', 2050),
+            new Cloud('img/background/4_clouds/2.png', 2600),
+            new Cloud('img/background/4_clouds/1.png', 3200),
+            new Cloud('img/background/4_clouds/2.png', 3850),
+            new Cloud('img/background/4_clouds/1.png', 4444),
+            new Cloud('img/background/4_clouds/2.png', 5100),
+            new Cloud('img/background/4_clouds/1.png', 5700),
+            new Cloud('img/background/4_clouds/2.png', 6200),
+            new Cloud('img/background/4_clouds/1.png', 6800)
+        ],
+        [
+            new BackgroundObject('img/background/air.png', -720),
+            new BackgroundObject('img/background/3_third_layer/1.png', -720),
+            new BackgroundObject('img/background/2_second_layer/1.png', -720),
+            new BackgroundObject('img/background/1_first_layer/1.png', -720),
 
+            new BackgroundObject('img/background/air.png', 0),
+            new BackgroundObject('img/background/3_third_layer/2.png', 0),
+            new BackgroundObject('img/background/2_second_layer/2.png', 0),
+            new BackgroundObject('img/background/1_first_layer/2.png', 0),
 
-function createGrenades() {
-    let repetitions = 3;
-    let offset = 1000;
-    for (let i = 0; i < repetitions; i+=2) {
-        this.placedItems.push(
-            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+1) * offset + 180),
-            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+1) * offset + 470),
-            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+1) * offset + 825),
-            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+2) * offset, 360),
-            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+2) * offset + 500),
-            new GrenadeAmmunition('img/grenade/grenade-00.png', (i+2) * offset + 680)
-        )
-    }
-}
+            new BackgroundObject('img/background/air.png', 720),
+            new BackgroundObject('img/background/3_third_layer/1.png', 720),
+            new BackgroundObject('img/background/2_second_layer/1.png', 720),
+            new BackgroundObject('img/background/1_first_layer/1.png', 720),
 
+            new BackgroundObject('img/background/air.png', 720 * 2),
+            new BackgroundObject('img/background/3_third_layer/2.png', 720 * 2),
+            new BackgroundObject('img/background/2_second_layer/2.png', 720 * 2),
+            new BackgroundObject('img/background/1_first_layer/2.png', 720 * 2),
 
-function createCloudObjects() {
-    let repetitions = 20;
-    for (let i = 0; i < repetitions; i += 2) {
-        this.clouds.push(
-            new Cloud("img/5_background/layers/4_clouds/1.png", i * 480),
-            new Cloud("img/5_background/layers/4_clouds/2.png", (i + 1) * 480),
-        );
-    }
-}
+            new BackgroundObject('img/background/air.png', 720 * 3),
+            new BackgroundObject('img/background/3_third_layer/1.png', 720 * 3),
+            new BackgroundObject('img/background/2_second_layer/1.png', 720 * 3),
+            new BackgroundObject('img/background/1_first_layer/1.png', 720 * 3),
 
+            new BackgroundObject('img/background/air.png', 720 * 4),
+            new BackgroundObject('img/background/3_third_layer/2.png', 720 * 4),
+            new BackgroundObject('img/background/2_second_layer/2.png', 720 * 4),
+            new BackgroundObject('img/background/1_first_layer/2.png', 720 * 4),
 
-function createBackgroundObjects() {
-    let repetitions = 9;
-    for (let i = 0; i < repetitions; i += 2) {
-        this.backgroundObjects.push(
-            
-            new BackgroundObject("img/5_background/layers/air.png", i * 720),
-            new BackgroundObject("img/5_background/layers/3_third_layer/1.png", i * 720),
-            new BackgroundObject("img/5_background/layers/2_second_layer/1.png", i * 720),
-            new BackgroundObject("img/5_background/layers/1_first_layer/1.png", i * 720),
+            new BackgroundObject('img/background/air.png', 720 * 5),
+            new BackgroundObject('img/background/3_third_layer/1.png', 720 * 5),
+            new BackgroundObject('img/background/2_second_layer/1.png', 720 * 5),
+            new BackgroundObject('img/background/1_first_layer/1.png', 720 * 5),
 
-            new BackgroundObject("img/5_background/layers/air.png", (i + 1) * 720),
-            new BackgroundObject("img/5_background/layers/3_third_layer/2.png", (i + 1) * 720),
-            new BackgroundObject("img/5_background/layers/2_second_layer/2.png", (i + 1) * 720),
-            new BackgroundObject("img/5_background/layers/1_first_layer/2.png", (i + 1) * 720)
-        );
-    }
+            new BackgroundObject('img/background/air.png', 720 * 6),
+            new BackgroundObject('img/background/3_third_layer/2.png', 720 * 6),
+            new BackgroundObject('img/background/2_second_layer/2.png', 720 * 6),
+            new BackgroundObject('img/background/1_first_layer/2.png', 720 * 6),
+
+            new BackgroundObject('img/background/air.png', 720 * 7),
+            new BackgroundObject('img/background/3_third_layer/1.png', 720 * 7),
+            new BackgroundObject('img/background/2_second_layer/1.png', 720 * 7),
+            new BackgroundObject('img/background/1_first_layer/1.png', 720 * 7),
+
+            new BackgroundObject('img/background/air.png', 720 * 8),
+            new BackgroundObject('img/background/3_third_layer/2.png', 720 * 8),
+            new BackgroundObject('img/background/2_second_layer/2.png', 720 * 8),
+            new BackgroundObject('img/background/1_first_layer/2.png', 720 * 8),
+        ]
+    );
+
 }

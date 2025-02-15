@@ -21,17 +21,29 @@ class DrawableObject {
 
 
 
-    drawFrame(ctx){
+    drawFrameCollisionBox(ctx) {
         if (this instanceof Character || this instanceof BrainAlien || 
             this instanceof GreenAlien || this instanceof Endboss || 
             this instanceof ThrowableObject || this instanceof GrenadeAmmunition) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.x + this.collisionBoxOffsetX, this.y + this. collisionBoxOffsetY, 
-                this.collisionBoxWidth, this.collisionBoxHeight);
+            ctx.rect(this.x + this.collisionBoxOffsetX, this.y + this.collisionBoxOffsetY, 
+            this.collisionBoxWidth, this.collisionBoxHeight);
             ctx.stroke();
         } 
+    }
+
+    drawFrameOutside(ctx) {
+        if (this instanceof Character || this instanceof BrainAlien || 
+            this instanceof GreenAlien || this instanceof Endboss || 
+            this instanceof ThrowableObject || this instanceof GrenadeAmmunition) {
+            ctx.beginPath();
+            ctx.lineWidth = "1";
+            ctx.strokeStyle = "blue";
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
     }
 
 

@@ -4,7 +4,7 @@ class Character extends MovableObject {
     width = 137;
     y = 310;
     x = 1030;
-    speed = 22;
+    speed = 6;
 
 
     // Hitbox

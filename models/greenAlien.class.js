@@ -1,8 +1,8 @@
 class GreenAlien extends MovableObject {
-    world;
-    y = 288;
+
     height = 144;
     width = 116;
+    y = 288;
 
 
     // Hitbox
@@ -24,23 +24,24 @@ class GreenAlien extends MovableObject {
     ];
 
 
-    constructor() {
-        super().loadImage('img/alien-green/walkgun/__friendly_alien_green_skin_walk_with_gun_000.png');
-
+    constructor(x) {
+        super().loadImage('img/alien-green/walkgun/__friendly_alien_green_skin_walk_with_gun_001.png');
         this.loadImages(this.IMAGES_WALKING);
 
-        this.x = 720 + Math.random() * 4444;
-        this.speed = 0.15 + Math.random() * 0.25;
+        this.x = x;
 
+        this.speed = 0.20 + Math.random() * 0.4;
 
         this.animate();
     }
 
     
     animate() {
-
         setInterval(() => {
             this.moveLeft();
+            if (this.x < level1.levelStartX - 555) {
+                this.x = level1.levelEndX + 400;
+            }
         }, 1000 / 60);
 
         setInterval(() => {

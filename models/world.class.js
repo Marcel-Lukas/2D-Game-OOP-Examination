@@ -1,5 +1,5 @@
 class World {
-
+    
     character = new Character();
     level = level1;
     ctx;
@@ -17,6 +17,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
+        
         this.setWorld();
         this.runIntervals();
     }
@@ -97,8 +98,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.endBoss);
-
+        
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
 
@@ -126,7 +126,8 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        mo.drawFrameCollisionBox(this.ctx);
+        mo.drawFrameOutside(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

@@ -3,6 +3,7 @@ class ThrowableObject extends MovableObject{
     height = 55;
     width = 55;
 
+    // Hitbox
     collisionBoxOffsetY = 0;
     collisionBoxOffsetX = 0;
     collisionBoxWidth = 55;

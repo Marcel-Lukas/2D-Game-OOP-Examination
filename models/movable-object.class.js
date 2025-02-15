@@ -34,18 +34,24 @@ class MovableObject extends DrawableObject {
 
 
     isColliding(obj) {
-        let thisRight = this.x + this.collisionBoxOffsetX + this.collisionBoxWidth;
-        let thisBottom = this.y + this.collisionBoxOffsetY + this.collisionBoxHeight;
-        let objRight = obj.x + obj.collisionBoxOffsetX + obj.collisionBoxWidth;
-        let objBottom = obj.y + obj.collisionBoxOffsetY + obj.collisionBoxHeight;
-    
+        let thisLeft = this.x + this.collisionBoxOffsetX;
+        let thisTop = this.y + this.collisionBoxOffsetY;
+        let thisRight = thisLeft + this.collisionBoxWidth;
+        let thisBottom = thisTop + this.collisionBoxHeight;
+        
+        let objLeft = obj.x + obj.collisionBoxOffsetX;
+        let objTop = obj.y + obj.collisionBoxOffsetY;
+        let objRight = objLeft + obj.collisionBoxWidth;
+        let objBottom = objTop + obj.collisionBoxHeight;
+        
         return (
-            thisRight >= obj.x + obj.collisionBoxOffsetX &&
-            this.x + this.collisionBoxOffsetX <= objRight &&
-            thisBottom >= obj.y + obj.collisionBoxOffsetY &&
-            this.y + this.collisionBoxOffsetY <= objBottom
+          thisRight >= objLeft &&
+          thisLeft <= objRight &&
+          thisBottom >= objTop &&
+          thisTop <= objBottom
         );
     }
+      
 
 
     hit() {
