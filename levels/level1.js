@@ -47,6 +47,41 @@ function initLevel() {
             new Cloud('img/background/4_clouds/1.png', 6800)
         ],
         [
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 650),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 700),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 750),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 800),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 1350),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 1600),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 2000),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 2500),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 2570),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 2950),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 3400),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 3900),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 4200),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 4260),
+            new GrenadeAmmunition('img/grenade/grenade-00.png', 4644)
+        ],
+        [
+            new PistolAmmunition(280, 382),
+            new PistolAmmunition(330, 382),
+            new PistolAmmunition(380, 382),
+            new PistolAmmunition(430, 382),
+            new PistolAmmunition(1250, 200),
+            new PistolAmmunition(1860, 200),
+            new PistolAmmunition(2250, 220),
+            new PistolAmmunition(3100, 200),
+            new PistolAmmunition(3640, 200),
+            new PistolAmmunition(4780, 200)
+        ],
+        [
+            new Health(545, 220),
+            new Health(1100, 120),
+            new Health(2700, 170),
+            new Health(4400, 220)
+        ],
+        [
             new BackgroundObject('img/background/air.png', -720),
             new BackgroundObject('img/background/3_third_layer/1.png', -720),
             new BackgroundObject('img/background/2_second_layer/1.png', -720),
@@ -95,7 +130,7 @@ function initLevel() {
             new BackgroundObject('img/background/air.png', 720 * 8),
             new BackgroundObject('img/background/3_third_layer/2.png', 720 * 8),
             new BackgroundObject('img/background/2_second_layer/2.png', 720 * 8),
-            new BackgroundObject('img/background/1_first_layer/2.png', 720 * 8),
+            new BackgroundObject('img/background/1_first_layer/2.png', 720 * 8)
         ]
     );
 

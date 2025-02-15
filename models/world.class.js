@@ -96,9 +96,12 @@ class World {
         this.ctx.translate(this.cameraX, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.grenadeAmmunition);
+        this.addObjectsToMap(this.level.pistolAmmunition);
+        this.addObjectsToMap(this.level.health);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        
+
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
 

@@ -1,18 +1,20 @@
 class GrenadeAmmunition extends MovableObject{
     height = 50;
     width = 50;
-    y = 380;
+    y = 376;
 
     // Hitbox
-    collisionBoxOffsetY = 5;
-    collisionBoxOffsetX = 8;
-    collisionBoxWidth = 30;
-    collisionBoxHeight = 40;
+    collisionBoxOffsetY = -4;
+    collisionBoxOffsetX = -4;
+    collisionBoxWidth = 58;
+    collisionBoxHeight = 58;
 
 
-    constructor(img, x) {
-        super().loadImage(img);
+    constructor(imagePath, x) {
+        super().loadImage(imagePath);
+
         this.x = x;
     }
+
 
 }
