@@ -176,7 +176,7 @@ class Character extends MovableObject {
 
 
     possibleToShoot() {
-        return this.world.keyboard.SHOOT && !this.isHurt() && !this.lifePoints == 0 && !this.isHurt();
+        return this.world.keyboard.SHOOT && !this.isHurt() && !this.lifePoints == 0 && this.world.collectedPistolAmmunitionBar.collectedPistolAmmunition.length > 0;
     }
 
 
@@ -223,7 +223,7 @@ class Character extends MovableObject {
         walking: 36,
         jumping: 101,
         throw: 58,
-        shoot: 76,
+        shoot: 33,
         defense: 111,
         hurt: 99
     };
@@ -280,7 +280,7 @@ class Character extends MovableObject {
 
 
     isCharacterShooting() {
-        return this.world.keyboard.SHOOT;
+        return this.world.keyboard.SHOOT && this.world.collectedPistolAmmunitionBar.collectedPistolAmmunition.length > 0;
     }
 
 

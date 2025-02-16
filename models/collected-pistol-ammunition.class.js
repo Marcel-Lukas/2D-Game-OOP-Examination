@@ -1,13 +1,13 @@
-class CollectedGrenades extends DrawableObject {
+class CollectedPistolAmmunition extends DrawableObject {
 
-    collectedGrenades = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    collectedPistolAmmunition = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
 
     constructor() {
         super();
-        this.loadImage("img/grenade/grenade-00.png");
-        this.x = 0;
-        this.y = 44;
+        this.loadImage("img/pistol/pistol-ammunition-07.png");
+        this.x = 1;
+        this.y = 92;
         this.width = 55;
         this.height = 55;
     }
@@ -23,7 +23,7 @@ class CollectedGrenades extends DrawableObject {
         ctx.shadowOffsetX = 1;
         ctx.shadowOffsetY = 1;
 
-        this.text = "x " + this.collectedGrenades.length;
+        this.text = "x " + this.collectedPistolAmmunition.length;
         ctx.fillText(this.text, this.x + 50, this.y + 41);
 
         // Shadow zurücksetzen

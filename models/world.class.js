@@ -9,7 +9,9 @@ class World {
     statusBar = new StatusBar();
     bossStatusBar = new BossStatusBar();
     collectedGrenadeBar = new CollectedGrenades();
+    collectedPistolAmmunitionBar = new CollectedPistolAmmunition();
     throwableObjects = [];
+    shootableObjects = [];
 
 
     constructor(canvas, keyboard) {
@@ -32,6 +34,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkBulletObjects();
         }, 80);
     }
 
@@ -63,10 +66,42 @@ class World {
                 this.throwableObjects.splice(i, 1);
             }
         }  
-        console.log('Grenades: ' , this.collectedGrenadeBar.collectedGrenades.length);
+        console.log('Grenades: ', this.collectedGrenadeBar.collectedGrenades.length);
     }
 
+// ##################
 
+
+    possibleToShoot() {
+        return this.keyboard.SHOOT && 
+        !this.character.lifePoints == 0 &&
+        !this.hasShoot &&
+        this.collectedPistolAmmunitionBar.collectedPistolAmmunition.length > 0;
+    }
+
+    checkBulletObjects() {
+        if (this.possibleToShoot()) {
+            this.hasShoot = true; 
+            let bullet = new ShootableObject(this.character.x + 54, this.character.y + 40);
+            this.shootableObjects.push(bullet);
+            this.collectedPistolAmmunitionBar.collectedPistolAmmunition.pop();
+            setTimeout(() => {
+                this.hasShoot = false;
+            }, 333);
+            this.splicePistolAmmunitionFromArray();
+        }
+    }
+
+    splicePistolAmmunitionFromArray() {
+        for (let i = this.shootableObjects.length - 1; i >= 0; i--) {
+            if (this.shootableObjects[i] > 0) {
+                this.shootableObjects.splice(i, 1);
+            }
+        }  
+        console.log('Pistol Ammunition: ', this.collectedPistolAmmunitionBar.collectedPistolAmmunition.length);
+    }
+
+// ##################
     
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -102,6 +137,7 @@ class World {
         this.addObjectsToMap(this.level.health);
         this.addObjectsToMap(this.level.enemies);
 
+        this.addObjectsToMap(this.shootableObjects);
         this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
 
@@ -113,6 +149,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.bossStatusBar);
         this.addToMap(this.collectedGrenadeBar);
+        this.addToMap(this.collectedPistolAmmunitionBar);
         
     }
 

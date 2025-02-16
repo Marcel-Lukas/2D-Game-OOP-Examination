@@ -25,7 +25,8 @@ class DrawableObject {
         if (this instanceof Character || this instanceof BrainAlien || 
             this instanceof GreenAlien || this instanceof Endboss || 
             this instanceof ThrowableObject || this instanceof GrenadeAmmunition ||
-            this instanceof PistolAmmunition || this instanceof Health) {
+            this instanceof PistolAmmunition || this instanceof Health ||
+            this instanceof ShootableObject) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
@@ -39,7 +40,8 @@ class DrawableObject {
         if (this instanceof Character || this instanceof BrainAlien || 
             this instanceof GreenAlien || this instanceof Endboss || 
             this instanceof ThrowableObject || this instanceof GrenadeAmmunition ||
-            this instanceof PistolAmmunition || this instanceof Health) {
+            this instanceof PistolAmmunition || this instanceof Health ||
+            this instanceof ShootableObject) {
             ctx.beginPath();
             ctx.lineWidth = "1";
             ctx.strokeStyle = "blue";
