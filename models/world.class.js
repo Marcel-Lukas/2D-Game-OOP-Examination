@@ -32,9 +32,12 @@ class World {
 
     runIntervals() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkEnemyCollisions();
             this.checkThrowObjects();
             this.checkBulletObjects();
+            this.checkHealthCollision();
+            this.checkPistolAmmunitionCollision();
+            this.checkGrenadeAmmunitionCollision();
         }, 80);
     }
 
@@ -69,8 +72,8 @@ class World {
         console.log('Grenades: ', this.collectedGrenadeBar.collectedGrenades.length);
     }
 
-// ##################
 
+// ##################
 
     possibleToShoot() {
         return this.keyboard.SHOOT && 
@@ -103,7 +106,7 @@ class World {
 
 // ##################
     
-    checkCollisions() {
+    checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
@@ -113,6 +116,50 @@ class World {
     }
 
 
+    checkHealthCollision() {
+        this.level.health.forEach((item) => {
+            if (this.character.isColliding(item) && this.character.lifePoints < 100) {
+                this.character.lifePoints = 100;
+                this.statusBar.setPercentage(this.character.lifePoints);
+                this.deletePlacedItems(item, 'health');
+            }
+        });
+    }
+    
+
+    checkPistolAmmunitionCollision() {
+        this.level.pistolAmmunition.forEach((item) => {
+            if (this.character.isColliding(item)) {
+                for (let i = 0; i < 6; i++) {
+                    this.collectedPistolAmmunitionBar.collectedPistolAmmunition.push(item);
+                }
+                this.deletePlacedItems(item, 'pistolAmmunition');
+            }
+        });
+    }
+    
+    
+    checkGrenadeAmmunitionCollision() {
+        this.level.grenadeAmmunition.forEach((item) => {
+            if (this.character.isColliding(item)) {
+                this.collectedGrenadeBar.collectedGrenades.push(item);
+                this.deletePlacedItems(item, 'grenadeAmmunition');
+            }
+        });
+    }
+    
+
+    deletePlacedItems(item, arrayName) {
+        const items = this.level[arrayName]; 
+        if (!items) return;
+    
+        let index = items.indexOf(item);
+        if (index !== -1) {
+            items.splice(index, 1);
+        }
+    }
+    
+    // ##################
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

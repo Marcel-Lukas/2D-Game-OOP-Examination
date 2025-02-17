@@ -1,6 +1,6 @@
 class CollectedGrenades extends DrawableObject {
 
-    collectedGrenades = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    collectedGrenades = [];
 
 
     constructor() {

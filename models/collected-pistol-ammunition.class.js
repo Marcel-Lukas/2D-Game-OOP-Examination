@@ -1,6 +1,6 @@
 class CollectedPistolAmmunition extends DrawableObject {
 
-    collectedPistolAmmunition = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    collectedPistolAmmunition = [];
 
 
     constructor() {

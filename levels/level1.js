@@ -5,7 +5,7 @@ function initLevel() {
     level1 = new Level(
         [
             // new GreenAlien(1630),
-            // new GreenAlien(2000),
+            new GreenAlien(2000),
             // new GreenAlien(2150),
             // new GreenAlien(2600),
             // new BrainAlien(2700),
@@ -77,7 +77,7 @@ function initLevel() {
         ],
         [
             new Health(545, 220),
-            new Health(1100, 120),
+            new Health(1100, 200), // zum testen später löschen
             new Health(2700, 170),
             new Health(4400, 220)
         ],
