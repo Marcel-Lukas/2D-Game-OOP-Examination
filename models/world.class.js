@@ -1,6 +1,7 @@
 class World {
     
     character = new Character();
+    bullet = new ShootableObject();
     level = level1;
     ctx;
     canvas;
@@ -38,6 +39,7 @@ class World {
             this.checkHealthCollision();
             this.checkPistolAmmunitionCollision();
             this.checkGrenadeAmmunitionCollision();
+            this.checkBulletCollisions();
         }, 80);
     }
 
@@ -116,6 +118,24 @@ class World {
     }
 
 
+    checkBulletCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            this.shootableObjects.forEach((bullet) => {
+                if (bullet.isColliding(enemy)) {
+                    console.log('Bullet hit enemy'); // TODO
+                    
+                    setTimeout(() => {
+                        let index = this.shootableObjects.indexOf(bullet);
+                        if (index !== -1) {
+                            this.shootableObjects.splice(index, 1);
+                        }
+                    }, 40);
+                }
+            });
+        });
+    }
+    
+    
     checkHealthCollision() {
         this.level.health.forEach((item) => {
             if (this.character.isColliding(item) && this.character.lifePoints < 100) {
@@ -207,7 +227,7 @@ class World {
         });
     }
 
-    
+
     addToMap(mo) {
         if (!mo.otherDirection) {
             mo.draw(this.ctx);
