@@ -4,7 +4,6 @@ class MovableObject extends DrawableObject {
     static throwOtherDirection = false;
     speedY = 0;
     acceleration = 1;
-    lifePoints = 100;
     lastHit = 0;
     currentImageLastPic = 0;
 

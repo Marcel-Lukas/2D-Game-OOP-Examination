@@ -7,10 +7,11 @@ class GreenAlien extends MovableObject {
 
     // Hitbox
     collisionBoxOffsetY = 25;
-    collisionBoxOffsetX = 35;
-    collisionBoxWidth = 55;
     collisionBoxHeight = 110;
 
+    collisionBoxOffsetX = 15;
+    collisionBoxWidth = 70;
+    
 
     IMAGES_WALKING = [
         'img/alien-green/walkgun/__friendly_alien_green_skin_walk_with_gun_000.png',
@@ -37,12 +38,12 @@ class GreenAlien extends MovableObject {
 
     
     animate() {
-        setInterval(() => {
-            this.moveLeft();
-            if (this.x < level1.levelStartX - 555) {
-                this.x = level1.levelEndX + 400;
-            }
-        }, 1000 / 60);
+        // setInterval(() => {
+        //     this.moveLeft();
+        //     if (this.x < level1.levelStartX - 555) {
+        //         this.x = level1.levelEndX + 400;
+        //     }
+        // }, 1000 / 60);
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);

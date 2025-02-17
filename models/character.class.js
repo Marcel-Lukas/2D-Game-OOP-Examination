@@ -5,13 +5,16 @@ class Character extends MovableObject {
     y = 310;
     x = 1030;
     speed = 6;
+    lifePoints = 100;
 
 
     // Hitbox
     collisionBoxOffsetY = 10;
-    collisionBoxOffsetX = 38;
-    collisionBoxWidth = 50;
     collisionBoxHeight = 100;
+
+    collisionBoxOffsetX = 38;
+    collisionBoxWidth = 60;
+
 
 
     IMAGES_IDLE = [
@@ -249,7 +252,7 @@ class Character extends MovableObject {
             this.playAnimationOneTime(this.IMAGES_DEAD);
 
         } else if (this.isHurt()) {
-            this.speed = 1;
+            this.speed = 2;
             this.playAnimationCharacter(this.IMAGES_HURT, 'hurt');
 
         } else if (this.isAboveGround()) {

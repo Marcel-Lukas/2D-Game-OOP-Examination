@@ -6,9 +6,10 @@ class Endboss extends MovableObject {
 
     // Hitbox
     collisionBoxOffsetY = 46;
-    collisionBoxOffsetX = 90;
-    collisionBoxWidth = 110;
     collisionBoxHeight = 250;
+
+    collisionBoxOffsetX = 80;
+    collisionBoxWidth = 120;
 
 
     IMAGES_IDLE = [
@@ -116,7 +117,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
 
         this.x = 5425;
-
 
         this.animate();
     }

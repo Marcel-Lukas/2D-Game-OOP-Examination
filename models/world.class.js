@@ -207,30 +207,32 @@ class World {
         });
     }
 
+    
     addToMap(mo) {
-        if (mo.otherDirection) {
-            this.flipImage(mo);
+        if (!mo.otherDirection) {
+            mo.draw(this.ctx);
+            mo.drawFrameCollisionBox(this.ctx);
+            mo.drawFrameOutside(this.ctx);
+        } else {
+            this.ctx.save();
+            this.ctx.translate(mo.x + mo.width, mo.y);
+            this.ctx.scale(-1, 1);
+            let oldX = mo.x;
+            let oldY = mo.y;
+            mo.x = 0;
+            mo.y = 0;
+            mo.draw(this.ctx);
+            mo.drawFrameCollisionBox(this.ctx);
+            mo.drawFrameOutside(this.ctx);
+            mo.x = oldX;
+            mo.y = oldY;
+            this.ctx.restore();
         }
-
-        mo.draw(this.ctx);
-        mo.drawFrameCollisionBox(this.ctx);
-        mo.drawFrameOutside(this.ctx);
-
-        if (mo.otherDirection) {
-            this.flipImageBack(mo);
-        }
     }
+    
+    
+    
 
-    flipImage(mo) {
-        this.ctx.save();
-        this.ctx.translate(mo.width, 0);
-        this.ctx.scale(-1, 1);
-        mo.x = mo.x * -1;
-    }
 
-    flipImageBack(mo) {
-        mo.x = mo.x * -1;
-        this.ctx.restore();
-    }
 
 }

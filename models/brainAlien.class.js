@@ -7,10 +7,11 @@ class BrainAlien extends MovableObject {
 
     // Hitbox
     collisionBoxOffsetY = 25;
-    collisionBoxOffsetX = 45;
-    collisionBoxWidth = 65;
     collisionBoxHeight = 150;
-    
+
+    collisionBoxOffsetX = 32;
+    collisionBoxWidth = 70;
+
 
     IMAGES_WALKING = [
         'img/brain-alien/walk/__green_alien_walk_000.png',
@@ -38,12 +39,12 @@ class BrainAlien extends MovableObject {
     
     animate() {
 
-        setInterval(() => {
-            this.moveLeft();
-            if (this.x < level1.levelStartX - 555) {
-                this.x = level1.levelEndX + 400;
-            }
-        }, 1000 / 60);
+        // setInterval(() => {
+        //     this.moveLeft();
+        //     if (this.x < level1.levelStartX - 555) {
+        //         this.x = level1.levelEndX + 400;
+        //     }
+        // }, 1000 / 60);
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
