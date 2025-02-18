@@ -44,7 +44,8 @@ function initLevel() {
             new Cloud('img/background/4_clouds/2.png', 5100),
             new Cloud('img/background/4_clouds/1.png', 5700),
             new Cloud('img/background/4_clouds/2.png', 6200),
-            new Cloud('img/background/4_clouds/1.png', 6800)
+            new Cloud('img/background/4_clouds/1.png', 6800),
+            new Ufo('img/alien-green/ufo.png', -1000)
         ],
         [
             new GrenadeAmmunition('img/grenade/grenade-00.png', 650),

@@ -75,7 +75,6 @@ class World {
                 this.throwableObjects.splice(i, 1);
             }
         }  
-        console.log('Grenades: ', this.collectedGrenadeBar.collectedGrenades.length);
     }
 
 
@@ -107,7 +106,6 @@ class World {
                 this.shootableObjects.splice(i, 1);
             }
         }  
-        console.log('Pistol Ammunition: ', this.collectedPistolAmmunitionBar.collectedPistolAmmunition.length);
     }
 
 // ##################
