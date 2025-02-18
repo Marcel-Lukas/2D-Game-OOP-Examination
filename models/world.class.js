@@ -21,13 +21,17 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         
-        this.setWorld();
         this.runIntervals();
+
+        this.setWorld(this.character);
+        this.level.enemies.forEach((enemy) =>{
+            this.setWorld(enemy);
+        });
     }
 
 
-    setWorld() {
-        this.character.world = this;
+    setWorld(obj) {
+        obj.world = this;
     }
 
 
@@ -111,19 +115,29 @@ class World {
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
+                this.character.hit(5);
                 this.statusBar.setPercentage(this.character.lifePoints);
             }
         });
     }
 
+    
 
     checkBulletCollisions() {
         this.level.enemies.forEach((enemy) => {
             this.shootableObjects.forEach((bullet) => {
                 if (bullet.isColliding(enemy)) {
-                    console.log('Bullet hit enemy'); // TODO
-                    
+                    enemy.hit(50);
+    
+                    if (enemy.lifePoints <= 0) {
+                        let enemyIndex = this.level.enemies.indexOf(enemy);
+                        if (enemyIndex !== -1) {
+                            setTimeout(() => {
+                                this.level.enemies.splice(enemyIndex, 1);
+                            }, 444);
+                        }
+                    }
+    
                     setTimeout(() => {
                         let index = this.shootableObjects.indexOf(bullet);
                         if (index !== -1) {
@@ -134,7 +148,7 @@ class World {
             });
         });
     }
-    
+
     
     checkHealthCollision() {
         this.level.health.forEach((item) => {

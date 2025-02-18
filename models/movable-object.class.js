@@ -51,14 +51,14 @@ class MovableObject extends DrawableObject {
     }
       
 
-    hit() {
-        this.lifePoints -= 5;
-        if(this.lifePoints < 0) {
-            this.lifePoints = 0;
+    hit(damage) {
+        this.lifePoints -= damage;
+        if (this.lifePoints < 0) {
+          this.lifePoints = 0;
         } else {
-            this.lastHit = new Date().getTime();
+          this.lastHit = new Date().getTime();
         }
-    }
+      }      
 
 
     isHurt() {
