@@ -13,7 +13,7 @@ class World {
     collectedPistolAmmunitionBar = new CollectedPistolAmmunition();
     throwableObjects = [];
     shootableObjects = [];
-
+    explosions = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -24,6 +24,7 @@ class World {
         this.runIntervals();
 
         this.setWorld(this.character);
+
         this.level.enemies.forEach((enemy) =>{
             this.setWorld(enemy);
         });
@@ -60,6 +61,7 @@ class World {
         if (this.possibleToThrow()) {
             this.hasThrownGrenade = true; 
             let grenade = new ThrowableObject(this.character.x + 80, this.character.y + -20);
+            this.setWorld(grenade);
             this.throwableObjects.push(grenade);
             this.collectedGrenadeBar.collectedGrenades.pop();
             setTimeout(() => {
@@ -218,6 +220,8 @@ class World {
 
         this.addObjectsToMap(this.shootableObjects);
         this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.explosions);
+
         this.addToMap(this.character);
 
         this.ctx.translate(-this.cameraX, 0);

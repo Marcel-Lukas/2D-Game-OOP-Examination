@@ -73,28 +73,10 @@ class BrainAlien extends MovableObject {
     }
 
 
-    lastFrameTime = 0;
-    currentImage = 0;
-
     animationSpeeds = {
         walking: 180,
         hurt: 160
     };
-
-
-    playAlienAnimation(images, animationKey) {
-        let speed = this.animationSpeeds[animationKey];
-        let now = Date.now();
-
-        if (now - this.lastFrameTime > speed) {
-            this.lastFrameTime = now;
-            
-            let index = this.currentImage % images.length;
-            let path = images[index];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        }
-    }
 
 
     alienAnimation() {
@@ -104,17 +86,17 @@ class BrainAlien extends MovableObject {
 
         } else if (this.isHurt()) {
             this.speed = 0;
-            this.playAlienAnimation(this.IMAGES_HURT, 'hurt');
+            this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
 
         } else {
             setTimeout(() => {
                 this.speed = 0.20;
-                this.playAlienAnimation(this.IMAGES_WALKING, 'walking');
+                this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
             }, 77);
         }
     }
 
 
 
+    
 }
-

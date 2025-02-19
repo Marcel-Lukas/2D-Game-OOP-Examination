@@ -6,6 +6,8 @@ class MovableObject extends DrawableObject {
     acceleration = 1;
     lastHit = 0;
     currentImageLastPic = 0;
+    lastFrameTime = 0;
+    currentImage = 0;
 
 
     setThrowOtherDirection(boolean) {
@@ -80,22 +82,6 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-    
-    playAnimationGrenade(images, runthrough) {
-        if (this.runCount === undefined) {
-            this.runCount = 0;
-        }
-    
-        if (this.runCount < runthrough) {
-            let index = this.currentImage % images.length;
-            let path = images[index];
-            this.img = this.imageCache[path];
-            
-            this.currentImage++;
-            this.runCount++;
-        }
-    }
-
 
     // for die animation
     playAnimationOneTime(images) {
@@ -107,6 +93,21 @@ class MovableObject extends DrawableObject {
             // Letztes Bild anzeigen und beibehalten
             let path = images[images.length - 1];
             this.img = this.imageCache[path];
+        }
+    }
+
+
+    playsTimedAnimation(images, animationKey) {
+        let speed = this.animationSpeeds[animationKey];
+        let now = Date.now();
+
+        if (now - this.lastFrameTime > speed) {
+            this.lastFrameTime = now;
+            
+            let index = this.currentImage % images.length;
+            let path = images[index];
+            this.img = this.imageCache[path];
+            this.currentImage++;
         }
     }
 

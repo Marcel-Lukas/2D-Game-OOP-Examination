@@ -218,8 +218,6 @@ class Character extends MovableObject {
     }
 
 
-    lastFrameTime = 0;
-    currentImage = 0;
 
     animationSpeeds = {
         idle: 70,
@@ -232,47 +230,32 @@ class Character extends MovableObject {
     };
 
 
-    playAnimationCharacter(images, animationKey) {
-        let speed = this.animationSpeeds[animationKey];
-        let now = Date.now();
-
-        if (now - this.lastFrameTime > speed) {
-            this.lastFrameTime = now;
-            
-            let index = this.currentImage % images.length;
-            let path = images[index];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        }
-    }
-
-
     characterAnimation() {
         if (this.isDead()) {
             this.playAnimationOneTime(this.IMAGES_DEAD);
 
         } else if (this.isHurt()) {
             this.speed = 2;
-            this.playAnimationCharacter(this.IMAGES_HURT, 'hurt');
+            this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
 
         } else if (this.isAboveGround()) {
-            this.playAnimationCharacter(this.IMAGES_JUMPING, 'jumping');
+            this.playsTimedAnimation(this.IMAGES_JUMPING, 'jumping');
 
         } else if (this.isCharacterThrowing()) {
-            this.playAnimationCharacter(this.IMAGES_THROW, 'throw');
+            this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
 
         } else if (this.isCharacterWalking()) {
             this.speed = 6;
-            this.playAnimationCharacter(this.IMAGES_WALKING, 'walking');
+            this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
 
         } else if (this.isCharacterShooting()) {
-            this.playAnimationCharacter(this.IMAGES_SHOOT, 'shoot');
+            this.playsTimedAnimation(this.IMAGES_SHOOT, 'shoot');
 
         } else if (this.isCharacterDefense()) {
-            this.playAnimationCharacter(this.IMAGES_DEFENSE, 'defense');
+            this.playsTimedAnimation(this.IMAGES_DEFENSE, 'defense');
 
         } else {
-            this.playAnimationCharacter(this.IMAGES_IDLE, 'idle');
+            this.playsTimedAnimation(this.IMAGES_IDLE, 'idle');
         }
     }
 

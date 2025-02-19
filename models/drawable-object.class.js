@@ -24,7 +24,7 @@ class DrawableObject {
     drawFrameCollisionBox(ctx) {
         if (this instanceof Character || this instanceof BrainAlien || 
             this instanceof GreenAlien || this instanceof Endboss || 
-            this instanceof ThrowableObject) {
+            this instanceof ThrowableObject || this instanceof Explosion) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
@@ -37,7 +37,7 @@ class DrawableObject {
     drawFrameOutside(ctx) {
         if (this instanceof Character || this instanceof BrainAlien || 
             this instanceof GreenAlien || this instanceof Endboss || 
-            this instanceof ThrowableObject) {
+            this instanceof ThrowableObject || this instanceof Explosion) {
             ctx.beginPath();
             ctx.lineWidth = "1";
             ctx.strokeStyle = "blue";

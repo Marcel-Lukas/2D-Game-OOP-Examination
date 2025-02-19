@@ -73,37 +73,19 @@ class GreenAlien extends MovableObject {
             this.alienAnimation();
         }, 1000 / 60);
 
-        setInterval(() => {
-            this.moveLeft();
-            if (this.x < level1.levelStartX - 555) {
-                this.x = level1.levelEndX + 400;
-            }
-        }, 1000 / 60);
+        // setInterval(() => {
+        //     this.moveLeft();
+        //     if (this.x < level1.levelStartX - 555) {
+        //         this.x = level1.levelEndX + 400;
+        //     }
+        // }, 1000 / 60);
     }
 
-
-    lastFrameTime = 0;
-    currentImage = 0;
 
     animationSpeeds = {
         walking: 180,
         hurt: 80
     };
-
-
-    playAlienAnimation(images, animationKey) {
-        let speed = this.animationSpeeds[animationKey];
-        let now = Date.now();
-
-        if (now - this.lastFrameTime > speed) {
-            this.lastFrameTime = now;
-            
-            let index = this.currentImage % images.length;
-            let path = images[index];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        }
-    }
 
 
     alienAnimation() {
@@ -113,19 +95,17 @@ class GreenAlien extends MovableObject {
 
         } else if (this.isHurt()) {
             this.speed = 0;
-            this.playAlienAnimation(this.IMAGES_HURT, 'hurt');
+            this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
 
         } else {
             setTimeout(() => {
                 this.speed = 0.20;
-                this.playAlienAnimation(this.IMAGES_WALKING, 'walking');
+                this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
             }, 77);
         }
     }
 
 
 
-
-
+    
 }
-
