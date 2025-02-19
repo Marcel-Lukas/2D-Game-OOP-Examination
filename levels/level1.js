@@ -4,7 +4,7 @@ function initLevel() {
 
     level1 = new Level(
         [
-            new GreenAlien(1450), // Der nur zum testen
+            // new GreenAlien(1450), // Der nur zum testen
             // new GreenAlien(1630),
             // new GreenAlien(2000),
             // new GreenAlien(2150),

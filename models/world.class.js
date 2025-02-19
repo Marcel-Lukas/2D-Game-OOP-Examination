@@ -2,6 +2,7 @@ class World {
     
     character = new Character();
     bullet = new ShootableObject();
+    detonation = new Explosion();
     level = level1;
     ctx;
     canvas;
@@ -45,6 +46,7 @@ class World {
             this.checkPistolAmmunitionCollision();
             this.checkGrenadeAmmunitionCollision();
             this.checkBulletCollisions();
+            this.checkGrenadeCollisions();
         }, 80);
     }
 
@@ -121,35 +123,46 @@ class World {
         });
     }
 
-    
+
+    removeAfterDelay(arr, item, delay) {
+        setTimeout(() => {
+          const i = arr.indexOf(item);
+          if (i !== -1) arr.splice(i, 1);
+        }, delay);
+      }
+
 
     checkBulletCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            this.shootableObjects.forEach((bullet) => {
-                if (bullet.isColliding(enemy)) {
-                    enemy.hit(50);
-    
-                    if (enemy.lifePoints <= 0) {
-                        let enemyIndex = this.level.enemies.indexOf(enemy);
-                        if (enemyIndex !== -1) {
-                            setTimeout(() => {
-                                this.level.enemies.splice(enemyIndex, 1);
-                            }, 444);
-                        }
-                    }
-    
-                    setTimeout(() => {
-                        let index = this.shootableObjects.indexOf(bullet);
-                        if (index !== -1) {
-                            this.shootableObjects.splice(index, 1);
-                        }
-                    }, 40);
-                }
-            });
+        this.level.enemies.forEach(enemy => {
+          this.shootableObjects.forEach(bullet => {
+            if (!bullet.isColliding(enemy)) return;
+            enemy.hit(50);
+            if (enemy.lifePoints <= 0) this.removeAfterDelay(this.level.enemies, enemy, 444);
+            this.removeAfterDelay(this.shootableObjects, bullet, 40);
+          });
         });
-    }
-
+      }
     
+
+    checkGrenadeCollisions() {
+        this.level.enemies.forEach(enemy => this.explosions.forEach(detonation => {
+          if (!detonation.isColliding(enemy)) return;
+          if (!detonation.alreadyHit) detonation.alreadyHit = new Set();
+          if (detonation.alreadyHit.has(enemy)) return;
+          this.handleGrenadeHit(detonation, enemy);
+        }));
+      }
+      
+
+    handleGrenadeHit(detonation, enemy) {
+        enemy.hit(334);
+        detonation.alreadyHit.add(enemy);
+        if (enemy.lifePoints <= 0) {
+            this.removeAfterDelay(this.level.enemies, enemy, 444);
+        }
+    }
+      
+
     checkHealthCollision() {
         this.level.health.forEach((item) => {
             if (this.character.isColliding(item) && this.character.lifePoints < 100) {

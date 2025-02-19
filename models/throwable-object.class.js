@@ -66,61 +66,6 @@ class ThrowableObject extends MovableObject{
     }
 
 
-
-    // throwAndAnimateGrenade(throwDirection) {
-    //     let delay = 70;
-    //     if (throwDirection === false) {
-    //         this.x += 16;
-    //         this.playAnimation(this.IMAGES_ROTATION);
-    
-    //         if (this.y >= 358 && !this.hasExploded) {
-    //             let exp = new Explosion(this.x -110);
-    //             this.world.explosions.push(exp);
-    //             this.hasExploded = true;
-    
-    //             let index = this.world.throwableObjects.indexOf(this);
-    //             if (index !== -1) {
-    //                 setTimeout(() => {
-    //                     this.world.throwableObjects.splice(index, 1);
-    //                 }, delay);
-    //             }
-
-    //             let i = this.world.explosions.indexOf(this);
-    //             if (this.hasExploded === true) {
-    //                 setTimeout(() => {
-    //                     this.world.explosions.splice(i, 1);
-    //                 }, 888);
-    //             }
-    //         }
-    //     } else {
-    //         this.x -= 16;
-    //         this.playAnimation(this.IMAGES_ROTATION);
-    
-    //         if (this.y >= 358 && !this.hasExploded) {
-    //             let exp = new Explosion(this.x -100);
-    //             this.world.explosions.push(exp);
-    //             this.hasExploded = true;
-    
-    //             let index = this.world.throwableObjects.indexOf(this);
-    //             if (index !== -1) {
-    //                 setTimeout(() => {
-    //                     this.world.throwableObjects.splice(index, 1);
-    //                 }, delay);
-    //             }
-
-    //             let i = this.world.explosions.indexOf(this);
-    //             if (this.hasExploded === true) {
-    //                 setTimeout(() => {
-    //                     this.world.explosions.splice(i, 1);
-    //                 }, 888);
-    //             }
-    //         }
-    //     }
-    // }
-    
-
-
-
     // throwAndAnimateGrenade(throwDirection) {
     //     this.move(throwDirection);
     //     if (this.y < 358 || this.hasExploded) return;
@@ -145,8 +90,6 @@ class ThrowableObject extends MovableObject{
     //     const i = arr.indexOf(item);
     //     if (i !== -1) setTimeout(() => arr.splice(i, 1), delay);
     //   }
-
-    
 
     
     throwAndAnimateGrenade(throwDirection) {

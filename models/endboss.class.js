@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
     height = 320;
     width = 280;
     y = 130;
+    lifePoints = 2000;
 
     // Hitbox
     collisionBoxOffsetY = 46;
@@ -46,26 +47,13 @@ class Endboss extends MovableObject {
         'img/endboss/walk/__grey_alien_black_jump_suit_walk_007.png'
     ];
 
-    IMAGES_WALKING_WITH_GUN = [
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_000.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_001.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_002.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_003.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_004.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_005.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_006.png',
-        'img/endboss/walkGun/__grey_alien_black_jump_suit_walk_with_gun_007.png'
-    ];
-
-    IMAGES_SHOOTING = [
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_000.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_001.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_002.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_003.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_004.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_005.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_006.png',
-        'img/endboss/shootStanding/__grey_alien_black_jump_suit_shoot_standing_007.png'
+    IMAGES_DASH = [
+        'img/endboss/dash/__grey_alien_black_jump_suit_dash_000.png',
+        'img/endboss/dash/__grey_alien_black_jump_suit_dash_001.png',
+        'img/endboss/dash/__grey_alien_black_jump_suit_dash_002.png',
+        'img/endboss/dash/__grey_alien_black_jump_suit_dash_003.png',
+        'img/endboss/dash/__grey_alien_black_jump_suit_dash_004.png',
+        'img/endboss/dash/__grey_alien_black_jump_suit_dash_005.png'
     ];
 
     IMAGES_HURT = [
@@ -110,21 +98,54 @@ class Endboss extends MovableObject {
 
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_WALKING_WITH_GUN);
-        this.loadImages(this.IMAGES_SHOOTING);
+        this.loadImages(this.IMAGES_DASH);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_WHACKED);
         this.loadImages(this.IMAGES_DEAD);
 
-        this.x = 5425;
+        // this.x = 5425;
+        this.x = 1370;
 
-        this.animate();
+        this.run();
     }
 
-    animate() {
+    run() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_IDLE);
-        }, 140);
+            this.alienAnimation();
+        }, 1000 / 60);
+
+        setInterval(() => {
+            console.log('Boss Leben ', this.lifePoints);
+        }, 400);
     }
+
+
+    animationSpeeds = {
+        idle: 111,
+        walking: 180,
+        dash: 111,
+        hurt: 80,
+        whacked: 111
+    };
+
+
+    alienAnimation() {
+        if (this.isDead()) {
+            this.speed = 0;
+            this.playAnimationOneTime(this.IMAGES_DEAD);
+
+        } else if (this.isHurt()) {
+            this.speed = 0;
+            this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
+
+        } else {
+            setTimeout(() => {
+                this.speed = 0.20;
+                this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
+            }, 77);
+        }
+    }
+
+
 
 }

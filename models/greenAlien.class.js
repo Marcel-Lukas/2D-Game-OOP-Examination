@@ -73,12 +73,12 @@ class GreenAlien extends MovableObject {
             this.alienAnimation();
         }, 1000 / 60);
 
-        // setInterval(() => {
-        //     this.moveLeft();
-        //     if (this.x < level1.levelStartX - 555) {
-        //         this.x = level1.levelEndX + 400;
-        //     }
-        // }, 1000 / 60);
+        setInterval(() => {
+            this.moveLeft();
+            if (this.x < level1.levelStartX - 555) {
+                this.x = level1.levelEndX + 400;
+            }
+        }, 1000 / 60);
     }
 
 

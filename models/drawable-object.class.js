@@ -27,7 +27,7 @@ class DrawableObject {
             this instanceof ThrowableObject || this instanceof Explosion) {
             ctx.beginPath();
             ctx.lineWidth = '1';
-            ctx.strokeStyle = 'red';
+            ctx.strokeStyle = 'transparent'; // red Collisions Box
             ctx.rect(this.x + this.collisionBoxOffsetX, this.y + this.collisionBoxOffsetY, 
             this.collisionBoxWidth, this.collisionBoxHeight);
             ctx.stroke();
@@ -39,8 +39,8 @@ class DrawableObject {
             this instanceof GreenAlien || this instanceof Endboss || 
             this instanceof ThrowableObject || this instanceof Explosion) {
             ctx.beginPath();
-            ctx.lineWidth = "1";
-            ctx.strokeStyle = "blue";
+            ctx.lineWidth = '1';
+            ctx.strokeStyle = 'transparent';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
