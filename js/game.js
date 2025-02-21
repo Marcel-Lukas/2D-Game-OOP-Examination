@@ -7,8 +7,28 @@ function init() {
     initLevel();
     canvas = document.getElementById('gameCanvas');
     world = new World(canvas, keyboard);
-
 }
+
+
+function playSound(sound, volume) {
+    sound.volume = volume;
+    sound.play();
+}
+
+
+let canPlayAgain = true;
+
+function playSoundInterval(sound, volume, interval) {
+  if (canPlayAgain) {
+    sound.volume = volume;
+    sound.play();
+    canPlayAgain = false;
+    setTimeout(() => {
+        canPlayAgain = true;
+    }, interval);
+  }
+}
+
 
 
 window.addEventListener("keydown", (event) => {

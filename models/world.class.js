@@ -16,6 +16,15 @@ class World {
     shootableObjects = [];
     explosions = [];
 
+
+    pickUpPistolAmmoSound = new Audio('audio/pick-pistol-ammo.mp3');
+    pickUpNadeAmmoSound = new Audio('audio/pick-nade-ammo.mp3');
+    pickUpHealthSound = new Audio('audio/collect.mp3');
+    alienHurtSound = new Audio('audio/alien-hurt-Sound.mp3');
+    throwSound = new Audio('audio/throw.mp3');
+    gameSound = new Audio('audio/gameSound.mp3');
+
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -29,6 +38,8 @@ class World {
         this.level.enemies.forEach((enemy) =>{
             this.setWorld(enemy);
         });
+
+        this.bossSeen = false;
     }
 
 
@@ -47,7 +58,15 @@ class World {
             this.checkGrenadeAmmunitionCollision();
             this.checkBulletCollisions();
             this.checkGrenadeCollisions();
+            this.timeForMusic();
         }, 80);
+    }
+
+
+    timeForMusic() {
+        if (this.character.x >= 1031) {
+            playSound(this.gameSound, 0.2);
+        }
     }
 
 
@@ -62,6 +81,7 @@ class World {
     checkThrowObjects() {
         if (this.possibleToThrow()) {
             this.hasThrownGrenade = true; 
+            playSound(this.throwSound, 0.5);
             let grenade = new ThrowableObject(this.character.x + 80, this.character.y + -20);
             this.setWorld(grenade);
             this.throwableObjects.push(grenade);
@@ -93,7 +113,7 @@ class World {
 
     checkBulletObjects() {
         if (this.possibleToShoot()) {
-            this.hasShoot = true; 
+            this.hasShoot = true;
             let bullet = new ShootableObject(this.character.x + 54, this.character.y + 40);
             this.shootableObjects.push(bullet);
             this.collectedPistolAmmunitionBar.collectedPistolAmmunition.pop();
@@ -137,6 +157,7 @@ class World {
           this.shootableObjects.forEach(bullet => {
             if (!bullet.isColliding(enemy)) return;
             enemy.hit(50);
+            playSound(this.alienHurtSound, 0.15);
             if (enemy.lifePoints <= 0) this.removeAfterDelay(this.level.enemies, enemy, 444);
             this.removeAfterDelay(this.shootableObjects, bullet, 40);
           });
@@ -156,6 +177,7 @@ class World {
 
     handleGrenadeHit(detonation, enemy) {
         enemy.hit(334);
+        playSound(this.alienHurtSound, 0.3);
         detonation.alreadyHit.add(enemy);
         if (enemy.lifePoints <= 0) {
             this.removeAfterDelay(this.level.enemies, enemy, 444);
@@ -165,11 +187,12 @@ class World {
 
     checkHealthCollision() {
         this.level.health.forEach((item) => {
-            if (this.character.isColliding(item) && this.character.lifePoints < 100) {
+            if (this.character.isColliding(item)) {
                 this.character.lifePoints = 100;
+                playSound(this.pickUpHealthSound, 0.5);
                 this.statusBar.setPercentage(this.character.lifePoints);
                 this.deletePlacedItems(item, 'health');
-            }
+            } 
         });
     }
     
@@ -180,16 +203,18 @@ class World {
                 for (let i = 0; i < 6; i++) {
                     this.collectedPistolAmmunitionBar.collectedPistolAmmunition.push(item);
                 }
+                playSound(this.pickUpPistolAmmoSound, 0.3);
                 this.deletePlacedItems(item, 'pistolAmmunition');
             }
         });
     }
-    
+
     
     checkGrenadeAmmunitionCollision() {
         this.level.grenadeAmmunition.forEach((item) => {
             if (this.character.isColliding(item)) {
                 this.collectedGrenadeBar.collectedGrenades.push(item);
+                playSound(this.pickUpNadeAmmoSound, 0.6);
                 this.deletePlacedItems(item, 'grenadeAmmunition');
             }
         });
@@ -243,10 +268,22 @@ class World {
 
     drawFixedObjects(){
         this.addToMap(this.statusBar);
-        this.addToMap(this.bossStatusBar);
-        this.addToMap(this.collectedGrenadeBar);
-        this.addToMap(this.collectedPistolAmmunitionBar);
+
+        if (!this.bossSeen && this.character.x > 4900) {
+            this.bossSeen = true;
+        }
+
+        if (this.bossSeen) {
+            this.showBossStatusBar();
+        }
         
+        this.addToMap(this.collectedGrenadeBar);
+        this.addToMap(this.collectedPistolAmmunitionBar); 
+    }
+
+    
+    showBossStatusBar() {
+        return this.addToMap(this.bossStatusBar);
     }
 
 

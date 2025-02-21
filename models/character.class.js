@@ -4,6 +4,7 @@ class Character extends MovableObject {
     width = 137;
     y = 310;
     x = 1030;
+    // x = 4880;
     speed = 6;
     lifePoints = 100;
 
@@ -15,6 +16,12 @@ class Character extends MovableObject {
     collisionBoxOffsetX = 38;
     collisionBoxWidth = 60;
 
+
+    shootSound = new Audio('audio/shoot.mp3');
+    walkSound = new Audio('audio/walk.mp3');
+    hurtSound = new Audio('audio/hurt.mp3');
+    jumpSound = new Audio('audio/jump.mp3');
+    dieSound = new Audio('audio/dieSound.mp3');
 
 
     IMAGES_IDLE = [
@@ -233,13 +240,16 @@ class Character extends MovableObject {
     characterAnimation() {
         if (this.isDead()) {
             this.playAnimationOneTime(this.IMAGES_DEAD);
+            playSoundInterval(this.dieSound, 0.7, 999999999);
 
         } else if (this.isHurt()) {
             this.speed = 2;
             this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
+            playSound(this.hurtSound, 0.7);
 
         } else if (this.isAboveGround()) {
             this.playsTimedAnimation(this.IMAGES_JUMPING, 'jumping');
+            playSoundInterval(this.jumpSound, 0.4, 1400);
 
         } else if (this.isCharacterThrowing()) {
             this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
@@ -247,9 +257,11 @@ class Character extends MovableObject {
         } else if (this.isCharacterWalking()) {
             this.speed = 6;
             this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
+            playSound(this.walkSound, 0.15);
 
         } else if (this.isCharacterShooting()) {
             this.playsTimedAnimation(this.IMAGES_SHOOT, 'shoot');
+            playSound(this.shootSound, 0.5);
 
         } else if (this.isCharacterDefense()) {
             this.playsTimedAnimation(this.IMAGES_DEFENSE, 'defense');

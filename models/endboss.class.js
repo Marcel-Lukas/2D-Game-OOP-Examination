@@ -12,6 +12,10 @@ class Endboss extends MovableObject {
     collisionBoxOffsetX = 80;
     collisionBoxWidth = 120;
 
+    bossAlertSound = new Audio('audio/alien-alert.mp3');
+    bossDashSound = new Audio('audio/dashSound.mp3');
+    bossWalkSound = new Audio('audio/boss-footstep.mp3');
+
 
     IMAGES_IDLE = [
         'img/endboss/idle/__grey_alien_black_jump_suit_idle_000.png',
@@ -93,7 +97,15 @@ class Endboss extends MovableObject {
         'img/endboss/die/__grey_alien_black_jump_suit_die_005.png'
     ];
 
-    constructor() {
+    IMAGES_ALERT = [
+        'img/endboss/alert/__grey_alien_black_jump_suit_upper_cut_000.png',
+        'img/endboss/alert/__grey_alien_black_jump_suit_upper_cut_001.png',
+        'img/endboss/alert/__grey_alien_black_jump_suit_upper_cut_002.png',
+        'img/endboss/alert/__grey_alien_black_jump_suit_upper_cut_008.png',
+        'img/endboss/alert/__grey_alien_black_jump_suit_upper_cut_009.png'
+    ];
+
+    constructor(x) {
         super().loadImage('img/endboss/idle/__grey_alien_black_jump_suit_idle_006.png');
 
         this.loadImages(this.IMAGES_IDLE);
@@ -102,50 +114,97 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_WHACKED);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_ALERT);
 
-        // this.x = 5425;
-        this.x = 1370;
+        this.x = x;
+
+        this.speed = 0.26;
 
         this.run();
     }
 
     run() {
         setInterval(() => {
-            this.alienAnimation();
+            this.bossAnimation();
         }, 1000 / 60);
 
         setInterval(() => {
-            console.log('Boss Leben ', this.lifePoints);
-        }, 400);
+            console.log('Boss Contact = ', this.hadBossFirstContact, ' Boss Leben', this.lifePoints);
+        }, 900);
     }
 
 
     animationSpeeds = {
-        idle: 111,
-        walking: 180,
+        idle: 96,
+        walking: 160,
         dash: 111,
-        hurt: 80,
-        whacked: 111
+        hurt: 111,
+        whacked: 60,
+        alert: 133
     };
 
+    hadBossFirstContact = false;
 
-    alienAnimation() {
-        if (this.isDead()) {
-            this.speed = 0;
-            this.playAnimationOneTime(this.IMAGES_DEAD);
+
+    bossAnimation() {
+        if (this.world.character.x > 5000 && !this.hadBossFirstContact) {
+            this.awakenedBossActions();
+            this.hadBossFirstContact = true;
 
         } else if (this.isHurt()) {
             this.speed = 0;
             this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
 
-        } else {
-            setTimeout(() => {
-                this.speed = 0.20;
-                this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
-            }, 77);
-        }
+        } else if (this.isDead()) {
+            this.speed = 0;
+            this.playAnimationOneTime(this.IMAGES_DEAD);
+        } 
+    }  
+
+
+    awakenedBossActions() {
+        let i = 0;
+        let dashCount = 0;
+        let phase = 'alert';
+    
+        setInterval(() => {
+            if (phase === 'alert') {
+                if (i < 99) {
+                    this.playsTimedAnimation(this.IMAGES_ALERT, 'alert');
+                    playSound(this.bossAlertSound, 0.95);
+                } else {
+                    phase = 'dash';
+                    dashCount = 0;
+                }
+            } else if (phase === 'dash') {
+                if (dashCount < 150) {
+                    this.playsTimedAnimation(this.IMAGES_DASH, 'dash');
+                    playSoundInterval(this.bossDashSound, 0.5, 999999999);
+                    this.moveLeft();
+                    this.speed = 3;
+                    dashCount++;
+                } else {
+                    phase = 'walking';
+                }
+            } else if (phase === 'walking') {
+                if (Math.abs(this.world.character.x - this.x) <= 574) {
+                    this.moveLeft();
+                    this.speed = 1;
+                    this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
+                    if (!this.isDead()) {
+                        playSound(this.bossWalkSound, 0.6);
+                    }
+                }
+            }
+            i++;
+        }, 1000 / 60);
     }
 
 
+
+
+
+
+    
 
 }

@@ -9,6 +9,9 @@ class ThrowableObject extends MovableObject{
     collisionBoxWidth = 55;
     collisionBoxHeight = 55;
 
+    explosionSound = new Audio('audio/grenade-explosion.mp3');
+
+
     IMAGES_EXPLOSION = [
         'img/explosion/explosion-00.png',
         'img/explosion/explosion-01.png',
@@ -72,6 +75,7 @@ class ThrowableObject extends MovableObject{
     //     const e = this.explode(throwDirection ? -100 : -110);
     //     this.removeItem(this.world.throwableObjects, this, 70);
     //     this.removeItem(this.world.explosions, e, 888);
+    //     playSound(this.explosionSound, 0.5);
     //   }
 
     //   move(throwDirection) {
@@ -91,7 +95,7 @@ class ThrowableObject extends MovableObject{
     //     if (i !== -1) setTimeout(() => arr.splice(i, 1), delay);
     //   }
 
-    
+
     throwAndAnimateGrenade(throwDirection) {
         this.x += throwDirection ? -16 : 16;
         this.playAnimation(this.IMAGES_ROTATION);
@@ -101,6 +105,7 @@ class ThrowableObject extends MovableObject{
         this.hasExploded = true;
         this.removeItem(this.world.throwableObjects, this, 70);
         this.removeItem(this.world.explosions, explosion, 888);
+        playSound(this.explosionSound, 0.5);
       }
 
       removeItem(arr, item, delay) {
