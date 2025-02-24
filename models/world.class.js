@@ -23,6 +23,7 @@ class World {
     alienHurtSound = new Audio('audio/alien-hurt-Sound.mp3');
     throwSound = new Audio('audio/throw.mp3');
     gameSound = new Audio('audio/gameSound.mp3');
+    jumpAlienHit = new Audio('audio/sci-fi-notification.mp3');
 
 
     constructor(canvas, keyboard) {
@@ -58,7 +59,8 @@ class World {
             this.checkGrenadeAmmunitionCollision();
             this.checkBulletCollisions();
             this.checkGrenadeCollisions();
-            this.timeForMusic();
+            this.checkJumpOnEnemy();
+            // this.timeForMusic();
         }, 80);
     }
 
@@ -102,8 +104,6 @@ class World {
     }
 
 
-// ##################
-
     possibleToShoot() {
         return this.keyboard.SHOOT && 
         !this.character.lifePoints == 0 &&
@@ -132,15 +132,27 @@ class World {
         }  
     }
 
-// ##################
     
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && this.character.y > 250) {
                 this.character.hit(5);
                 this.statusBar.setPercentage(this.character.lifePoints);
             }
         });
+    }
+
+
+    checkJumpOnEnemy() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0 && !this.character.jumptOnEnemy) {
+                this.character.jumptOnEnemy = true;
+                enemy.hit(1);
+                playSound(this.jumpAlienHit, 0.4);
+                this.character.speedY = 14;
+                setTimeout(() => this.character.jumptOnEnemy = false, 1444);
+            }
+        })
     }
 
 
