@@ -60,14 +60,14 @@ class World {
             this.checkBulletCollisions();
             this.checkGrenadeCollisions();
             this.checkJumpOnEnemy();
-            // this.timeForMusic();
+            this.timeForMusic();
         }, 80);
     }
 
 
     timeForMusic() {
         if (this.character.x >= 1031) {
-            playSound(this.gameSound, 0.2);
+            playSound(this.gameSound, 0.12);
         }
     }
 
@@ -111,6 +111,7 @@ class World {
         this.collectedPistolAmmunitionBar.collectedPistolAmmunition.length > 0;
     }
 
+
     checkBulletObjects() {
         if (this.possibleToShoot()) {
             this.hasShoot = true;
@@ -123,6 +124,7 @@ class World {
             this.splicePistolAmmunitionFromArray();
         }
     }
+
 
     splicePistolAmmunitionFromArray() {
         for (let i = this.shootableObjects.length - 1; i >= 0; i--) {
@@ -243,7 +245,6 @@ class World {
         }
     }
     
-    // ##################
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

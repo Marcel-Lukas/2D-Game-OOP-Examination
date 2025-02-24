@@ -171,7 +171,7 @@ class Endboss extends MovableObject {
             if (phase === 'alert') {
                 if (i < 99) {
                     this.playsTimedAnimation(this.IMAGES_ALERT, 'alert');
-                    playSound(this.bossAlertSound, 0.95);
+                    playSound(this.bossAlertSound, 0.8);
                 } else {
                     phase = 'dash';
                     dashCount = 0;
@@ -187,12 +187,20 @@ class Endboss extends MovableObject {
                     phase = 'walking';
                 }
             } else if (phase === 'walking') {
-                if (Math.abs(this.world.character.x - this.x) <= 574) {
-                    this.moveLeft();
-                    this.speed = 1;
+                if (Math.abs(this.world.character.x - this.x) <= 666) {
+                    if (this.world.character.x < this.x) {
+                        this.otherDirection = true;
+                        this.moveLeft();
+                        this.speed = 1;
+                    } else if (this.world.character.x > this.x) {
+                        this.otherDirection = false;
+                        this.moveRight();
+                        this.speed = 1;
+                    }
+
                     this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
                     if (!this.isDead()) {
-                        playSound(this.bossWalkSound, 0.6);
+                        playSound(this.bossWalkSound, 0.2);
                     }
                 }
             }

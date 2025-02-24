@@ -83,14 +83,12 @@ class MovableObject extends DrawableObject {
     }
 
 
-    // for die animation
     playAnimationOneTime(images) {
         if (this.currentImage < images.length - 1) {
             let path = images[this.currentImage];
             this.img = this.imageCache[path];
             this.currentImage++;
         } else {
-            // Letztes Bild anzeigen und beibehalten
             let path = images[images.length - 1];
             this.img = this.imageCache[path];
         }
