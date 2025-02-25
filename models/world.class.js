@@ -60,7 +60,7 @@ class World {
             this.checkBulletCollisions();
             this.checkGrenadeCollisions();
             this.checkJumpOnEnemy();
-            // this.timeForMusic();
+            this.timeForMusic();
         }, 80);
     }
 

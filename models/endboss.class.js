@@ -130,7 +130,7 @@ class Endboss extends MovableObject {
 
         // setInterval(() => {
         //     console.log('Boss Contact = ', this.hadBossFirstContact, ' Boss Leben', this.lifePoints);
-        // }, 900);
+        // }, 500);
     }
 
 
@@ -165,51 +165,92 @@ class Endboss extends MovableObject {
     awakenedBossActions() {
         let i = 0;
         let dashCount = 0;
-        let phase = 'alert';
-    
+        let phase = "alert";
         setInterval(() => {
-            if (phase === 'alert') {
-                if (i < 99) {
-                    this.playsTimedAnimation(this.IMAGES_ALERT, 'alert');
-                    playSound(this.bossAlertSound, 0.5);
-                } else {
-                    phase = 'dash';
-                    dashCount = 0;
-                }
-            } else if (phase === 'dash') {
-                if (dashCount < 150) {
-                    this.playsTimedAnimation(this.IMAGES_DASH, 'dash');
-                    playSoundInterval(this.bossDashSound, 0.25, 999999999);
-                    this.moveLeft();
-                    this.speed = 3;
-                    dashCount++;
-                } else {
-                    phase = 'walking';
-                }
-            } else if (phase === 'walking') {
-                if (Math.abs(world.character.x - this.x) <= 666) {
-                    if (this.world.character.x < this.x) {
-                        this.otherDirection = true;
-                        this.moveLeft();
-                        this.speed = 1;
-                    } else if (this.world.character.x > this.x) {
-                        this.otherDirection = false;
-                        this.moveRight();
-                        this.speed = 1;
-                    }
-
-                    this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
-                    if (!this.isDead()) {
-                        playSound(this.bossWalkSound, 0.12);
-                    }
-                }
-            }
-            i++;
+        phase = this.handlePhase(phase, i, dashCount);
+        if (phase === "dash") dashCount++;
+        i++;
         }, 1000 / 60);
     }
 
 
+    handlePhase(phase, i, dashCount) {
+        if (phase === "alert") return this.handleAlertPhase(i);
+        if (phase === "dash") return this.handleDashPhase(dashCount);
+        return this.handleWalkingPhase();
+    }
 
+
+    handleAlertPhase(i) {
+        if (i < 99) {
+        this.playsTimedAnimation(this.IMAGES_ALERT, "alert");
+        playSound(this.bossAlertSound, 0.5);
+        return "alert";
+        }
+        return "dash";
+    }
+
+
+    handleDashPhase(dashCount) {
+        if (dashCount < 150) {
+        this.playsTimedAnimation(this.IMAGES_DASH, "dash");
+        playSoundInterval(this.bossDashSound, 0.25, 2222);
+        this.moveLeft();
+        this.speed = 3;
+        return "dash";
+        }
+        return "walking";
+    }
+
+
+    handleWalkingPhase() {
+        if (Math.abs(world.character.x - this.x) <= 666) {
+        this.walkPhaseMovement();
+        this.walkPhaseAnimation();
+        }
+        return "walking";
+    }
+
+
+    walkPhaseMovement() {
+        if (world.character.x < this.x) this.walkLeftMovement();
+        else if (world.character.x - 100 > this.x) this.walkRightMovement();
+    }
+
+
+    walkLeftMovement() {
+        if (world.character.lifePoints > 0) {
+        this.otherDirection = true;
+        this.moveLeft();
+        this.speed = 1;
+        } else {
+        this.speed = 0;
+        this.playsTimedAnimation(this.IMAGES_IDLE, "idle");
+        }
+    }
+
+
+    walkRightMovement() {
+        if (world.character.lifePoints > 0) {
+        this.otherDirection = false;
+        this.moveRight();
+        this.speed = 1;
+        } else {
+        this.speed = 0;
+        this.playsTimedAnimation(this.IMAGES_IDLE, "idle");
+        }
+    }
+
+
+    walkPhaseAnimation() {
+        this.playsTimedAnimation(this.IMAGES_WALKING, "walking");
+        if (!this.isDead() && !world.character.isDead()) {
+        playSound(this.bossWalkSound, 0.12);
+        }
+    }
+
+    
+      
 
 
 
