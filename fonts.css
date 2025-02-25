@@ -7,3 +7,14 @@
     font-weight: 400;
     src: url('./fonts/ZCOOLKuaiLe-Regular.ttf') format('woff2');
 }
+
+
+/* Orbitron Regular */
+
+@font-face {
+    font-display: swap;
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/Orbitron-Regular.ttf') format('woff2');
+}

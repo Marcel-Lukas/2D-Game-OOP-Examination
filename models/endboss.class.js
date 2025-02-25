@@ -128,9 +128,9 @@ class Endboss extends MovableObject {
             this.bossAnimation();
         }, 1000 / 60);
 
-        setInterval(() => {
-            console.log('Boss Contact = ', this.hadBossFirstContact, ' Boss Leben', this.lifePoints);
-        }, 900);
+        // setInterval(() => {
+        //     console.log('Boss Contact = ', this.hadBossFirstContact, ' Boss Leben', this.lifePoints);
+        // }, 900);
     }
 
 
@@ -147,7 +147,7 @@ class Endboss extends MovableObject {
 
 
     bossAnimation() {
-        if (this.world.character.x > 5000 && !this.hadBossFirstContact) {
+        if (world.character.x > 5000 && !this.hadBossFirstContact) {
             this.awakenedBossActions();
             this.hadBossFirstContact = true;
 
@@ -171,7 +171,7 @@ class Endboss extends MovableObject {
             if (phase === 'alert') {
                 if (i < 99) {
                     this.playsTimedAnimation(this.IMAGES_ALERT, 'alert');
-                    playSound(this.bossAlertSound, 0.8);
+                    playSound(this.bossAlertSound, 0.5);
                 } else {
                     phase = 'dash';
                     dashCount = 0;
@@ -179,7 +179,7 @@ class Endboss extends MovableObject {
             } else if (phase === 'dash') {
                 if (dashCount < 150) {
                     this.playsTimedAnimation(this.IMAGES_DASH, 'dash');
-                    playSoundInterval(this.bossDashSound, 0.5, 999999999);
+                    playSoundInterval(this.bossDashSound, 0.25, 999999999);
                     this.moveLeft();
                     this.speed = 3;
                     dashCount++;
@@ -187,7 +187,7 @@ class Endboss extends MovableObject {
                     phase = 'walking';
                 }
             } else if (phase === 'walking') {
-                if (Math.abs(this.world.character.x - this.x) <= 666) {
+                if (Math.abs(world.character.x - this.x) <= 666) {
                     if (this.world.character.x < this.x) {
                         this.otherDirection = true;
                         this.moveLeft();
@@ -200,7 +200,7 @@ class Endboss extends MovableObject {
 
                     this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
                     if (!this.isDead()) {
-                        playSound(this.bossWalkSound, 0.2);
+                        playSound(this.bossWalkSound, 0.12);
                     }
                 }
             }

@@ -60,7 +60,7 @@ class World {
             this.checkBulletCollisions();
             this.checkGrenadeCollisions();
             this.checkJumpOnEnemy();
-            this.timeForMusic();
+            // this.timeForMusic();
         }, 80);
     }
 
@@ -174,6 +174,10 @@ class World {
             playSound(this.alienHurtSound, 0.15);
             if (enemy.lifePoints <= 0) this.removeAfterDelay(this.level.enemies, enemy, 444);
             this.removeAfterDelay(this.shootableObjects, bullet, 40);
+            if (enemy instanceof Endboss) {
+                this.bossStatusBar.setPercentage(enemy.lifePoints);
+                console.log('Pistol Hit! Boss Life:', enemy.lifePoints);
+            }
           });
         });
       }
@@ -195,6 +199,10 @@ class World {
         detonation.alreadyHit.add(enemy);
         if (enemy.lifePoints <= 0) {
             this.removeAfterDelay(this.level.enemies, enemy, 444);
+        }
+        if (enemy instanceof Endboss) {
+            this.bossStatusBar.setPercentage(enemy.lifePoints);
+            console.log('Nade Hit! Boss Life:', enemy.lifePoints);
         }
     }
       

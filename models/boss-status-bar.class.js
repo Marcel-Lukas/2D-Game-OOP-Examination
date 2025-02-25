@@ -26,7 +26,6 @@ class BossStatusBar extends DrawableObject{
       ];      
     
 
-    percentage = 100;
 
     constructor(){
         super();
@@ -35,7 +34,7 @@ class BossStatusBar extends DrawableObject{
         this.y = 5;
         this.width = 190;
         this.height = 40;
-        this.setPercentage(100);
+        this.setPercentage(2000);
     }
 
 
@@ -47,7 +46,7 @@ class BossStatusBar extends DrawableObject{
 
 
     resolveImageIndex() {
-        let index = Math.floor(this.percentage / 5);
+        let index = Math.floor(this.percentage / 100);
         if (index < 0) index = 0;
         if (index > 20) index = 20;
     
