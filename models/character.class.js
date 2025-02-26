@@ -17,13 +17,6 @@ class Character extends MovableObject {
     collisionBoxWidth = 60;
 
 
-    shootSound = new Audio('audio/shoot.mp3');
-    walkSound = new Audio('audio/walk.mp3');
-    hurtSound = new Audio('audio/hurt.mp3');
-    jumpSound = new Audio('audio/jump.mp3');
-    dieSound = new Audio('audio/dieSound.mp3');
-
-
     IMAGES_IDLE = [
         'img/character/idle/idle-00.png',
         'img/character/idle/idle-01.png',
@@ -112,17 +105,6 @@ class Character extends MovableObject {
         'img/character/shoot/shoot-09.png'
     ];
 
-    IMAGES_DEFENSE = [
-        'img/character/defense/defense-00.png',
-        'img/character/defense/defense-01.png',
-        'img/character/defense/defense-02.png',
-        'img/character/defense/defense-03.png',
-        'img/character/defense/defense-04.png',
-        'img/character/defense/defense-05.png',
-        'img/character/defense/defense-06.png',
-        'img/character/defense/defense-07.png'
-    ];
-
     IMAGES_HURT = [
         'img/character/hurt/hurt-00.png',
         'img/character/hurt/hurt-01.png',
@@ -148,7 +130,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_THROW);
         this.loadImages(this.IMAGES_SHOOT);
-        this.loadImages(this.IMAGES_DEFENSE);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
 
@@ -190,11 +171,6 @@ class Character extends MovableObject {
     }
 
 
-    possibleToDefens() {
-        return this.world.keyboard.DOWN && !this.isHurt() && !this.lifePoints == 0;
-    }
-    
-
     characterControls() {
 
         if (this.possibleMoveRight()) {
@@ -217,13 +193,8 @@ class Character extends MovableObject {
             this.isCharacterShooting();
         }
 
-        if (this.possibleToDefens()) {
-            this.isCharacterDefense();
-        }
-
         this.world.cameraX = -this.x + 100;
     }
-
 
 
     animationSpeeds = {
@@ -240,31 +211,36 @@ class Character extends MovableObject {
     characterAnimation() {
         if (this.isDead()) {
             this.playAnimationOneTime(this.IMAGES_DEAD);
-            playSoundInterval(this.dieSound, 0.7, 999999999);
+            if (!this.deadSoundPlayed) {
+                DIE_SOUND.play();
+                WILHELM_SCREAM.play();
+                this.deadSoundPlayed = true;
+            }
 
         } else if (this.isHurt()) {
             this.speed = 2;
             this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
-            playSound(this.hurtSound, 0.7);
+            HURT_SOUND.play();
 
         } else if (this.isAboveGround()) {
             this.playsTimedAnimation(this.IMAGES_JUMPING, 'jumping');
-            playSoundInterval(this.jumpSound, 0.4, 1400);
+            if (!this.jumpSoundPlayed) {
+                JUMP_SOUND.play();
+                this.jumpSoundPlayed = true;
+                setTimeout(() => {this.jumpSoundPlayed = false;}, 1333);
+            }
 
         } else if (this.isCharacterThrowing()) {
-            this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
+            THROW_SOUND.play();
 
         } else if (this.isCharacterWalking()) {
             this.speed = 6;
             this.playsTimedAnimation(this.IMAGES_WALKING, 'walking');
-            playSound(this.walkSound, 0.15);
+            WALK_SOUND.play();
 
         } else if (this.isCharacterShooting()) {
             this.playsTimedAnimation(this.IMAGES_SHOOT, 'shoot');
-            playSound(this.shootSound, 0.5);
-
-        } else if (this.isCharacterDefense()) {
-            this.playsTimedAnimation(this.IMAGES_DEFENSE, 'defense');
+            SHOOT_SOUND.play();
 
         } else {
             this.playsTimedAnimation(this.IMAGES_IDLE, 'idle');
@@ -282,15 +258,11 @@ class Character extends MovableObject {
     }
 
 
-    isCharacterDefense() {
-        return this.world.keyboard.DOWN;
-    }
-
-
     isCharacterThrowing() {
         return this.world.keyboard.THROW && this.world.collectedGrenadeBar.collectedGrenades.length > 0;
     }
     
+
 
 
 }

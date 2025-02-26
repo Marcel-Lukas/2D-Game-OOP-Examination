@@ -12,10 +12,6 @@ class Endboss extends MovableObject {
     collisionBoxOffsetX = 80;
     collisionBoxWidth = 120;
 
-    bossAlertSound = new Audio('audio/alien-alert.mp3');
-    bossDashSound = new Audio('audio/dashSound.mp3');
-    bossWalkSound = new Audio('audio/boss-footstep.mp3');
-
 
     IMAGES_IDLE = [
         'img/endboss/idle/__grey_alien_black_jump_suit_idle_000.png',
@@ -184,7 +180,7 @@ class Endboss extends MovableObject {
     handleAlertPhase(i) {
         if (i < 99) {
         this.playsTimedAnimation(this.IMAGES_ALERT, "alert");
-        playSound(this.bossAlertSound, 0.5);
+        BOSS_ALERT_SOUND.play();
         return "alert";
         }
         return "dash";
@@ -192,9 +188,9 @@ class Endboss extends MovableObject {
 
 
     handleDashPhase(dashCount) {
-        if (dashCount < 150) {
+        if (dashCount < 144) {
         this.playsTimedAnimation(this.IMAGES_DASH, "dash");
-        playSoundInterval(this.bossDashSound, 0.25, 2222);
+        BOSS_DASH_SOUND.play();
         this.moveLeft();
         this.speed = 3;
         return "dash";
@@ -245,12 +241,20 @@ class Endboss extends MovableObject {
     walkPhaseAnimation() {
         this.playsTimedAnimation(this.IMAGES_WALKING, "walking");
         if (!this.isDead() && !world.character.isDead()) {
-        playSound(this.bossWalkSound, 0.12);
+        BOSS_WALK_SOUND.play();
+        }
+        if (world.character.isDead()) {
+            this.playsTimedAnimation(this.IMAGES_IDLE, "idle");
+            if (!this.bossScreamSoundPlayed) {
+                setTimeout(() => {
+                    BOSS_SCREAM.play();
+                    this.bossScreamSoundPlayed = true;
+                }, 888);
+            }
         }
     }
 
     
-      
 
 
 

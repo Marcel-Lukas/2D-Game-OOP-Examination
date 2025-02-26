@@ -17,15 +17,6 @@ class World {
     explosions = [];
 
 
-    pickUpPistolAmmoSound = new Audio('audio/pick-pistol-ammo.mp3');
-    pickUpNadeAmmoSound = new Audio('audio/pick-nade-ammo.mp3');
-    pickUpHealthSound = new Audio('audio/collect.mp3');
-    alienHurtSound = new Audio('audio/alien-hurt-Sound.mp3');
-    throwSound = new Audio('audio/throw.mp3');
-    gameSound = new Audio('audio/gameSound.mp3');
-    jumpAlienHit = new Audio('audio/sci-fi-notification.mp3');
-
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -67,7 +58,7 @@ class World {
 
     timeForMusic() {
         if (this.character.x >= 1031) {
-            playSound(this.gameSound, 0.12);
+            GAME_SOUND.play();
         }
     }
 
@@ -83,7 +74,7 @@ class World {
     checkThrowObjects() {
         if (this.possibleToThrow()) {
             this.hasThrownGrenade = true; 
-            playSound(this.throwSound, 0.5);
+            THROW_SOUND.play();
             let grenade = new ThrowableObject(this.character.x + 80, this.character.y + -20);
             this.setWorld(grenade);
             this.throwableObjects.push(grenade);
@@ -150,7 +141,7 @@ class World {
             if (this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 0 && !this.character.jumptOnEnemy) {
                 this.character.jumptOnEnemy = true;
                 enemy.hit(1);
-                playSound(this.jumpAlienHit, 0.4);
+                JUMP_ALIEN_HIT.play();
                 this.character.speedY = 14;
                 setTimeout(() => this.character.jumptOnEnemy = false, 1444);
             }
@@ -171,7 +162,7 @@ class World {
           this.shootableObjects.forEach(bullet => {
             if (!bullet.isColliding(enemy)) return;
             enemy.hit(50);
-            playSound(this.alienHurtSound, 0.15);
+            ALIEN_HURT_SOUND.play();
             if (enemy.lifePoints <= 0) this.removeAfterDelay(this.level.enemies, enemy, 444);
             this.removeAfterDelay(this.shootableObjects, bullet, 40);
             if (enemy instanceof Endboss) {
@@ -195,7 +186,7 @@ class World {
 
     handleGrenadeHit(detonation, enemy) {
         enemy.hit(334);
-        playSound(this.alienHurtSound, 0.3);
+        ALIEN_HURT_SOUND.play();
         detonation.alreadyHit.add(enemy);
         if (enemy.lifePoints <= 0) {
             this.removeAfterDelay(this.level.enemies, enemy, 444);
@@ -211,7 +202,7 @@ class World {
         this.level.health.forEach((item) => {
             if (this.character.isColliding(item)) {
                 this.character.lifePoints = 100;
-                playSound(this.pickUpHealthSound, 0.5);
+                PICK_UP_HEALTH_SOUND.play();
                 this.statusBar.setPercentage(this.character.lifePoints);
                 this.deletePlacedItems(item, 'health');
             } 
@@ -225,7 +216,7 @@ class World {
                 for (let i = 0; i < 6; i++) {
                     this.collectedPistolAmmunitionBar.collectedPistolAmmunition.push(item);
                 }
-                playSound(this.pickUpPistolAmmoSound, 0.3);
+                PICK_UP_PISTOL_AMMO_SOUND.play();
                 this.deletePlacedItems(item, 'pistolAmmunition');
             }
         });
@@ -236,7 +227,7 @@ class World {
         this.level.grenadeAmmunition.forEach((item) => {
             if (this.character.isColliding(item)) {
                 this.collectedGrenadeBar.collectedGrenades.push(item);
-                playSound(this.pickUpNadeAmmoSound, 0.6);
+                PICK_UP_NADE_AMMO_SOUND.play();
                 this.deletePlacedItems(item, 'grenadeAmmunition');
             }
         });

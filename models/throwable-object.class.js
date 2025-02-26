@@ -9,8 +9,6 @@ class ThrowableObject extends MovableObject{
     collisionBoxWidth = 55;
     collisionBoxHeight = 55;
 
-    explosionSound = new Audio('audio/grenade-explosion.mp3');
-
 
     IMAGES_EXPLOSION = [
         'img/explosion/explosion-00.png',
@@ -105,7 +103,7 @@ class ThrowableObject extends MovableObject{
         this.hasExploded = true;
         this.removeItem(this.world.throwableObjects, this, 70);
         this.removeItem(this.world.explosions, explosion, 888);
-        playSound(this.explosionSound, 0.5);
+        EXPLOSION_SOUND.play();
       }
 
       removeItem(arr, item, delay) {

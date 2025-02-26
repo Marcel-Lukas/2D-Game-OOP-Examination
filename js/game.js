@@ -10,27 +10,6 @@ function init() {
 }
 
 
-function playSound(sound, volume) {
-    sound.volume = volume;
-    sound.play();
-}
-
-
-let canPlayAgain = true;
-
-function playSoundInterval(sound, volume, interval) {
-  if (canPlayAgain) {
-    sound.volume = volume;
-    sound.play();
-    canPlayAgain = false;
-    setTimeout(() => {
-        canPlayAgain = true;
-    }, interval);
-  }
-}
-
-
-
 window.addEventListener("keydown", (event) => {
     switch (event.key) {
         case "d":
@@ -39,10 +18,6 @@ window.addEventListener("keydown", (event) => {
         case "a":
             keyboard.LEFT = true;
             break;
-        case "s":
-            keyboard.DOWN = true;
-            break;
-
 
         case "ArrowRight":
             keyboard.RIGHT = true;
@@ -50,10 +25,6 @@ window.addEventListener("keydown", (event) => {
         case "ArrowLeft":
             keyboard.LEFT = true;
             break;
-        case "ArrowDown":
-            keyboard.DOWN = true;
-            break;
-
 
         case "r":
             keyboard.SHOOT = true;
@@ -61,7 +32,6 @@ window.addEventListener("keydown", (event) => {
         case "f":
             keyboard.THROW = true;
             break;
-
 
         case " ":
             keyboard.SPACE = true;
@@ -85,10 +55,6 @@ window.addEventListener("keyup", (event) => {
         case "a":
             keyboard.LEFT = false;
             break;
-        case "s":
-            keyboard.DOWN = false;
-            break;
-
 
         case "ArrowRight":
             keyboard.RIGHT = false;
@@ -96,10 +62,6 @@ window.addEventListener("keyup", (event) => {
         case "ArrowLeft":
             keyboard.LEFT = false;
             break;
-        case "ArrowDown":
-            keyboard.DOWN = false;
-            break;
-
 
         case "r":
             keyboard.SHOOT = false;
@@ -107,7 +69,6 @@ window.addEventListener("keyup", (event) => {
         case "f":
             keyboard.THROW = false;
             break;
-
 
         case " ":
             keyboard.SPACE = false;
