@@ -18,3 +18,13 @@
     font-weight: 400;
     src: url('./fonts/Orbitron-Regular.ttf') format('woff2');
 }
+
+/* OpenSans Regular */
+
+@font-face {
+    font-display: swap;
+    font-family: 'OpenSans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/openSans-Regular.ttf') format('woff2');
+}
