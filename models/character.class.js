@@ -231,6 +231,7 @@ class Character extends MovableObject {
             }
 
         } else if (this.isCharacterThrowing()) {
+            this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
             THROW_SOUND.play();
 
         } else if (this.isCharacterWalking()) {
