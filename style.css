@@ -262,9 +262,15 @@ body {
     }
     p {
         cursor: default;
+        margin-left: 4px;
+        margin-right: 4px;
         text-shadow: 1px 1px 3px rgb(0, 0, 0);
     }
+    .extra {
+        margin-left: 37px;
+    }
 }
+
 
 
 .xBtn {
