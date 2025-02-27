@@ -51,15 +51,7 @@ class World {
             this.checkBulletCollisions();
             this.checkGrenadeCollisions();
             this.checkJumpOnEnemy();
-            this.timeForMusic();
         }, 80);
-    }
-
-
-    timeForMusic() {
-        if (this.character.x >= 1031) {
-            GAME_SOUND.play();
-        }
     }
 
 

@@ -1,12 +1,55 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let allIntervalsIDs = [];
+
+
+function startGame() {
+    const startOverlay = document.getElementById("start-overlay");
+    startOverlay.classList.add("d-none");
+    init();
+    setInterval(() => {checkGameOver()}, 80);
+    setTimeout(() => {GAME_SOUND.play();}, 444);
+}
+
+
+function restartGame() {
+    const gameOverOverlay = document.getElementById("game-over-overlay");
+    gameOverOverlay.classList.add("d-none");
+    clearAllIntervals();
+    init();
+    setTimeout(() => {GAME_SOUND.play();}, 444);
+}
 
 
 function init() {
     initLevel();
     canvas = document.getElementById('gameCanvas');
     world = new World(canvas, keyboard);
+}
+
+
+function setStoppableIverval(fn, time) {
+    let id = setInterval(fn, time);
+    allIntervalsIDs.push(id);
+}
+
+
+function clearAllIntervals() {
+    allIntervalsIDs.forEach(clearInterval);
+    allIntervalsIDs.length = 0;
+}
+
+
+function checkGameOver() {
+    if (world.character.lifePoints == 0) {
+        const gameOverOverlay = document.getElementById("game-over-overlay");
+        setTimeout(() => {
+            gameOverOverlay.classList.remove("d-none");
+            GAME_SOUND.pause();
+            clearAllIntervals();
+        }, 2222);
+    }
 }
 
 
