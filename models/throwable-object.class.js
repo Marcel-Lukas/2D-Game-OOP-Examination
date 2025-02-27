@@ -61,7 +61,7 @@ class ThrowableObject extends MovableObject{
     throw() {
         let throwDirection = MovableObject.throwOtherDirection;
 
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.throwAndAnimateGrenade(throwDirection); 
         }, 65)
     }

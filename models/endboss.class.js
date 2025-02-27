@@ -120,13 +120,9 @@ class Endboss extends MovableObject {
     }
 
     run() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.bossAnimation();
         }, 1000 / 60);
-
-        // setInterval(() => {
-        //     console.log('Boss Contact = ', this.hadBossFirstContact, ' Boss Leben', this.lifePoints);
-        // }, 500);
     }
 
 
@@ -143,6 +139,7 @@ class Endboss extends MovableObject {
 
 
     bossAnimation() {
+        const winScreen = document.getElementById("win-overlay");
         if (world.character.x > 5000 && !this.hadBossFirstContact) {
             this.awakenedBossActions();
             this.hadBossFirstContact = true;
@@ -154,6 +151,14 @@ class Endboss extends MovableObject {
         } else if (this.isDead()) {
             this.speed = 0;
             this.playAnimationOneTime(this.IMAGES_DEAD);
+            setTimeout(() => {
+                winScreen.classList.remove("d-none");
+                GAME_SOUND.pause();
+                WIN_SOUND.play();
+                setTimeout(() => {
+                    clearAllIntervals();
+                }, 80);
+            }, 3000);
         } 
     }  
 
@@ -162,7 +167,7 @@ class Endboss extends MovableObject {
         let i = 0;
         let dashCount = 0;
         let phase = "alert";
-        setInterval(() => {
+        setStoppableIverval(() => {
         phase = this.handlePhase(phase, i, dashCount);
         if (phase === "dash") dashCount++;
         i++;
@@ -239,7 +244,9 @@ class Endboss extends MovableObject {
 
 
     walkPhaseAnimation() {
+        if (!this.isDead()) {
         this.playsTimedAnimation(this.IMAGES_WALKING, "walking");
+        }
         if (!this.isDead() && !world.character.isDead()) {
         BOSS_WALK_SOUND.play();
         }

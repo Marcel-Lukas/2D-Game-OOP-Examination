@@ -34,7 +34,7 @@ class ShootableObject extends MovableObject {
     shoot() {
         let shootDirection = MovableObject.throwOtherDirection;
 
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.shootAndAnimateBullet(shootDirection); 
         }, 50)
     }

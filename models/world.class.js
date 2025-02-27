@@ -41,7 +41,7 @@ class World {
 
 
     runIntervals() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.checkEnemyCollisions();
             this.checkThrowObjects();
             this.checkBulletObjects();
@@ -155,11 +155,13 @@ class World {
             if (!bullet.isColliding(enemy)) return;
             enemy.hit(50);
             ALIEN_HURT_SOUND.play();
-            if (enemy.lifePoints <= 0) this.removeAfterDelay(this.level.enemies, enemy, 444);
+            if (enemy.lifePoints <= 0) 
             this.removeAfterDelay(this.shootableObjects, bullet, 40);
+            if (!enemy instanceof Endboss) {
+                this.removeAfterDelay(this.level.enemies, enemy, 444);
+            }
             if (enemy instanceof Endboss) {
                 this.bossStatusBar.setPercentage(enemy.lifePoints);
-                console.log('Pistol Hit! Boss Life:', enemy.lifePoints);
             }
           });
         });
@@ -181,11 +183,12 @@ class World {
         ALIEN_HURT_SOUND.play();
         detonation.alreadyHit.add(enemy);
         if (enemy.lifePoints <= 0) {
-            this.removeAfterDelay(this.level.enemies, enemy, 444);
+            if (!enemy instanceof Endboss) {
+                this.removeAfterDelay(this.level.enemies, enemy, 444);
+            }
         }
         if (enemy instanceof Endboss) {
             this.bossStatusBar.setPercentage(enemy.lifePoints);
-            console.log('Nade Hit! Boss Life:', enemy.lifePoints);
         }
     }
       

@@ -60,11 +60,11 @@ class BrainAlien extends MovableObject {
 
     
     run() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.alienAnimation();
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.moveLeft();
             if (this.x < level1.levelStartX - 555) {
                 this.x = level1.levelEndX + 400;

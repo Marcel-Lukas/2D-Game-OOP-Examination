@@ -43,7 +43,7 @@ class Explosion extends MovableObject {
 
 
     explode() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.playsTimedAnimation(this.IMAGES_EXPLOSION, 'detonationSpeed');
         }, 1000 / 60);
     }

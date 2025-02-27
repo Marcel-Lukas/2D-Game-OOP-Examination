@@ -55,12 +55,6 @@
 
   <body>
 
-    <div id="start-overlay" class="start-overlay">
-        <img id="start-screen" class="start-screen" src="img/start-screen.jpg" alt="Start Screen">
-        <div id="start-btn" onclick="startGame()">Start</div>
-    </div>
-
-
     <div>
         <canvas id="gameCanvas" width="720" height="480"></canvas>
         <img id="sound-switch" onclick="toggleMute()" src="img/sound-icon.png" alt="Sound Switch">
@@ -75,12 +69,20 @@
         </div>
     </div>
 
+    <div id="start-overlay" class="start-overlay">
+        <img id="start-screen" class="start-screen" src="img/start-screen.jpg" alt="Start Screen">
+        <div id="start-btn" onclick="startGame()">Start</div>
+    </div>
 
     <div id="game-over-overlay" class="game-over-overlay d-none">
         <img id="game-over-screen" class="game-over-screen" src="img/end-screen.jpg" alt="Game Over">
-        <div id="continue-btn" onclick="restartGame()">Continue</div>
+        <div id="continue-btn" onclick="restartGame()">Try Again</div>
     </div>
 
+    <div id="win-overlay" class="win-overlay d-none">
+        <img id="win-screen" class="win-screen" src="img/win-screen.jpg" alt="Game Over">
+        <div id="play-again-btn" onclick="restartGame()">Play Again</div>
+    </div>
 
     <div id="game-controls-container" class="game-controls-container d-none">
         <img class="xBtn" onclick="closeWindow()" src="img/close-white.png" alt="X Button">

@@ -4,28 +4,28 @@ let keyboard = new Keyboard();
 let allIntervalsIDs = [];
 
 
+function init() {
+    initLevel();
+    canvas = document.getElementById('gameCanvas');
+    world = new World(canvas, keyboard);
+}
+
+
 function startGame() {
     const startOverlay = document.getElementById("start-overlay");
     startOverlay.classList.add("d-none");
     init();
-    setInterval(() => {checkGameOver()}, 80);
     setTimeout(() => {GAME_SOUND.play();}, 444);
 }
 
 
 function restartGame() {
     const gameOverOverlay = document.getElementById("game-over-overlay");
+    const winScreen = document.getElementById("win-overlay");
     gameOverOverlay.classList.add("d-none");
-    clearAllIntervals();
+    winScreen.classList.add("d-none");
     init();
     setTimeout(() => {GAME_SOUND.play();}, 444);
-}
-
-
-function init() {
-    initLevel();
-    canvas = document.getElementById('gameCanvas');
-    world = new World(canvas, keyboard);
 }
 
 
@@ -38,18 +38,6 @@ function setStoppableIverval(fn, time) {
 function clearAllIntervals() {
     allIntervalsIDs.forEach(clearInterval);
     allIntervalsIDs.length = 0;
-}
-
-
-function checkGameOver() {
-    if (world.character.lifePoints == 0) {
-        const gameOverOverlay = document.getElementById("game-over-overlay");
-        setTimeout(() => {
-            gameOverOverlay.classList.remove("d-none");
-            GAME_SOUND.pause();
-            clearAllIntervals();
-        }, 2222);
-    }
 }
 
 
@@ -82,7 +70,7 @@ function closeWindow() {
 
 
 function fullscreen() {
-    let layers = ['start-overlay', 'start-screen', 'game-over-overlay', 'game-over-screen', 'gameCanvas', 'game-controls-container', 'impressum-container'];
+    let layers = ['start-overlay', 'start-screen', 'game-over-overlay', 'game-over-screen', 'win-overlay', 'gameCanvas', 'win-screen', 'game-controls-container', 'impressum-container'];
     let container = document.getElementById('absolute-container');
     container.classList.toggle('d-none');
 

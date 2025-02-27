@@ -139,7 +139,7 @@ class Character extends MovableObject {
 
 
     run() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.characterControls();
             this.characterAnimation();
         }, 1000 / 60);
@@ -209,8 +209,16 @@ class Character extends MovableObject {
 
 
     characterAnimation() {
+        const gameOverOverlay = document.getElementById("game-over-overlay");
         if (this.isDead()) {
-            this.playAnimationOneTime(this.IMAGES_DEAD);
+                this.playAnimationOneTime(this.IMAGES_DEAD);
+                setTimeout(() => {
+                    gameOverOverlay.classList.remove("d-none");
+                    GAME_SOUND.pause();
+                    setTimeout(() => {
+                        clearAllIntervals();
+                    }, 80);
+                }, 2222);
             if (!this.deadSoundPlayed) {
                 DIE_SOUND.play();
                 WILHELM_SCREAM.play();

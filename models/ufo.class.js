@@ -16,7 +16,7 @@ class Ufo extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.moveLeft();
             this.y = 90 + Math.sin(this.floatOffset) * 22;
             this.floatOffset += 0.1;

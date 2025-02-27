@@ -89,6 +89,9 @@ BOSS_SCREAM.volume = 0.6;
 const GAME_SOUND = new Audio('audio/gameSound.mp3');
 GAME_SOUND.volume = 0.12;
 
+const WIN_SOUND = new Audio('audio/win-sound.mp3');
+WIN_SOUND.volume = 0.5;
+
 
 
 function setAllSoundsMuted(muted) {
@@ -115,6 +118,7 @@ function setAllSoundsMuted(muted) {
     BOSS_SCREAM.muted = muted;
 
     GAME_SOUND.muted = muted;
+    WIN_SOUND.muted = muted;
 }
 
 

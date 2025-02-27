@@ -31,7 +31,7 @@ class PistolAmmunition extends MovableObject{
 
 
     animate() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.playAnimation(this.IMAGES);
         }, 120);
     }

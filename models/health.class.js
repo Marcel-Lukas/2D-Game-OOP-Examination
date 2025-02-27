@@ -25,7 +25,7 @@ class Health extends MovableObject {
 
 
     animate() {
-        setInterval(() => {
+        setStoppableIverval(() => {
             this.playAnimation(this.IMAGES);
         }, 333);
     }
