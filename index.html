@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html translate="no">
+<html lang="en" class="notranslate" translate="no"> 
+    
   <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="notranslate">
+    <meta name="googlebot" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Defend the world against a ruthless alien invasion! Arm yourself with weapons and fight for survival in this action-packed browser game.">
     <meta name="keywords" content="Alien Invasion, Shooter, Desert, Browser Game, Action, Weapons, Survival, Sci-Fi, Combat, Defense">    
@@ -11,6 +15,7 @@
     <link rel="shortcut icon" href="img/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="img/favicon/site.webmanifest" />
+    
     <title>Desert Alien Invasion</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -51,47 +56,35 @@
   <body onload="init()">
 
 
-    <div id="start-overlay" class="d-none">
-        <img class="fullscreen-Icon" onclick="fullscreen()" src="img/fullscreen-icon.png" alt="Fullscreen">
-        <img id="start-screen" src="img/start-screen.jpg" alt="Start Screen">
-
+    <div id="start-overlay" class="start-overlay d-none">
+        <img id="start-screen" class="start-screen" src="img/start-screen.jpg" alt="Start Screen">
         <div id="start-btn" onclick="startGame()">Start</div>
+    </div>
 
-        <div class="controls-info-btn" onclick="toggleControlInfo()">
-            <span>Game Controls</span>
-            <img src="img/keyboard.png" alt="Keyboard">
-        </div>
 
-        <div class="impressum-btn" onclick="toggleImpressum()">
-            Impressum
+    <div>
+        <canvas id="gameCanvas" width="720" height="480"></canvas>
+        <img id="sound-switch" onclick="toggleMute()" src="img/sound-icon.png" alt="Sound Switch">
+        <img id="fullscreen-Icon" onclick="fullscreen()" src="img/fullscreen-icon.png" alt="Fullscreen">
+        <div id="absolute-container">
+            <h1 id="game-title">Desert Alien Invasion</h1>
+            <div id="controls-info-btn" class="controls-info-btn" onclick="toggleControlInfo()">
+                <span>Game Controls</span>
+                <img src="img/keyboard.png" alt="Keyboard">
+            </div>
+            <div class="impressum-btn" onclick="toggleImpressum()">Impressum</div>
         </div>
     </div>
 
 
-    <h1>Desert Alien Invasion</h1>
-    <canvas id="gameCanvas" width="720" height="480"></canvas>
-    <img id="sound-switch" class="sound-switch-icon" onclick="toggleMute()" src="img/sound-icon.png" alt="Sound Switch">
-
-
-    <div id="game-over-overlay" class="d-none">
-        <img class="fullscreen-Icon" onclick="fullscreen()" src="img/fullscreen-icon.png" alt="Fullscreen">
-        <img id="game-over-screen" src="img/end-screen.jpg" alt="Game Over">
-
+    <div id="game-over-overlay" class="game-over-overlay d-none">
+        <img id="game-over-screen" class="game-over-screen" src="img/end-screen.jpg" alt="Game Over">
         <div id="continue-btn" onclick="restartGame()">Continue</div>
-
-        <div class="controls-info-btn" onclick="toggleControlInfo()">
-            <span>Game Controls</span>
-            <img src="img/keyboard.png" alt="Keyboard">
-        </div>
-
-        <div class="impressum-btn" onclick="toggleImpressum()">
-            Impressum
-        </div>
     </div>
 
-    
 
-    <div id="game-controls-container" class="d-none">
+    <div id="game-controls-container" class="game-controls-container d-none">
+        <img class="xBtn" onclick="closeWindow()" src="img/close-white.png" alt="X Button">
         <h2>Game Controls</h2>
         <span>move character</span>
         <div class="control-info-box">
@@ -124,13 +117,12 @@
             <div class="keyBox">F</div>
             <span>shoot</span>
         </div>
-
-        
     </div>
 
 
-    <div id="impressum-container" class="d-none">
+    <div id="impressum-container" class="impressum-container d-none">
         <div id="impressum-box">
+            <img class="xBtn" onclick="closeWindow()" src="img/close-white.png" alt="X Button">
             <h2>Impressum</h2>
             <p>Marcel Lukas</p>
             <p>Hauptstrasse. 55</p>
@@ -139,6 +131,7 @@
         </div>
         <a href="https://github.com/Marcel-Lukas" target="_blank" rel="noopener noreferrer"><img id="gitcontact" src="img/github-contact.png" alt="GitHub Kontakt"></a>
     </div>
+
 
   </body>
 

@@ -5,13 +5,20 @@
   padding: 0;
 }
 
+
 .d-none {
     display: none !important;
 }
 
+
 html {
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
+
 
 body {
     background-image: url("img/background.jpg");
@@ -25,6 +32,7 @@ body {
     justify-content: center;
 }
 
+
 #gameCanvas {
     background-color: rgba(0, 0, 0, 0);
     border: solid 4px rgba(0, 0, 0, 0.35);
@@ -33,10 +41,13 @@ body {
     display: block;
 }
 
-body > h1 {
-    margin-top: 144px;
+
+#game-title {
+    position: absolute;
+    margin-bottom: 1080px;
+    margin-left: 22px;
     font-family: "Orbitron";
-    font-size: 46px;
+    font-size: 43px;
     color: rgb(235, 235, 235);
     text-shadow: 2px 2px 6px rgb(0, 0, 0),
     1px 1px 14px rgb(72, 255, 0),
@@ -45,7 +56,8 @@ body > h1 {
     padding-bottom: 6px;
 }
 
-#start-overlay {
+
+.start-overlay {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -54,51 +66,21 @@ body > h1 {
 }
 
 
-#start-screen {
+.start-screen {
     position: relative;
     margin: 0;
     padding: 0;
-    margin-top: 220px;
-    height: 506px;
-    width: 740px;
+    height: 480px;
+    width: 720px;
     border-radius: 22px;
     box-shadow: 0px 0px 24px rgba(197, 197, 197, 0.9);
     z-index: 1;
 }
 
 
-.fullscreen-Icon {
-    position: absolute;
-    margin-top: -230px;
-    right: 10px;
-    height: 44px;
-    z-index: 3;
-    cursor: pointer;
-    transition: all ease-in-out 222ms;
-    filter: drop-shadow(0px 0px 4px rgb(255, 255, 255));
-    &:hover {
-        transform: translateY(3px) translateX(-2px) scale(1.25);
-    }
-}
-
-.sound-switch-icon {
-    position: absolute;
-    margin-top: 640px;
-    margin-right: 660px;
-    height: 34px;
-    z-index: 5;
-    cursor: pointer;
-    transition: all ease-in-out 222ms;
-    &:hover {
-        transform: scale(1.2);
-        filter: drop-shadow(0px 0px 8px rgb(0, 0, 0));
-    }
-}
-
-
 #start-btn {
-    margin-top: 180px;
     position: absolute;
+    margin-bottom: 70px;
     font-family: "Orbitron";
     font-size: 38px;
     color: black;
@@ -118,11 +100,43 @@ body > h1 {
     z-index: 2;
 }
 
+
 #start-btn:hover {
     box-shadow: 0px 0px 34px rgba(45, 126, 42, 0.9);
     background-color: rgb(21, 255, 0);
     animation: wip 240ms infinite ease-in-out;
     text-shadow: 1px 1px 3px rgb(106, 255, 143);
+}
+
+
+#fullscreen-Icon {
+    position: absolute;
+    margin-top: -68px;
+    margin-left: 4px;
+    height: 32px;
+    z-index: 3;
+    cursor: pointer;
+    transition: all ease-in-out 222ms;
+    filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.85));
+    &:hover {
+        transform: translateY(-2px) translateX(2px) scale(1.2);
+        filter: drop-shadow(0px 0px 3px rgb(0, 0, 0));
+    }
+}
+
+
+#sound-switch {
+    position: absolute;
+    margin-top: -36px;
+    margin-left: 10px;
+    height: 28px;
+    z-index: 5;
+    cursor: pointer;
+    transition: all ease-in-out 222ms;
+    &:hover {
+        transform: translateY(-2px) translateX(2px) scale(1.2);
+        filter: drop-shadow(0px 0px 3px rgb(0, 0, 0));
+    }
 }
 
 
@@ -137,6 +151,7 @@ body > h1 {
         transform: scale(1);
     }
 }
+
 
 @keyframes wip {
     0% {
@@ -154,13 +169,21 @@ body > h1 {
 }
 
 
-.controls-info-btn {
+#absolute-container {
+    margin-top: -2px;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 720px;
+}
+
+
+.controls-info-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3;
-    margin-top: 650px;
     cursor: pointer;
     transition: all ease-in-out 222ms;
     span {
@@ -168,46 +191,46 @@ body > h1 {
         font-family: "Orbitron";
         font-size: 22px;
         margin-right: 16px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        text-shadow: 1px 1px 4px rgb(0, 0, 0);
     }
     img {
         height: 40px;
-        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.8));
+        filter: drop-shadow(0px 0px 4px rgb(0, 0, 0));
     }
 }
 
 
 .controls-info-btn:hover {
-    transform: translateY(2px) scale(1.2);
-}
-
-
-.impressum-btn {
-    position: absolute;
-    z-index: 3;
-    margin-top: 680px;
-    margin-left: 600px;
-    cursor: pointer;
-    color: white;
-    font-family: "Orbitron";
-    font-size: 17px;
-    transition: all ease-in-out 222ms;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    &:hover {
-        transform: translateY(1px) translateX(-6px) scale(1.2);
+    transform: translateX(20px) scale(1.15);
+    span {
+        text-decoration: underline;
     }
 }
 
 
-#impressum-container {
+.impressum-btn {
+    z-index: 3;
+    cursor: pointer;
+    color: white;
+    font-family: "Orbitron";
+    font-size: 22px;
+    transition: all ease-in-out 222ms;
+    text-shadow: 1px 1px 4px rgb(0, 0, 0);
+    &:hover {
+        transform: translateX(-10px) scale(1.2);
+        text-decoration: underline;
+    }
+}
+
+
+.impressum-container {
     position: absolute;
     margin: 0;
     padding: 0;
-    margin-top: 220px;
-    height: 506px;
-    width: 740px;
+    height: 488px;
+    width: 728px;
     border-radius: 22px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -259,13 +282,12 @@ body > h1 {
 }
 
 
-#game-controls-container {
+.game-controls-container {
     position: absolute;
     margin: 0;
     padding: 0;
-    margin-top: 220px;
-    height: 506px;
-    width: 740px;
+    height: 490px;
+    width: 730px;
     border-radius: 22px;
     background-color: rgba(104, 85, 71, 0.9);
     z-index: 2;
@@ -297,6 +319,26 @@ body > h1 {
 }
 
 
+.xBtn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    height: 38px;
+    width: 38px;
+    cursor: pointer;
+    z-index: 4;
+    transition: all ease-in-out 222ms;
+    filter: drop-shadow(0px 0px 4px rgb(255, 255, 255));
+    border-radius: 50%;
+    background-color: rgb(77, 77, 77);
+    padding: 3px;
+    &:hover {
+        transform: translateY(2px) translateX(-2px) scale(1.2);
+        box-shadow: 0px 0px 8px rgba(204, 204, 204, 0.8);
+    }
+}
+
+
 .control-info-box {
     display: flex;
     align-items: center;
@@ -320,10 +362,10 @@ body > h1 {
       0 2px 2px rgba(0,0,0,0.5), 
       inset 0 1px 0 #2a2a2a;
     filter: drop-shadow(0px 0px 6px rgb(255, 255, 255));
-  }
+}
 
 
-  .keyBoxSpace {
+.keyBoxSpace {
     cursor: default;
     margin: 8px;
     height: 50px;
@@ -339,31 +381,32 @@ body > h1 {
       0 2px 2px rgba(0,0,0,0.5), 
       inset 0 1px 0 #2a2a2a;
     filter: drop-shadow(0px 0px 6px rgb(255, 255, 255));
-  }
+}
   
 
-  #game-over-overlay {
+.game-over-overlay {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
+}
 
-  #game-over-screen {
+
+.game-over-screen {
     position: relative;
     margin: 0;
     padding: 0;
-    margin-top: 220px;
-    height: 506px;
-    width: 740px;
+    height: 480px;
+    width: 720px;
     border-radius: 22px;
     box-shadow: 0px 0px 24px rgba(197, 197, 197, 0.9);
     z-index: 1;
 }
 
+
 #continue-btn {
-    margin-top: -196px;
+    margin-top: -400px;
     position: absolute;
     font-family: "Orbitron";
     font-size: 36px;
@@ -384,9 +427,18 @@ body > h1 {
     z-index: 2;
 }
 
+
 #continue-btn:hover {
     box-shadow: 0px 0px 34px rgba(45, 126, 42, 0.9);
     background-color: rgb(21, 255, 0);
     animation: wip 333ms infinite ease-in-out;
     text-shadow: 1px 1px 3px rgb(106, 255, 143);
+}
+
+
+.fullScreenSize {
+    max-width: 1440px;
+    max-height: 960px;
+    width: 100vw;
+    height: 100vh;
 }
