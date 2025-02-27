@@ -158,7 +158,7 @@ class Endboss extends MovableObject {
                 setTimeout(() => {
                     clearAllIntervals();
                 }, 80);
-            }, 3000);
+            }, 2400);
         } 
     }  
 

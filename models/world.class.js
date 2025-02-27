@@ -146,7 +146,7 @@ class World {
           const i = arr.indexOf(item);
           if (i !== -1) arr.splice(i, 1);
         }, delay);
-      }
+    }
 
 
     checkBulletCollisions() {
@@ -155,17 +155,16 @@ class World {
             if (!bullet.isColliding(enemy)) return;
             enemy.hit(50);
             ALIEN_HURT_SOUND.play();
-            if (enemy.lifePoints <= 0) 
             this.removeAfterDelay(this.shootableObjects, bullet, 40);
-            if (!enemy instanceof Endboss) {
-                this.removeAfterDelay(this.level.enemies, enemy, 444);
-            }
+            if (enemy.lifePoints <= 0 && !(enemy instanceof Endboss)) {
+            this.removeAfterDelay(this.level.enemies, enemy, 444);
+            }               
             if (enemy instanceof Endboss) {
                 this.bossStatusBar.setPercentage(enemy.lifePoints);
             }
           });
         });
-      }
+    }
     
 
     checkGrenadeCollisions() {
@@ -182,10 +181,8 @@ class World {
         enemy.hit(334);
         ALIEN_HURT_SOUND.play();
         detonation.alreadyHit.add(enemy);
-        if (enemy.lifePoints <= 0) {
-            if (!enemy instanceof Endboss) {
-                this.removeAfterDelay(this.level.enemies, enemy, 444);
-            }
+        if (enemy.lifePoints <= 0 && !(enemy instanceof Endboss)) {
+            this.removeAfterDelay(this.level.enemies, enemy, 444);
         }
         if (enemy instanceof Endboss) {
             this.bossStatusBar.setPercentage(enemy.lifePoints);
