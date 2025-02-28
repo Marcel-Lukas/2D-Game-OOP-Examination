@@ -1,0 +1,143 @@
+@media (orientation: portrait) and (max-width: 728px) {
+    .turn-notice {
+        visibility:visible;
+    }
+
+    #gameCanvas, .start-overlay, .start-screen, .game-over-overlay, .game-over-screen, 
+    .win-overlay, .win-screen, .game-controls-container, .impressum-container, 
+    .mobile-control-container, #absolute-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .turn-notice img {
+        height: 500px;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .turn-notice img {
+        height: 400px;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .turn-notice img {
+        height: 300px;
+    }
+}
+
+@media (orientation: landscape) {
+    .turn-notice {
+        visibility: hidden;
+    }
+}
+
+@media (max-height: 500px) {
+
+    #game-title {
+        display: none;
+    }
+
+    #gameCanvas, .start-overlay, .start-screen, .game-over-overlay, .game-over-screen, 
+    .win-overlay, .win-screen, .game-controls-container, .impressum-container, 
+    .mobile-control-container, #absolute-container {
+        height: 100vh;
+        width: 100vw;
+        border: none;
+        border-radius: 0;
+    }
+
+    #fullscreen-Icon {
+        display: none;
+    }
+
+    .mobile-control-container {
+        visibility: visible;
+        margin: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    #continue-btn {
+        margin-bottom: -140px;
+    }
+
+    #play-again-btn {
+        margin-bottom: 270px;
+    }
+
+    #absolute-container {
+        bottom: 0;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+
+    #impressum-btn {
+        margin-right: 4px;
+        margin-bottom: 1px;
+        font-size: 14px;
+        &:hover {
+            transform: none;
+            text-decoration: none;
+        }
+    }
+
+    #controls-info-btn {
+        margin-right: 200px;
+        font-size: 10px;
+        span {
+            margin-right: 5px;
+            font-size: 14px;
+        }
+        img {
+            height: 22px;
+            filter: drop-shadow(0px 0px 4px rgb(0, 0, 0));
+        }
+    } 
+
+    #controls-info-btn:hover {
+        transform: none;
+        span {
+            text-decoration: none;
+        }
+    }
+
+    #game-controls-container {
+        font-size: 18px;
+        span {
+            margin: 0;
+        }
+        .extra {
+            margin-left: 24px;
+        }
+        h2 {
+            margin-top: 14px;
+            font-size: 20px;
+            letter-spacing: 3px;
+            margin-bottom: 2px;
+        }
+    }
+
+    .keyBox, .keyBoxSpace {
+        font-size: 18px;
+        padding: 5px 12px;
+        height: 45px;
+        width: 45px;
+    }
+
+    .keyBoxSpace {
+        width: 130px;
+    }
+
+    #impressum-box {
+        font-size: 18px;
+        h2 {
+            font-size: 24px;
+        }
+    }
+
+
+}

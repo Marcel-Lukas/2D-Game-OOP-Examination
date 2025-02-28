@@ -21,15 +21,14 @@ html {
 
 
 body {
-    background-image: url("img/background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url("img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 
@@ -254,6 +253,7 @@ body {
         text-shadow: 1px 1px 3px rgb(0, 0, 0);
     }
     h2 {
+        font-size: 28px;
         font-family: "Orbitron";
         letter-spacing: 4px;
         text-decoration: underline;
@@ -270,7 +270,6 @@ body {
         margin-left: 37px;
     }
 }
-
 
 
 .xBtn {
@@ -450,3 +449,60 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
+
+.mobile-control-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 430px;
+    width: 720px;
+    visibility: hidden;
+}
+
+
+#mobile-move-control {
+    margin-left: 110px;
+}
+
+
+#mobile-action-control {
+    margin-right: 110px;
+}
+
+
+.mobile-btn {
+    margin: 5px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+}
+
+
+.action-btn {
+    margin: 5px;
+    height: 38px;
+    border: solid 2px rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+}
+
+
+.turn-notice {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    background-image: url(img/background.jpg);
+    background-position: center;
+    background-size: cover;
+    z-index: 8;
+    visibility: hidden;
+    img {
+        height: 600px;
+    }
+}
+

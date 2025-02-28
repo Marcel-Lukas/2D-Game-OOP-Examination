@@ -10,33 +10,29 @@
     <meta name="description" content="Defend the world against a ruthless alien invasion! Arm yourself with weapons and fight for survival in this action-packed browser game.">
     <meta name="keywords" content="Alien Invasion, Shooter, Desert, Browser Game, Action, Weapons, Survival, Sci-Fi, Combat, Defense">    
     <meta name="author" content="Marcel Lukas">
-    <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="img/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="img/favicon/site.webmanifest" />
-    
+    <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg">
+    <link rel="shortcut icon" href="img/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
     <title>Desert Alien Invasion</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="fonts.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="responsiv.css">
 
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
-    
     <script src="models/character.class.js"></script>
     <script src="models/greenAlien.class.js"></script>
     <script src="models/brainAlien.class.js"></script>
-    
     <script src="models/status-bar.class.js"></script>
     <script src="models/boss-status-bar.class.js"></script>
     <script src="models/collected-grenades.class.js"></script>
     <script src="models/collected-pistol-ammunition.class.js"></script>
     <script src="models/cloud.class.js"></script>
     <script src="models/ufo.class.js"></script>
-    
     <script src="models/world.class.js"></script>
-    <script src="models/keyboard.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
     <script src="models/shootable-object.class.js"></script>
@@ -48,24 +44,22 @@
     <script src="models/endboss.class.js"></script>
     <script src="js/sounds.js"></script>
     <script src="levels/level1.js"></script>
-
-    <script src="js/game.js"></script>
-
+    <script defer src="models/keyboard.class.js"></script>
+    <script defer src="js/game.js"></script>
   </head>
 
   <body>
-
     <div>
         <canvas id="gameCanvas" width="720" height="480"></canvas>
         <img id="sound-switch" onclick="toggleMute()" src="img/sound-icon.png" alt="Sound Switch">
         <img id="fullscreen-Icon" onclick="fullscreen()" src="img/fullscreen-icon.png" alt="Fullscreen">
-        <div id="absolute-container">
+        <div id="absolute-container" class="absolute-container">
             <h1 id="game-title">Desert Alien Invasion</h1>
             <div id="controls-info-btn" class="controls-info-btn" onclick="toggleControlInfo()">
                 <span>Game Controls</span>
                 <img src="img/keyboard.png" alt="Keyboard">
             </div>
-            <div class="impressum-btn" onclick="toggleImpressum()">Impressum</div>
+            <div id="impressum-btn" class="impressum-btn" onclick="toggleImpressum()">Impressum</div>
         </div>
     </div>
 
@@ -84,6 +78,22 @@
         <div id="play-again-btn" onclick="restartGame()">Play Again</div>
     </div>
 
+    <div class="mobile-control-container">
+        <div id="mobile-move-control">
+            <img id="btnLeft" class="mobile-btn" src="img/left.png" alt="Left Button">
+            <img id="btnRight" class="mobile-btn" src="img/right.png" alt="Right Button">
+        </div>
+        <div id="mobile-action-control">
+            <img id="btnShoot" class="action-btn" src="img/gun.png" alt="Shoot Button">
+            <img id="btnJump" class="mobile-btn" src="img/up.png" alt="Jump Button">
+            <img id="btnThrow" class="action-btn" src="img/grenade/grenade-00.png" alt="Throw Grenade Button">
+        </div>
+    </div>
+
+    <div class="turn-notice">
+        <img src="img/turn-phone.gif" alt="Rotate your cell phone hint">
+    </div>
+
     <div id="game-controls-container" class="game-controls-container d-none">
         <img class="xBtn" onclick="closeWindow()" src="img/close-white.png" alt="X Button">
         <h2>Game Controls</h2>
@@ -94,16 +104,13 @@
             <div class="keyBox">D</div>
             <p>right</p>
         </div>
-
         <div class="control-info-box">
             <p>left</p>
             <div class="keyBox">←</div>
             <div class="keyBox">→</div>
             <p>right</p>
         </div>
-
         <span>to jump</span>
-
         <div class="control-info-box">
             <div class="keyBox">W</div>
             <p>or</p>
@@ -111,7 +118,6 @@
             <p>or</p>
             <div class="keyBox">↑</div>
         </div>
-
         <div class="control-info-box">
             <span class="extra">shoot</span>
             <div class="keyBox">R</div>
@@ -119,7 +125,6 @@
             <span>grenade</span>
         </div>
     </div>
-
 
     <div id="impressum-container" class="impressum-container d-none">
         <div id="impressum-box">
@@ -132,7 +137,6 @@
         </div>
         <a href="https://github.com/Marcel-Lukas" target="_blank" rel="noopener noreferrer"><img id="gitcontact" src="img/github-contact.png" alt="GitHub Kontakt"></a>
     </div>
-
 
   </body>
 
