@@ -78,4 +78,22 @@ function fullscreen() {
         document.getElementById(layer).classList.toggle('fullScreenSize');
     });
 }
+
+
+function autoFullscreenForMobile() {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      const element = document.documentElement;
+  
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      } else {
+        alert("Full screen mode is not supported.");
+      }
+    }
+}
+  
   

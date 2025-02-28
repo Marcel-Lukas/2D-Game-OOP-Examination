@@ -10,6 +10,8 @@
     <meta name="description" content="Defend the world against a ruthless alien invasion! Arm yourself with weapons and fight for survival in this action-packed browser game.">
     <meta name="keywords" content="Alien Invasion, Shooter, Desert, Browser Game, Action, Weapons, Survival, Sci-Fi, Combat, Defense">    
     <meta name="author" content="Marcel Lukas">
+    <meta name="theme-color" content="#333333">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg">
     <link rel="shortcut icon" href="img/favicon/favicon.ico">
@@ -65,7 +67,7 @@
 
     <div id="start-overlay" class="start-overlay">
         <img id="start-screen" class="start-screen" src="img/start-screen.jpg" alt="Start Screen">
-        <div id="start-btn" onclick="startGame()">Start</div>
+        <div id="start-btn" onclick="startGame(), autoFullscreenForMobile()">Start</div>
     </div>
 
     <div id="game-over-overlay" class="game-over-overlay d-none">
@@ -137,7 +139,11 @@
         </div>
         <a href="https://github.com/Marcel-Lukas" target="_blank" rel="noopener noreferrer"><img id="gitcontact" src="img/github-contact.png" alt="GitHub Kontakt"></a>
     </div>
-
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+          event.preventDefault();
+        });
+      </script>
   </body>
 
 </html>
