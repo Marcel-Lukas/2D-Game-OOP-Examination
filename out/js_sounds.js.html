@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: js/sounds.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: js/sounds.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let isMuted = false;
+
+
+/**
+ * Sound effects for character.
+ * 
+ * @type {HTMLAudioElement}
+ */
+const WALK_SOUND = new Audio('audio/walk.mp3');
+WALK_SOUND.volume = 0.15;
+
+const JUMP_SOUND = new Audio('audio/jump.mp3');
+JUMP_SOUND.volume = 0.4;
+
+const THROW_SOUND = new Audio('audio/throw.mp3');
+THROW_SOUND.volume = 0.5;
+
+const HURT_SOUND = new Audio('audio/hurt.mp3');
+HURT_SOUND.volume = 0.7;
+
+const DIE_SOUND = new Audio('audio/dieSound.mp3');
+DIE_SOUND.volume = 0.7;
+
+const WILHELM_SCREAM = new Audio('audio/dieWilhelmScream.mp3');
+WILHELM_SCREAM.volume = 0.7;
+
+
+/**
+ * Sound effects for weapons.
+ * 
+ * @type {HTMLAudioElement}
+ */
+const SHOOT_SOUND = new Audio('audio/shoot.mp3');
+SHOOT_SOUND.volume = 0.5;
+
+const EXPLOSION_SOUND = new Audio('audio/grenade-explosion.mp3');
+EXPLOSION_SOUND.volume = 0.5;
+
+
+/**
+ * Sound effects for collectable items.
+ * 
+ * @type {HTMLAudioElement}
+ */
+const PICK_UP_PISTOL_AMMO_SOUND = new Audio('audio/pick-pistol-ammo.mp3');
+PICK_UP_PISTOL_AMMO_SOUND.volume = 0.3;
+
+const PICK_UP_NADE_AMMO_SOUND = new Audio('audio/pick-nade-ammo.mp3');
+PICK_UP_NADE_AMMO_SOUND.volume = 0.6;
+
+const PICK_UP_HEALTH_SOUND = new Audio('audio/collect.mp3');
+PICK_UP_HEALTH_SOUND.volume = 0.5;
+
+
+/**
+ * Sound effects for alien enemies.
+ * 
+ * @type {HTMLAudioElement}
+ */
+const ALIEN_HURT_SOUND = new Audio('audio/alien-hurt-Sound.mp3');
+ALIEN_HURT_SOUND.volume = 0.2;
+
+const JUMP_ALIEN_HIT = new Audio('audio/sci-fi-notification.mp3');
+JUMP_ALIEN_HIT.volume = 0.4;
+
+
+/**
+ * Sound effects for endboss alien.
+ * 
+ * @type {HTMLAudioElement}
+ */
+const BOSS_ALERT_SOUND = new Audio('audio/alien-alert.mp3');
+BOSS_ALERT_SOUND.volume = 0.5;
+
+const BOSS_DASH_SOUND = new Audio('audio/dashSound.mp3');
+BOSS_DASH_SOUND.volume = 0.25;
+
+const BOSS_WALK_SOUND = new Audio('audio/boss-footstep.mp3');
+BOSS_WALK_SOUND.volume = 0.18;
+
+const BOSS_SCREAM = new Audio('audio/bossWinSound.mp3');
+BOSS_SCREAM.volume = 0.6;
+
+
+/**
+ * Background music and win sound from the game.
+ * 
+ * @type {HTMLAudioElement}
+ */
+const GAME_SOUND = new Audio('audio/gameSound.mp3');
+GAME_SOUND.volume = 0.12;
+
+const WIN_SOUND = new Audio('audio/win-sound.mp3');
+WIN_SOUND.volume = 0.5;
+
+
+/**
+ * Mutes or unmutes all sound elements by setting their muted property to the provided value.
+ * 
+ * @function setAllSoundsMuted
+ * @param {boolean} muted - If true, all sounds will be muted; if false, sounds will be unmuted.
+ * @returns {void} No return value.
+ */
+function setAllSoundsMuted(muted) {
+    WALK_SOUND.muted = muted;
+    JUMP_SOUND.muted = muted;
+    THROW_SOUND.muted = muted;
+    HURT_SOUND.muted = muted;
+    DIE_SOUND.muted = muted;
+    WILHELM_SCREAM.muted = muted;
+
+    SHOOT_SOUND.muted = muted;
+    EXPLOSION_SOUND.muted = muted;
+
+    PICK_UP_PISTOL_AMMO_SOUND.muted = muted;
+    PICK_UP_NADE_AMMO_SOUND.muted = muted;
+    PICK_UP_HEALTH_SOUND.muted = muted;
+    
+    ALIEN_HURT_SOUND.muted = muted;
+    JUMP_ALIEN_HIT.muted = muted;
+
+    BOSS_ALERT_SOUND.muted = muted;
+    BOSS_DASH_SOUND.muted = muted;
+    BOSS_WALK_SOUND.muted = muted;
+    BOSS_SCREAM.muted = muted;
+
+    GAME_SOUND.muted = muted;
+    WIN_SOUND.muted = muted;
+}
+
+
+/**
+ * Mutes all sounds by calling setAllSoundsMuted with the value true and
+ * stores this setting in local storage.
+ * 
+ * @function muteSound
+ * @returns {void} No return value.
+ */
+function muteSound() {
+    setAllSoundsMuted(true);
+    localStorage.setItem('isSoundMuted', 'true');
+}
+
+
+/**
+ * Unmutes all sounds by calling setAllSoundsMuted with the value false and
+ * stores this setting in local storage.
+ * 
+ * @function playSound
+ * @returns {void} No return value.
+ */
+function playSound() {
+    setAllSoundsMuted(false);
+    localStorage.setItem('isSoundMuted', 'false');
+}
+
+
+/**
+ * Loads the user's sound preference from local storage. If 'isSoundMuted' in
+ * local storage is 'true', all sounds are muted; otherwise, all sounds are
+ * unmuted. Also updates the mute icon.
+ * 
+ * @function loadSoundStatus
+ * @returns {void} No return value.
+ */
+function loadSoundStatus() {
+    const storageValue = localStorage.getItem('isSoundMuted');
+    if (storageValue === 'true') {
+        isMuted = true;
+        setAllSoundsMuted(true);
+    } else {
+        isMuted = false;
+        setAllSoundsMuted(false);
+    }
+    changeMuteIcon();
+}
+
+
+/**
+ * Toggles the mute state of all sounds. If sounds are currently unmuted,
+ * they will be muted, and vice versa. The mute icon is updated accordingly.
+ * 
+ * @function toggleMute
+ * @returns {void} No return value.
+ */
+function toggleMute() {
+    isMuted = !isMuted;
+    if (isMuted) {
+        muteSound();
+    } else {
+        playSound();
+    }
+    changeMuteIcon();
+}
+
+
+/**
+ * Updates the icon representing the current sound state. Retrieves the mute
+ * status from local storage and changes the image source to reflect whether
+ * sounds are muted or unmuted.
+ * 
+ * @function changeMuteIcon
+ * @returns {void} No return value.
+ */
+function changeMuteIcon() {
+    const storageValue = localStorage.getItem('isSoundMuted');
+    const soundIcon = document.getElementById('sound-switch');
+    if (storageValue === 'true') {
+        soundIcon.src = 'img/mute-icon.png';
+    } else {
+        soundIcon.src = 'img/sound-icon.png';
+    }
+}
+
+
+/**
+ * Event listener for DOM content loaded, triggering the initial sound status load.
+ */
+window.addEventListener('DOMContentLoaded', loadSoundStatus);
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="BossStatusBar.html">BossStatusBar</a></li><li><a href="BrainAlien.html">BrainAlien</a></li><li><a href="Character.html">Character</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="CollectedGrenades.html">CollectedGrenades</a></li><li><a href="CollectedPistolAmmunition.html">CollectedPistolAmmunition</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Explosion.html">Explosion</a></li><li><a href="GreenAlien.html">GreenAlien</a></li><li><a href="GrenadeAmmunition.html">GrenadeAmmunition</a></li><li><a href="Health.html">Health</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="PistolAmmunition.html">PistolAmmunition</a></li><li><a href="ShootableObject.html">ShootableObject</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="Ufo.html">Ufo</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ALIEN_HURT_SOUND">ALIEN_HURT_SOUND</a></li><li><a href="global.html#BOSS_ALERT_SOUND">BOSS_ALERT_SOUND</a></li><li><a href="global.html#GAME_SOUND">GAME_SOUND</a></li><li><a href="global.html#PICK_UP_PISTOL_AMMO_SOUND">PICK_UP_PISTOL_AMMO_SOUND</a></li><li><a href="global.html#SHOOT_SOUND">SHOOT_SOUND</a></li><li><a href="global.html#WALK_SOUND">WALK_SOUND</a></li><li><a href="global.html#animate">animate</a></li><li><a href="global.html#applyGravity">applyGravity</a></li><li><a href="global.html#autoFullscreenForMobile">autoFullscreenForMobile</a></li><li><a href="global.html#changeMuteIcon">changeMuteIcon</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeWindow">closeWindow</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#drawFrameCollisionBox">drawFrameCollisionBox</a></li><li><a href="global.html#drawFrameOutside">drawFrameOutside</a></li><li><a href="global.html#explode">explode</a></li><li><a href="global.html#fullscreen">fullscreen</a></li><li><a href="global.html#hit">hit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLevel">initLevel</a></li><li><a href="global.html#isAboveGround">isAboveGround</a></li><li><a href="global.html#isColliding">isColliding</a></li><li><a href="global.html#isDead">isDead</a></li><li><a href="global.html#isHurt">isHurt</a></li><li><a href="global.html#loadImage">loadImage</a></li><li><a href="global.html#loadImages">loadImages</a></li><li><a href="global.html#loadSoundStatus">loadSoundStatus</a></li><li><a href="global.html#moveLeft">moveLeft</a></li><li><a href="global.html#moveRight">moveRight</a></li><li><a href="global.html#muteSound">muteSound</a></li><li><a href="global.html#playAnimation">playAnimation</a></li><li><a href="global.html#playAnimationOneTime">playAnimationOneTime</a></li><li><a href="global.html#playSound">playSound</a></li><li><a href="global.html#playsTimedAnimation">playsTimedAnimation</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#resolveImageIndex">resolveImageIndex</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#setAllSoundsMuted">setAllSoundsMuted</a></li><li><a href="global.html#setPercentage">setPercentage</a></li><li><a href="global.html#setRandomSpeed">setRandomSpeed</a></li><li><a href="global.html#setStoppableIverval">setStoppableIverval</a></li><li><a href="global.html#setThrowOtherDirection">setThrowOtherDirection</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#throw">throw</a></li><li><a href="global.html#throwAndAnimateGrenade">throwAndAnimateGrenade</a></li><li><a href="global.html#toggleControlInfo">toggleControlInfo</a></li><li><a href="global.html#toggleImpressum">toggleImpressum</a></li><li><a href="global.html#toggleMute">toggleMute</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Mar 01 2025 12:45:14 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

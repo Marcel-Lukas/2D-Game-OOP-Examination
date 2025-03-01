@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/keyboard.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/keyboard.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Manages keyboard and touch input events for controlling the game character.
+ * Handles both desktop keyboard inputs and mobile touch events.
+ */
+class Keyboard {
+
+    /**
+     * Indicates whether the key is currently pressed.
+     * @type {boolean}
+     * @default false
+     */
+    RIGHT = false;
+    LEFT = false;
+    SPACE = false;
+    SHOOT = false;
+    THROW = false;
+    ESC = false;
+
+    
+    /**
+     * Initializes event listeners for both keyboard and touch input.
+     *
+     * @constructor
+     */
+    constructor() {
+        this.keyboardButtonEvents();
+        this.touchButtonEvents();
+    }
+
+
+    /**
+     * Adds event listeners for keyboard input, updating the corresponding
+     * control properties when keys are pressed and released.
+     *
+     * @returns {void} No return value.
+     */
+    keyboardButtonEvents() {
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "d":
+                    keyboard.RIGHT = true;
+                    break;
+                case "a":
+                    keyboard.LEFT = true;
+                    break;
+                case "ArrowRight":
+                    keyboard.RIGHT = true;
+                    break;
+                case "ArrowLeft":
+                    keyboard.LEFT = true;
+                    break;
+                case "r":
+                    keyboard.SHOOT = true;
+                    break;
+                case "f":
+                    keyboard.THROW = true;
+                    break;
+                case " ":
+                    keyboard.SPACE = true;
+                    break;
+                case "ArrowUp":
+                    keyboard.SPACE = true;
+                    break;
+                case "w":
+                    keyboard.SPACE = true;
+                    break;
+                case "Escape":
+                    keyboard.ESC = true;
+                    if (document.getElementById('absolute-container').classList.contains('d-none')) {
+                        fullscreen();
+                    }
+                    break;
+            }
+        });
+
+        document.addEventListener("keyup", (event) => {
+            switch (event.key) {
+                case "d":
+                    keyboard.RIGHT = false;
+                    break;
+                case "a":
+                    keyboard.LEFT = false;
+                    break;
+                case "ArrowRight":
+                    keyboard.RIGHT = false;
+                    break;
+                case "ArrowLeft":
+                    keyboard.LEFT = false;
+                    break;
+                case "r":
+                    keyboard.SHOOT = false;
+                    break;
+                case "f":
+                    keyboard.THROW = false;
+                    break;
+                case " ":
+                    keyboard.SPACE = false;
+                    break;
+                case "ArrowUp":
+                    keyboard.SPACE = false;
+                    break;
+                case "w":
+                    keyboard.SPACE = false;
+                    break;
+                case "Escape":
+                    keyboard.ESC = false;
+                    break;
+            }
+        });
+    }
+
+
+    /**
+     * Adds event listeners for mobile touch controls, updating the corresponding
+     * control properties when touch interactions occur.
+     *
+     * @returns {void} No return value.
+     */
+    touchButtonEvents() {
+        document.getElementById("btnRight").addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            this.RIGHT = true;
+        });
+        document.getElementById("btnRight").addEventListener("touchend", (e) => {
+            e.preventDefault();
+            this.RIGHT = false;
+        });
+
+        document.getElementById("btnLeft").addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            this.LEFT = true;
+        });
+        document.getElementById("btnLeft").addEventListener("touchend", (e) => {
+            e.preventDefault();
+            this.LEFT = false;
+        });
+
+        document.getElementById("btnShoot").addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            this.SHOOT = true;
+        });
+        document.getElementById("btnShoot").addEventListener("touchend", (e) => {
+            e.preventDefault();
+            this.SHOOT = false;
+        });
+
+        document.getElementById("btnThrow").addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            this.THROW = true;
+        });
+        document.getElementById("btnThrow").addEventListener("touchend", (e) => {
+            e.preventDefault();
+            this.THROW = false;
+        });
+
+        document.getElementById("btnJump").addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            this.SPACE = true;
+        });
+        document.getElementById("btnJump").addEventListener("touchend", (e) => {
+            e.preventDefault();
+            this.SPACE = false;
+        });
+    }
+
+    
+
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="BossStatusBar.html">BossStatusBar</a></li><li><a href="BrainAlien.html">BrainAlien</a></li><li><a href="Character.html">Character</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="CollectedGrenades.html">CollectedGrenades</a></li><li><a href="CollectedPistolAmmunition.html">CollectedPistolAmmunition</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Explosion.html">Explosion</a></li><li><a href="GreenAlien.html">GreenAlien</a></li><li><a href="GrenadeAmmunition.html">GrenadeAmmunition</a></li><li><a href="Health.html">Health</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="PistolAmmunition.html">PistolAmmunition</a></li><li><a href="ShootableObject.html">ShootableObject</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="Ufo.html">Ufo</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ALIEN_HURT_SOUND">ALIEN_HURT_SOUND</a></li><li><a href="global.html#BOSS_ALERT_SOUND">BOSS_ALERT_SOUND</a></li><li><a href="global.html#GAME_SOUND">GAME_SOUND</a></li><li><a href="global.html#PICK_UP_PISTOL_AMMO_SOUND">PICK_UP_PISTOL_AMMO_SOUND</a></li><li><a href="global.html#SHOOT_SOUND">SHOOT_SOUND</a></li><li><a href="global.html#WALK_SOUND">WALK_SOUND</a></li><li><a href="global.html#animate">animate</a></li><li><a href="global.html#applyGravity">applyGravity</a></li><li><a href="global.html#autoFullscreenForMobile">autoFullscreenForMobile</a></li><li><a href="global.html#changeMuteIcon">changeMuteIcon</a></li><li><a href="global.html#clearAllIntervals">clearAllIntervals</a></li><li><a href="global.html#closeWindow">closeWindow</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#drawFrameCollisionBox">drawFrameCollisionBox</a></li><li><a href="global.html#drawFrameOutside">drawFrameOutside</a></li><li><a href="global.html#explode">explode</a></li><li><a href="global.html#fullscreen">fullscreen</a></li><li><a href="global.html#hit">hit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLevel">initLevel</a></li><li><a href="global.html#isAboveGround">isAboveGround</a></li><li><a href="global.html#isColliding">isColliding</a></li><li><a href="global.html#isDead">isDead</a></li><li><a href="global.html#isHurt">isHurt</a></li><li><a href="global.html#loadImage">loadImage</a></li><li><a href="global.html#loadImages">loadImages</a></li><li><a href="global.html#loadSoundStatus">loadSoundStatus</a></li><li><a href="global.html#moveLeft">moveLeft</a></li><li><a href="global.html#moveRight">moveRight</a></li><li><a href="global.html#muteSound">muteSound</a></li><li><a href="global.html#playAnimation">playAnimation</a></li><li><a href="global.html#playAnimationOneTime">playAnimationOneTime</a></li><li><a href="global.html#playSound">playSound</a></li><li><a href="global.html#playsTimedAnimation">playsTimedAnimation</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#resolveImageIndex">resolveImageIndex</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#setAllSoundsMuted">setAllSoundsMuted</a></li><li><a href="global.html#setPercentage">setPercentage</a></li><li><a href="global.html#setRandomSpeed">setRandomSpeed</a></li><li><a href="global.html#setStoppableIverval">setStoppableIverval</a></li><li><a href="global.html#setThrowOtherDirection">setThrowOtherDirection</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#throw">throw</a></li><li><a href="global.html#throwAndAnimateGrenade">throwAndAnimateGrenade</a></li><li><a href="global.html#toggleControlInfo">toggleControlInfo</a></li><li><a href="global.html#toggleImpressum">toggleImpressum</a></li><li><a href="global.html#toggleMute">toggleMute</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat Mar 01 2025 12:45:14 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
