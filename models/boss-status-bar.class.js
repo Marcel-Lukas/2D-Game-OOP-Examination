@@ -1,5 +1,10 @@
+/**
+ * Represents the status bar for the boss in the game, displaying the boss's health
+ * level as an image. Inherits properties and methods from {@link DrawableObject}.
+ *
+ * @extends DrawableObject
+ */
 class BossStatusBar extends DrawableObject{
-
 
     IMAGES = [
         'img/bosslifebar/bossLifebar-000.png',
@@ -25,7 +30,6 @@ class BossStatusBar extends DrawableObject{
         'img/bosslifebar/bossLifebar-100.png'
       ];      
     
-
 
     constructor(){
         super();
@@ -53,6 +57,4 @@ class BossStatusBar extends DrawableObject{
         return index;
     }
 
-
 }
-

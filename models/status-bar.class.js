@@ -1,6 +1,24 @@
-class StatusBar extends DrawableObject{
+/**
+ * Represents a status bar for displaying the player's current health or life percentage.
+ * Inherits properties and methods from {@link DrawableObject}.
+ *
+ * @extends DrawableObject
+ */
+class StatusBar extends DrawableObject {
+
+    /**
+     * The current life percentage displayed by the status bar.
+     * @type {number}
+     * @default 100
+     */
+    percentage = 100;
 
 
+    /**
+     * An array of image paths for different lifebar stages, corresponding to
+     * various health percentages.
+     * @type {string[]}
+     */
     IMAGES = [
         'img/lifebar/lifebar-000.png',
         'img/lifebar/lifebar-005.png',
@@ -24,10 +42,14 @@ class StatusBar extends DrawableObject{
         'img/lifebar/lifebar-095.png',
         'img/lifebar/lifebar-100.png'
     ];
-    
 
-    percentage = 100;
 
+    /**
+     * Creates a new StatusBar instance, loads all the lifebar images,
+     * sets its position and size, and initializes the displayed percentage.
+     *
+     * @constructor
+     */
     constructor(){
         super();
         this.loadImages(this.IMAGES);
@@ -39,6 +61,13 @@ class StatusBar extends DrawableObject{
     }
 
 
+    /**
+     * Sets the current life percentage and updates the displayed lifebar image accordingly.
+     *
+     * @function setPercentage
+     * @param {number} percentage - The new life percentage to display (0-100).
+     * @returns {void} No return value.
+     */
     setPercentage(percentage){
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
@@ -46,6 +75,12 @@ class StatusBar extends DrawableObject{
     }
 
 
+    /**
+     * Resolves the array index for the lifebar image based on the current life percentage.
+     *
+     * @function resolveImageIndex
+     * @returns {number} The index of the appropriate image in the {@link IMAGES} array.
+     */
     resolveImageIndex() {
         let index = Math.floor(this.percentage / 5);
         if (index < 0) index = 0;
@@ -56,4 +91,3 @@ class StatusBar extends DrawableObject{
 
 
 }
-

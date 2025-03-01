@@ -1,5 +1,6 @@
 let isMuted = false;
 
+
 /**
  * Sound effects for character.
  * 
@@ -82,7 +83,7 @@ BOSS_SCREAM.volume = 0.6;
 
 
 /**
- * Background music from the game.
+ * Background music and win sound from the game.
  * 
  * @type {HTMLAudioElement}
  */
@@ -93,7 +94,13 @@ const WIN_SOUND = new Audio('audio/win-sound.mp3');
 WIN_SOUND.volume = 0.5;
 
 
-
+/**
+ * Mutes or unmutes all sound elements by setting their muted property to the provided value.
+ * 
+ * @function setAllSoundsMuted
+ * @param {boolean} muted - If true, all sounds will be muted; if false, sounds will be unmuted.
+ * @returns {void} No return value.
+ */
 function setAllSoundsMuted(muted) {
     WALK_SOUND.muted = muted;
     JUMP_SOUND.muted = muted;
@@ -122,18 +129,40 @@ function setAllSoundsMuted(muted) {
 }
 
 
+/**
+ * Mutes all sounds by calling setAllSoundsMuted with the value true and
+ * stores this setting in local storage.
+ * 
+ * @function muteSound
+ * @returns {void} No return value.
+ */
 function muteSound() {
     setAllSoundsMuted(true);
     localStorage.setItem('isSoundMuted', 'true');
 }
 
 
+/**
+ * Unmutes all sounds by calling setAllSoundsMuted with the value false and
+ * stores this setting in local storage.
+ * 
+ * @function playSound
+ * @returns {void} No return value.
+ */
 function playSound() {
     setAllSoundsMuted(false);
     localStorage.setItem('isSoundMuted', 'false');
 }
 
 
+/**
+ * Loads the user's sound preference from local storage. If 'isSoundMuted' in
+ * local storage is 'true', all sounds are muted; otherwise, all sounds are
+ * unmuted. Also updates the mute icon.
+ * 
+ * @function loadSoundStatus
+ * @returns {void} No return value.
+ */
 function loadSoundStatus() {
     const storageValue = localStorage.getItem('isSoundMuted');
     if (storageValue === 'true') {
@@ -147,6 +176,13 @@ function loadSoundStatus() {
 }
 
 
+/**
+ * Toggles the mute state of all sounds. If sounds are currently unmuted,
+ * they will be muted, and vice versa. The mute icon is updated accordingly.
+ * 
+ * @function toggleMute
+ * @returns {void} No return value.
+ */
 function toggleMute() {
     isMuted = !isMuted;
     if (isMuted) {
@@ -158,6 +194,14 @@ function toggleMute() {
 }
 
 
+/**
+ * Updates the icon representing the current sound state. Retrieves the mute
+ * status from local storage and changes the image source to reflect whether
+ * sounds are muted or unmuted.
+ * 
+ * @function changeMuteIcon
+ * @returns {void} No return value.
+ */
 function changeMuteIcon() {
     const storageValue = localStorage.getItem('isSoundMuted');
     const soundIcon = document.getElementById('sound-switch');
@@ -169,4 +213,8 @@ function changeMuteIcon() {
 }
 
 
+/**
+ * Event listener for DOM content loaded, triggering the initial sound status load.
+ */
 window.addEventListener('DOMContentLoaded', loadSoundStatus);
+

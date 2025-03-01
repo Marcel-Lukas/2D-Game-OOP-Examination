@@ -1,5 +1,13 @@
 let level1;
 
+/**
+ * Initializes the game level by creating a new {@link Level} instance with configured enemies,
+ * clouds, ammunition, health items, and background objects. The created level is then
+ * stored in the global variable {@link level1}.
+ *
+ * @function initLevel
+ * @returns {void} No return value.
+ */
 function initLevel() {
 
     level1 = new Level(

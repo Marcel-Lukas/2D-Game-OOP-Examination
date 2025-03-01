@@ -1,15 +1,28 @@
+/**
+ * Represents a brain alien enemy in the game, including its sprite animations,
+ * hitbox properties, and movement logic. Inherits properties and methods from
+ * {@link MovableObject}.
+ *
+ * @extends MovableObject
+ */
 class BrainAlien extends MovableObject {
 
+    /**
+     * Big Brain Alien properties
+     * @type {number}
+     */
     height = 190;
     width = 146;
     y = 246;
     lifePoints = 300;
 
 
-    // Hitbox
+    /**
+     * Hitbox properties
+     * @type {number}
+     */
     collisionBoxOffsetY = 25;
     collisionBoxHeight = 150;
-
     collisionBoxOffsetX = 32;
     collisionBoxWidth = 70;
 
@@ -24,6 +37,7 @@ class BrainAlien extends MovableObject {
         'img/brain-alien/walk/__green_alien_walk_006.png',
         'img/brain-alien/walk/__green_alien_walk_007.png'
     ];
+
 
     IMAGES_HURT = [
         'img/brain-alien/hurt/__green_alien_hurt_000.png',
@@ -50,11 +64,8 @@ class BrainAlien extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-
         this.x = x;
-
         this.speed = 0.20;
- 
         this.run();
     }
 
@@ -63,7 +74,6 @@ class BrainAlien extends MovableObject {
         setStoppableIverval(() => {
             this.alienAnimation();
         }, 1000 / 60);
-
         setStoppableIverval(() => {
             this.moveLeft();
             if (this.x < level1.levelStartX - 555) {
@@ -83,11 +93,9 @@ class BrainAlien extends MovableObject {
         if (this.isDead()) {
             this.speed = 0;
             this.playAnimationOneTime(this.IMAGES_DEAD);
-
         } else if (this.isHurt()) {
             this.speed = 0;
             this.playsTimedAnimation(this.IMAGES_HURT, 'hurt');
-
         } else {
             setTimeout(() => {
                 this.speed = 0.20;
@@ -95,8 +103,6 @@ class BrainAlien extends MovableObject {
             }, 77);
         }
     }
-
-
 
     
 }
