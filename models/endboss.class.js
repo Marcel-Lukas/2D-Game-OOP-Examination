@@ -6,7 +6,6 @@
  */
 class Endboss extends MovableObject {
 
-    
     /**
      * A reference to the game world.
      * @type {World}
@@ -189,7 +188,6 @@ class Endboss extends MovableObject {
     /**
      * Creates a new Endboss instance, loads its default sprite and all relevant animations,
      * sets its position and speed, and initiates its main behavior loop.
-     *
      * @constructor
      * @param {number} x - The initial x-coordinate of the endboss on the canvas.
      */
@@ -211,7 +209,6 @@ class Endboss extends MovableObject {
     /**
      * Starts the endboss's main behavior loop, which triggers its animations
      * at a fixed interval.
-     *
      * @returns {void} No return value.
      */
     run() {
@@ -224,7 +221,6 @@ class Endboss extends MovableObject {
     /**
      * Handles the endboss's core animation logic based on character position
      * and the endboss's current state (e.g., first contact, hurt, dead).
-     *
      * @returns {void} No return value.
      */
     bossAnimation() {
@@ -250,7 +246,6 @@ class Endboss extends MovableObject {
     /**
      * Awakens the boss, initiating phases such as "alert", "dash",
      * and "walking". Each phase handles different animations and movements.
-     *
      * @returns {void} No return value.
      */
     awakenedBossActions() {
@@ -268,7 +263,6 @@ class Endboss extends MovableObject {
     /**
      * Orchestrates which phase should run based on the current phase, a counter,
      * and how many times the boss has dashed.
-     *
      * @param {string} phase - The current phase of the boss ("alert", "dash", or "walking").
      * @param {number} i - A counter that increments over time.
      * @param {number} dashCount - The number of dash actions performed.
@@ -284,7 +278,6 @@ class Endboss extends MovableObject {
     /**
      * Manages the "alert" phase, during which the boss plays its alert animation and sound.
      * After a set time, transitions to the "dash" phase.
-     *
      * @param {number} i - A counter that increments to determine how long the alert phase lasts.
      * @returns {string} The next phase, either "alert" or "dash".
      */
@@ -302,7 +295,6 @@ class Endboss extends MovableObject {
      * Manages the "dash" phase, during which the boss moves quickly to the left
      * and performs a dash animation. After a certain count, transitions to the
      * "walking" phase.
-     *
      * @param {number} dashCount - The number of dashes performed so far.
      * @returns {string} The next phase, either "dash" or "walking".
      */
@@ -322,7 +314,6 @@ class Endboss extends MovableObject {
      * Manages the "walking" phase, where the boss moves left or right toward the character
      * if the character is within range. Plays walking animations and sounds if the boss
      * is alive and the character is not dead.
-     *
      * @returns {string} Always returns "walking".
      */
     handleWalkingPhase() {
@@ -338,7 +329,6 @@ class Endboss extends MovableObject {
      * Determines the boss's horizontal movement based on the character's position.
      * If the character is still alive, the boss moves toward the character;
      * otherwise, the boss remains idle.
-     *
      * @returns {void} No return value.
      */
     walkPhaseMovement() {
@@ -352,7 +342,6 @@ class Endboss extends MovableObject {
 
     /**
      * Moves the boss to the left at speed 1 if the character is alive. Otherwise, the boss stays idle.
-     *
      * @returns {void} No return value.
      */
     walkLeftMovement() {
@@ -369,7 +358,6 @@ class Endboss extends MovableObject {
 
     /**
      * Moves the boss to the right at speed 1 if the character is alive. Otherwise, the boss stays idle.
-     *
      * @returns {void} No return value.
      */
     walkRightMovement() {
@@ -387,7 +375,6 @@ class Endboss extends MovableObject {
     /**
      * Plays walking animations if the boss is alive, and triggers sounds. If the character is dead,
      * the boss plays its idle animation and may perform a victory scream.
-     *
      * @returns {void} No return value.
      */
     walkPhaseAnimation() {
@@ -407,6 +394,5 @@ class Endboss extends MovableObject {
             }
         }
     }
-
 
 }

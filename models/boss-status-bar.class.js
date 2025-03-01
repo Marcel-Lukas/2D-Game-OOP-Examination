@@ -6,6 +6,11 @@
  */
 class BossStatusBar extends DrawableObject{
 
+    /**
+     * An array of image paths corresponding to different boss lifebar states.
+     * Each image represents a different percentage of the boss's health.
+     * @type {string[]}
+     */
     IMAGES = [
         'img/bosslifebar/bossLifebar-000.png',
         'img/bosslifebar/bossLifebar-005.png',
@@ -31,6 +36,12 @@ class BossStatusBar extends DrawableObject{
       ];      
     
 
+    /**
+     * Creates a new BossStatusBar instance. Loads all lifebar images,
+     * sets its position and dimensions, and initializes the boss health display.
+     *
+     * @constructor
+     */
     constructor(){
         super();
         this.loadImages(this.IMAGES);
@@ -42,6 +53,12 @@ class BossStatusBar extends DrawableObject{
     }
 
 
+    /**
+     * Sets the current health percentage for the boss and updates the displayed lifebar image.
+     *
+     * @param {number} percentage - The current health value of the boss.
+     * @returns {void} No return value.
+     */
     setPercentage(percentage){
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
@@ -49,12 +66,18 @@ class BossStatusBar extends DrawableObject{
     }
 
 
+    /**
+     * Determines the correct image index for the lifebar based on the boss's current health percentage.
+     * The index is calculated by dividing the percentage by 100 and clamped between 0 and 20.
+     *
+     * @returns {number} The index of the image to be displayed in the lifebar.
+     */
     resolveImageIndex() {
         let index = Math.floor(this.percentage / 100);
         if (index < 0) index = 0;
         if (index > 20) index = 20;
-    
         return index;
     }
+
 
 }

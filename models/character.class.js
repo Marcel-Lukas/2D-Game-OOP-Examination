@@ -6,7 +6,6 @@
  */
 class Character extends MovableObject {
 
-
     /**
      * Character properties
      * @type {number}
@@ -50,7 +49,6 @@ class Character extends MovableObject {
         hurt: 99
     };
 
-
     /**
      * An array of image paths for the idle animation.
      * @type {string[]}
@@ -83,7 +81,6 @@ class Character extends MovableObject {
         'img/character/idle/idle-24.png'
     ];
 
-
     /**
      * An array of image paths for the walking animation.
      * @type {string[]}
@@ -107,7 +104,6 @@ class Character extends MovableObject {
         'img/character/walk/walk-15.png'
     ];
 
-
     /**
      * An array of image paths for the jumping animation.
      * @type {string[]}
@@ -127,7 +123,6 @@ class Character extends MovableObject {
         'img/character/jump/jump-11.png'
     ];
 
-
     /**
      * An array of image paths for the throwing animation.
      * @type {string[]}
@@ -144,7 +139,6 @@ class Character extends MovableObject {
         'img/character/throw/throw-08.png',
         'img/character/throw/throw-09.png'
     ];
-
 
     /**
      * An array of image paths for the shooting animation.
@@ -163,7 +157,6 @@ class Character extends MovableObject {
         'img/character/shoot/shoot-09.png'
     ];
 
-
     /**
      * An array of image paths for the hurt animation.
      * @type {string[]}
@@ -175,7 +168,6 @@ class Character extends MovableObject {
         'img/character/hurt/hurt-03.png',
         'img/character/hurt/hurt-04.png'
     ];
-
 
     /**
      * An array of image paths for the death animation.
@@ -193,7 +185,6 @@ class Character extends MovableObject {
     /**
      * Creates a new Character instance, loads relevant image arrays,
      * applies gravity, and starts the main logic loop.
-     *
      * @constructor
      */
     constructor() {
@@ -212,7 +203,6 @@ class Character extends MovableObject {
 
     /**
      * Initiates the character's main behavior loop, handling controls and animations.
-     *
      * @returns {void} No return value.
      */
     run() {
@@ -225,7 +215,6 @@ class Character extends MovableObject {
 
     /**
      * Makes the character jump by adjusting the vertical speed.
-     *
      * @returns {void} No return value.
      */
     characterjump() {
@@ -236,7 +225,6 @@ class Character extends MovableObject {
     /**
      * Determines if the character can move to the right based on keyboard input,
      * boundary constraints, and the character's life points.
-     *
      * @returns {boolean} True if moving right is allowed; false otherwise.
      */
     possibleMoveRight() {
@@ -247,7 +235,6 @@ class Character extends MovableObject {
     /**
      * Determines if the character can move to the left based on keyboard input,
      * boundary constraints, and the character's life points.
-     *
      * @returns {boolean} True if moving left is allowed; false otherwise.
      */
     possibleMoveLeft() {
@@ -258,7 +245,6 @@ class Character extends MovableObject {
     /**
      * Determines if the character can jump based on keyboard input, current state,
      * and life points.
-     *
      * @returns {boolean} True if jumping is allowed; false otherwise.
      */
     possibleJump() {
@@ -269,7 +255,6 @@ class Character extends MovableObject {
     /**
      * Determines if the character can shoot based on keyboard input, current state,
      * life points, and available pistol ammunition.
-     *
      * @returns {boolean} True if shooting is allowed; false otherwise.
      */
     possibleToShoot() {
@@ -280,7 +265,6 @@ class Character extends MovableObject {
     /**
      * Checks input to move left or right, jump, or shoot, and updates camera
      * position accordingly. Also adjusts the orientation for throwing objects.
-     *
      * @returns {void} No return value.
      */
     characterControls() {
@@ -303,7 +287,6 @@ class Character extends MovableObject {
      * Determines and executes the character's current animation based on
      * whether the character is dead, hurt, jumping, throwing, walking, or shooting.
      * Defaults to the idle animation if none of these conditions are met.
-     *
      * @returns {void} No return value.
      */
     characterAnimation() {
@@ -320,7 +303,6 @@ class Character extends MovableObject {
     /**
      * Handles the character's death animation, displays the game over screen,
      * and clears intervals after a short delay. Plays a death sound once.
-     *
      * @returns {void} No return value.
      */
     handleDead() {
@@ -340,7 +322,6 @@ class Character extends MovableObject {
 
     /**
      * Handles the character's hurt animation, reduces speed, and plays the hurt sound.
-     *
      * @returns {void} No return value.
      */
     handleHurt() {
@@ -353,7 +334,6 @@ class Character extends MovableObject {
     /**
      * Handles the character's jump animation, including playing a jump sound once
      * per jump sequence.
-     *
      * @returns {void} No return value.
      */
     handleJump() {
@@ -368,7 +348,6 @@ class Character extends MovableObject {
 
     /**
      * Handles the character's throw animation and plays the throw sound.
-     *
      * @returns {void} No return value.
      */
     handleThrow() {
@@ -380,7 +359,6 @@ class Character extends MovableObject {
     /**
      * Handles the character's walk animation, sets the walking speed, and
      * plays the walk sound.
-     *
      * @returns {void} No return value.
      */
     handleWalk() {
@@ -392,7 +370,6 @@ class Character extends MovableObject {
 
     /**
      * Handles the character's shoot animation and plays the shoot sound.
-     *
      * @returns {void} No return value.
      */
     handleShoot() {
@@ -404,7 +381,6 @@ class Character extends MovableObject {
     /**
      * Handles the character's idle animation, which is played if no other actions
      * (like walking, jumping, or shooting) are happening.
-     *
      * @returns {void} No return value.
      */
     handleIdle() {
@@ -414,7 +390,6 @@ class Character extends MovableObject {
 
     /**
      * Determines if the character is currently walking based on left or right keyboard input.
-     *
      * @returns {boolean} True if the character is walking; otherwise false.
      */
     isCharacterWalking() {
@@ -425,7 +400,6 @@ class Character extends MovableObject {
     /**
      * Determines if the character is currently shooting based on keyboard input
      * and the availability of pistol ammunition.
-     *
      * @returns {boolean} True if the character is shooting; otherwise false.
      */
     isCharacterShooting() {
@@ -436,12 +410,9 @@ class Character extends MovableObject {
     /**
      * Determines if the character is currently throwing a grenade based on keyboard input
      * and the availability of collected grenades.
-     *
      * @returns {boolean} True if the character is throwing; otherwise false.
      */
     isCharacterThrowing() {
         return this.world.keyboard.THROW && this.world.collectedGrenadeBar.collectedGrenades.length > 0;
     }
-
-
 }

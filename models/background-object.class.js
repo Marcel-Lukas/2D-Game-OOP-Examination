@@ -13,10 +13,20 @@ class BackgroundObject extends MovableObject{
     width = 720;
     height= 480;
 
+
+    /**
+     * Creates a new BackgroundObject instance, loads the specified image,
+     * and positions it correctly at the bottom of the game world.
+     *
+     * @constructor
+     * @param {string} imagePath - The path to the background image.
+     * @param {number} x - The x-coordinate of the background object.
+     */
     constructor(imagePath, x){
         super().loadImage(imagePath);
         this.x = x;
         this.y = 480 - this.height;
     }
 
+    
 }

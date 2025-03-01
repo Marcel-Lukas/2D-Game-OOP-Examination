@@ -27,6 +27,22 @@ class BrainAlien extends MovableObject {
     collisionBoxWidth = 70;
 
 
+    /**
+     * Defines animation speeds for the brain alien.
+     * @type {Object}
+     * @property {number} walking - Delay in milliseconds for the walking animation.
+     * @property {number} hurt - Delay in milliseconds for the hurt animation.
+     */
+    animationSpeeds = {
+        walking: 180,
+        hurt: 160
+    };
+
+
+    /**
+     * An array of image paths for the walking animation.
+     * @type {string[]}
+     */
     IMAGES_WALKING = [
         'img/brain-alien/walk/__green_alien_walk_000.png',
         'img/brain-alien/walk/__green_alien_walk_001.png',
@@ -39,6 +55,10 @@ class BrainAlien extends MovableObject {
     ];
 
 
+    /**
+     * An array of image paths for the hurt animation.
+     * @type {string[]}
+     */
     IMAGES_HURT = [
         'img/brain-alien/hurt/__green_alien_hurt_000.png',
         'img/brain-alien/hurt/__green_alien_hurt_001.png',
@@ -49,6 +69,10 @@ class BrainAlien extends MovableObject {
     ];
 
 
+    /**
+     * An array of image paths for the death animation.
+     * @type {string[]}
+     */
     IMAGES_DEAD = [
         'img/brain-alien/die/__green_alien_die_000.png',
         'img/brain-alien/die/__green_alien_die_001.png',
@@ -59,6 +83,13 @@ class BrainAlien extends MovableObject {
     ];
 
 
+    /**
+     * Creates a new BrainAlien instance. Loads the initial image and animation frames,
+     * sets the x-coordinate, movement speed, and starts the alien's behavior loop.
+     *
+     * @constructor
+     * @param {number} x - The initial x-coordinate of the brain alien.
+     */
     constructor(x) {
         super().loadImage('img/brain-alien/walk/__green_alien_walk_000.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -70,6 +101,13 @@ class BrainAlien extends MovableObject {
     }
 
     
+    /**
+     * Starts the brain alien's main behavior loop. This method sets up two intervals:
+     * one for updating the alien's animation and one for moving the alien to the left.
+     * If the alien moves off the left side of the level, its x-coordinate resets to the right.
+     *
+     * @returns {void} No return value.
+     */
     run() {
         setStoppableIverval(() => {
             this.alienAnimation();
@@ -83,12 +121,14 @@ class BrainAlien extends MovableObject {
     }
 
 
-    animationSpeeds = {
-        walking: 180,
-        hurt: 160
-    };
-
-
+    /**
+     * Controls the brain alien's animations based on its current state.
+     * If the alien is dead, it stops moving and plays the death animation once.
+     * If the alien is hurt, it stops moving and plays a timed hurt animation.
+     * Otherwise, it resumes its normal walking animation after a brief delay.
+     *
+     * @returns {void} No return value.
+     */
     alienAnimation() {
         if (this.isDead()) {
             this.speed = 0;

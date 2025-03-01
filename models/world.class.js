@@ -20,12 +20,10 @@ class World {
     shootableObjects = [];
     explosions = [];
 
-    
     /**
      * Creates a new World instance, initializes the rendering context,
      * starts the game loop and intervals for collision checks, and sets
      * up world references for game objects.
-     *
      * @constructor
      * @param {HTMLCanvasElement} canvas - The canvas element on which the game is drawn.
      * @param {Keyboard} keyboard - The keyboard input manager.
@@ -43,10 +41,8 @@ class World {
         this.bossSeen = false;
     }
 
-
     /**
      * Assigns this World instance to the world property of the provided object.
-     *
      * @param {Object} obj - The object to which the world reference will be assigned.
      * @returns {void} No return value.
      */
@@ -54,11 +50,9 @@ class World {
         obj.world = this;
     }
 
-
     /**
      * Sets up a repeated interval to perform various collision checks and game logic,
      * such as checking enemy collisions, throw and shoot actions, and health pickups.
-     *
      * @returns {void} No return value.
      */
     runIntervals() {
@@ -75,11 +69,9 @@ class World {
         }, 80);
     }
 
-
     /**
      * Determines whether the character is allowed to throw a grenade based on
      * keyboard input, character state, and available collected grenades.
-     *
      * @returns {boolean} True if throwing is possible; otherwise false.
      */
     possibleToThrow() {
@@ -89,12 +81,10 @@ class World {
             this.collectedGrenadeBar.collectedGrenades.length > 0;
     }
 
-
     /**
      * Checks if the conditions to throw a grenade are met and, if so, creates
      * a new throwable object, plays a sound, updates the collected grenade count,
      * and resets the throw flag after a delay.
-     *
      * @returns {void} No return value.
      */
     checkThrowObjects() {
@@ -112,11 +102,9 @@ class World {
         }
     }
 
-
     /**
      * Removes grenade objects from the throwableObjects array by splicing out
      * any element that is greater than 0.
-     *
      * @returns {void} No return value.
      */
     spliceGrenadeFromArray() {
@@ -127,11 +115,9 @@ class World {
         }
     }
 
-
     /**
      * Determines whether the character is allowed to shoot based on
      * keyboard input, character state, and available collected pistol ammunition.
-     *
      * @returns {boolean} True if shooting is possible; otherwise false.
      */
     possibleToShoot() {
@@ -141,11 +127,9 @@ class World {
             this.collectedPistolAmmunitionBar.collectedPistolAmmunition.length > 0;
     }
 
-
     /**
      * Checks if the conditions to shoot are met and, if so, creates a new bullet object,
      * updates the collected pistol ammunition count, and resets the shoot flag after a delay.
-     *
      * @returns {void} No return value.
      */
     checkBulletObjects() {
@@ -161,11 +145,9 @@ class World {
         }
     }
 
-
     /**
      * Removes pistol ammunition objects from the shootableObjects array by splicing out
      * any element that is greater than 0.
-     *
      * @returns {void} No return value.
      */
     splicePistolAmmunitionFromArray() {
@@ -176,12 +158,10 @@ class World {
         }
     }
 
-
     /**
      * Checks for collisions between the character and enemies. If a collision
      * occurs and the character is above a certain y-threshold, applies damage to
      * the character and updates the status bar.
-     *
      * @returns {void} No return value.
      */
     checkEnemyCollisions() {
@@ -193,12 +173,10 @@ class World {
         });
     }
 
-
     /**
      * Checks if the character is jumping on an enemy. If the conditions are met,
      * deals damage to the enemy, plays a sound, propels the character upward,
      * and temporarily prevents multiple jumps on the same enemy.
-     *
      * @returns {void} No return value.
      */
     checkJumpOnEnemy() {
@@ -213,10 +191,8 @@ class World {
         });
     }
 
-
     /**
      * Removes a specific item from an array after a specified delay.
-     *
      * @param {Array} arr - The array from which the item will be removed.
      * @param {*} item - The item to be removed.
      * @param {number} delay - The delay in milliseconds before removal.
@@ -229,12 +205,10 @@ class World {
         }, delay);
     }
 
-
     /**
      * Checks for collisions between bullets and enemies. When a collision is detected,
      * applies damage to the enemy, plays a sound, and removes the bullet after a short delay.
      * Also updates the boss status bar if the enemy is an Endboss.
-     *
      * @returns {void} No return value.
      */
     checkBulletCollisions() {
@@ -254,11 +228,9 @@ class World {
         });
     }
 
-
     /**
      * Checks for collisions between grenade explosions and enemies. For each collision,
      * ensures that the enemy is only hit once per explosion, and applies damage and sound.
-     *
      * @returns {void} No return value.
      */
     checkGrenadeCollisions() {
@@ -270,11 +242,9 @@ class World {
         }));
     }
 
-
     /**
      * Handles the effect of a grenade explosion on an enemy by applying damage,
      * playing a sound, and updating the boss status bar if the enemy is an Endboss.
-     *
      * @param {Explosion} detonation - The explosion object causing the damage.
      * @param {MovableObject} enemy - The enemy object that was hit.
      * @returns {void} No return value.
@@ -291,12 +261,10 @@ class World {
         }
     }
 
-
     /**
      * Checks for collisions between the character and health pickups.
      * If a collision occurs, restores the character's life, plays a sound,
      * updates the status bar, and removes the health pickup from the level.
-     *
      * @returns {void} No return value.
      */
     checkHealthCollision() {
@@ -310,12 +278,10 @@ class World {
         });
     }
 
-
     /**
      * Checks for collisions between the character and pistol ammunition pickups.
      * If a collision occurs, adds multiple instances of the pickup to the
      * collected pistol ammunition bar, plays a sound, and removes the pickup from the level.
-     *
      * @returns {void} No return value.
      */
     checkPistolAmmunitionCollision() {
@@ -330,12 +296,10 @@ class World {
         });
     }
 
-
     /**
      * Checks for collisions between the character and grenade ammunition pickups.
      * If a collision occurs, adds the pickup to the collected grenade bar, plays a sound,
      * and removes the pickup from the level.
-     *
      * @returns {void} No return value.
      */
     checkGrenadeAmmunitionCollision() {
@@ -348,10 +312,8 @@ class World {
         });
     }
 
-
     /**
      * Removes a specific item from the level's array of placed items based on the given array name.
-     *
      * @param {*} item - The item to be removed.
      * @param {string} arrayName - The name of the array in the level object from which the item should be removed.
      * @returns {void} No return value.
@@ -365,11 +327,9 @@ class World {
         }
     }
 
-
     /**
      * Clears the canvas, draws all movable and fixed objects, and schedules the next
      * frame using requestAnimationFrame.
-     *
      * @returns {void} No return value.
      */
     draw() {
@@ -382,11 +342,9 @@ class World {
         });
     }
 
-
     /**
      * Draws all movable objects in the game world by applying camera translation,
      * adding background objects, pickups, enemies, and dynamic objects, and finally drawing the character.
-     *
      * @returns {void} No return value.
      */
     drawMovableObjects() {
@@ -404,11 +362,9 @@ class World {
         this.ctx.translate(-this.cameraX, 0);
     }
 
-
     /**
      * Draws fixed objects such as the status bar, boss status bar (if applicable),
      * and collected ammunition bars.
-     *
      * @returns {void} No return value.
      */
     drawFixedObjects() {
@@ -423,20 +379,16 @@ class World {
         this.addToMap(this.collectedPistolAmmunitionBar);
     }
 
-
     /**
      * Displays the boss status bar by adding it to the map.
-     *
      * @returns {*} The result of adding the boss status bar to the map.
      */
     showBossStatusBar() {
         return this.addToMap(this.bossStatusBar);
     }
 
-
     /**
      * Iterates over an array of objects and adds each object to the map using {@link addToMap}.
-     *
      * @param {Object[]} objects - An array of objects to be added to the map.
      * @returns {void} No return value.
      */
@@ -446,11 +398,9 @@ class World {
         });
     }
 
-
     /**
      * Adds a movable object to the canvas. If the object is facing left (otherDirection is true),
      * the function applies a mirror transformation; otherwise, it draws the object normally.
-     *
      * @param {MovableObject} mo - The movable object to be drawn.
      * @returns {void} No return value.
      */
@@ -475,6 +425,4 @@ class World {
             this.ctx.restore();
         }
     }
-
-
 }
