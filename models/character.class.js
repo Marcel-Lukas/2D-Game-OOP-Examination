@@ -43,9 +43,9 @@ class Character extends MovableObject {
         idle: 70,
         walking: 36,
         jumping: 101,
-        throw: 58,
+        // throw: 58,
+        throw: 36,
         shoot: 33,
-        defense: 111,
         hurt: 99
     };
 
@@ -347,15 +347,27 @@ class Character extends MovableObject {
 
 
     /**
-     * Handles the character's throw animation and plays the throw sound.
+     * Handles the character's throw animation.
      * @returns {void} No return value.
      */
     handleThrow() {
-        this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
-        THROW_SOUND.play();
+        if (this.throwAnimationRunning) return;
+        this.throwAnimationRunning = true;
+        this.currentImage = 0;
+        this.lastFrameTime = Date.now();
+    
+        const animate = () => {
+            this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
+            if (this.currentImage < this.IMAGES_THROW.length) {
+                requestAnimationFrame(animate);
+            } else {
+                this.throwAnimationRunning = false;
+            }
+        };
+        requestAnimationFrame(animate);
     }
-
-
+    
+    
     /**
      * Handles the character's walk animation, sets the walking speed, and
      * plays the walk sound.
@@ -369,14 +381,26 @@ class Character extends MovableObject {
 
 
     /**
-     * Handles the character's shoot animation and plays the shoot sound.
+     * Handles the character's shoot animation.
      * @returns {void} No return value.
      */
     handleShoot() {
-        this.playsTimedAnimation(this.IMAGES_SHOOT, 'shoot');
+        if (this.shootAnimationRunning) return;
         SHOOT_SOUND.play();
+        this.shootAnimationRunning = true;
+        this.currentImage = 0;
+        this.lastFrameTime = Date.now();
+        const animate = () => {
+            this.playsTimedAnimation(this.IMAGES_SHOOT, 'shoot');
+            if (this.currentImage < this.IMAGES_SHOOT.length) {
+                requestAnimationFrame(animate);
+            } else {
+                this.shootAnimationRunning = false;
+            }
+        };
+        requestAnimationFrame(animate);
     }
-
+    
 
     /**
      * Handles the character's idle animation, which is played if no other actions
