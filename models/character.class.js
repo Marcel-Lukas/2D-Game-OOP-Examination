@@ -355,7 +355,6 @@ class Character extends MovableObject {
         this.throwAnimationRunning = true;
         this.currentImage = 0;
         this.lastFrameTime = Date.now();
-    
         const animate = () => {
             this.playsTimedAnimation(this.IMAGES_THROW, 'throw');
             if (this.currentImage < this.IMAGES_THROW.length) {

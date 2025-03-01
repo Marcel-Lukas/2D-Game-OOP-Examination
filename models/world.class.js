@@ -166,7 +166,7 @@ class World {
      */
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && this.character.y > 250) {
+            if (this.character.isColliding(enemy) && this.character.y > 250 && !enemy.lifePoints == 0) {
                 this.character.hit(5);
                 this.statusBar.setPercentage(this.character.lifePoints);
             }
