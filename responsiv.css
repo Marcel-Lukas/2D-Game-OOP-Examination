@@ -1,3 +1,14 @@
+@media (max-width: 1366px) and (max-height: 1366px) {
+    .mobile-control-container {
+        visibility: visible;
+        margin: 0;
+        margin-bottom: -426px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}
+
 @media (orientation: portrait) and (max-width: 728px) {
     .turn-notice {
         visibility:visible;
@@ -63,11 +74,11 @@
     }
 
     #continue-btn {
-        margin-bottom: -140px;
+        margin-bottom: -160px;
     }
 
     #play-again-btn {
-        margin-bottom: 270px;
+        margin-bottom: 248px;
     }
 
     #absolute-container {
@@ -80,7 +91,7 @@
         display: none;
     } 
 
-    #impressum-btn {
+    /* #impressum-btn {
         margin-right: 10px;
         margin-bottom: 2px;
         font-size: 14px;
@@ -88,6 +99,9 @@
             transform: none;
             text-decoration: none;
         }
+    } */
+    #impressum-btn {
+        display: none;
     }
 
     #impressum-box {
