@@ -14,7 +14,6 @@ class BossStatusBar extends DrawableObject{
      */
     IMAGES = [
         'img/bosslifebar/bossLifebar-000.png',
-        'img/bosslifebar/bossLifebar-002.png',
         'img/bosslifebar/bossLifebar-005.png',
         'img/bosslifebar/bossLifebar-010.png',
         'img/bosslifebar/bossLifebar-015.png',
@@ -83,7 +82,7 @@ class BossStatusBar extends DrawableObject{
         if (this.percentage > 0 && index === 0) {
             index = 1;
         }
-        return Math.max(0, Math.min(21, index));
+        return Math.max(0, Math.min(20, index));
     }
     
     

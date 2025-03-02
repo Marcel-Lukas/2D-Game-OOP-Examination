@@ -224,7 +224,7 @@ class Endboss extends MovableObject {
      * @returns {void} No return value.
      */
     bossAnimation() {
-        if (world.character.x > 5000 && !this.hadBossFirstContact) {
+        if (world.character.x > 4900 && !this.hadBossFirstContact) {
             this.awakenedBossActions();
             this.hadBossFirstContact = true;
         } else if (this.isHurt()) {
@@ -303,7 +303,7 @@ class Endboss extends MovableObject {
             this.playsTimedAnimation(this.IMAGES_DASH, "dash");
             BOSS_DASH_SOUND.play();
             this.moveLeft();
-            this.speed = 3;
+            this.speed = 6;
             return "dash";
         }
         return "walking";
@@ -341,30 +341,30 @@ class Endboss extends MovableObject {
 
 
     /**
-     * Moves the boss to the left at speed 1 if the character is alive. Otherwise, the boss stays idle.
+     * Moves the boss to the left if the character is alive. Otherwise, the boss stays idle.
      * @returns {void} No return value.
      */
     walkLeftMovement() {
         if (world.character.lifePoints > 0) {
-            this.otherDirection = true;
+            if (!this.isDead()) {this.otherDirection = true;}
             this.moveLeft();
-            this.speed = 1;
+            this.speed = 1.4;
         } else {
             this.speed = 0;
             this.playsTimedAnimation(this.IMAGES_IDLE, "idle");
         }
     }
-
+    
 
     /**
-     * Moves the boss to the right at speed 1 if the character is alive. Otherwise, the boss stays idle.
+     * Moves the boss to the right if the character is alive. Otherwise, the boss stays idle.
      * @returns {void} No return value.
      */
     walkRightMovement() {
         if (world.character.lifePoints > 0) {
-            this.otherDirection = false;
+            if (!this.isDead()) {this.otherDirection = false;}
             this.moveRight();
-            this.speed = 1;
+            this.speed = 1.4;
         } else {
             this.speed = 0;
             this.playsTimedAnimation(this.IMAGES_IDLE, "idle");
