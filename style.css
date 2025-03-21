@@ -206,13 +206,12 @@ body {
     }
     a {
         color: rgb(9, 255, 0);
-        text-shadow: 2px 2px 8px rgb(255, 255, 255);
+        text-shadow: 0 0 6px rgb(255, 255, 255);
         text-decoration: none;
         cursor: pointer;
     }
     a:hover {
-        text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.7);
-        font-weight: bold;
+        text-shadow: 0 0 18px rgb(255, 255, 255);
     }
 }
 
