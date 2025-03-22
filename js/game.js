@@ -154,7 +154,10 @@ function fullscreen() {
  * @returns {void} No return value.
  */
 function autoFullscreenForMobile() {
-    if (window.matchMedia("(orientation: landscape)").matches) {
+    if (
+      window.matchMedia("(orientation: landscape)").matches &&
+      (window.innerWidth <= 728 || window.innerHeight <= 728)
+    ) {
       const element = document.documentElement;
       if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -167,4 +170,4 @@ function autoFullscreenForMobile() {
       }
     }
 }
-
+  

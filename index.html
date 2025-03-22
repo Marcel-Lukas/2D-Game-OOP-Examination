@@ -10,6 +10,7 @@
     <meta name="description" content="Defend the world against a ruthless alien invasion! Arm yourself with weapons and fight for survival in this action-packed browser game.">
     <meta name="keywords" content="Alien Invasion, Shooter, Desert, Browser Game, Action, Weapons, Survival, Sci-Fi, Combat, Defense">    
     <meta name="author" content="Marcel Lukas">
+    <meta name="developer" content="Marcel Lukas">
     <meta name="theme-color" content="#1b1b1b">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96">
@@ -18,11 +19,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
     <link rel="manifest" href="img/favicon/site.webmanifest">
     <title>Desert Alien Invasion</title>
-
     <link rel="stylesheet" type="text/css" href="fonts.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="responsiv.css">
-
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
@@ -67,17 +66,17 @@
 
     <div id="start-overlay" class="start-overlay">
         <img id="start-screen" class="start-screen" src="img/start-screen.jpg" alt="Start Screen">
-        <div id="start-btn" onclick="startGame()">Start</div>
+        <div id="start-btn" onclick="startGame(), autoFullscreenForMobile()">Start</div>
     </div>
 
     <div id="game-over-overlay" class="game-over-overlay d-none">
         <img id="game-over-screen" class="game-over-screen" src="img/end-screen.jpg" alt="Game Over">
-        <div id="continue-btn" onclick="restartGame()">Try Again</div>
+        <div id="continue-btn" onclick="restartGame(), autoFullscreenForMobile()">Try Again</div>
     </div>
 
     <div id="win-overlay" class="win-overlay d-none">
         <img id="win-screen" class="win-screen" src="img/win-screen.jpg" alt="Game Over">
-        <div id="play-again-btn" onclick="restartGame()">Play Again</div>
+        <div id="play-again-btn" onclick="restartGame(), autoFullscreenForMobile()">Play Again</div>
     </div>
 
     <div class="mobile-control-container">
@@ -132,11 +131,12 @@
         <div id="impressum-box">
             <img class="xBtn" onclick="closeWindow()" src="img/close-white.png" alt="X Button">
             <h2>Impressum</h2>
+            <p>Angaben gemäß § 5 DDG</p>
             <p>Marcel Lukas</p>
             <p>Marienhöhe 13</p>
             <p>84152 Mengkofen</p>
-            <br>
-            <a href="https://marcel-lukas.com" target="_blank" rel="noopener noreferrer">www.marcel-lukas.com</a>
+            <div><span>E-Mail:</span><a href="mailto:contact@marcel-lukas.com">contact&#64;marcel-lukas.com</a></div>
+            <a href="https://marcel-lukas.com">www.marcel-lukas.com</a>
         </div>
         <a href="https://github.com/Marcel-Lukas" target="_blank" rel="noopener noreferrer"><img id="gitcontact" src="img/github-contact.png" alt="GitHub Kontakt"></a>
     </div>
