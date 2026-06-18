@@ -214,6 +214,29 @@ function changeMuteIcon() {
 
 
 /**
+ * Prevents the browser from eagerly downloading all audio files on page load.
+ * Each sound is marked `preload="none"` so the initial page (start screen) loads
+ * faster, especially on slow / throttled connections. The actual buffering is
+ * done in parallel by the preloader right before the game starts.
+ *
+ * @function deferSoundPreloading
+ * @returns {void} No return value.
+ */
+function deferSoundPreloading() {
+    [
+        WALK_SOUND, JUMP_SOUND, THROW_SOUND, HURT_SOUND, DIE_SOUND, WILHELM_SCREAM,
+        SHOOT_SOUND, EXPLOSION_SOUND, PICK_UP_PISTOL_AMMO_SOUND, PICK_UP_NADE_AMMO_SOUND,
+        PICK_UP_HEALTH_SOUND, ALIEN_HURT_SOUND, JUMP_ALIEN_HIT, BOSS_ALERT_SOUND,
+        BOSS_DASH_SOUND, BOSS_WALK_SOUND, BOSS_SCREAM, GAME_SOUND, WIN_SOUND
+    ].forEach((audio) => {
+        if (audio) audio.preload = 'none';
+    });
+}
+
+deferSoundPreloading();
+
+
+/**
  * Event listener for DOM content loaded, triggering the initial sound status load.
  */
 window.addEventListener('DOMContentLoaded', loadSoundStatus);

@@ -13,17 +13,48 @@ class DrawableObject {
     width = 111;
     imageCache = {};
 
+    /**
+     * A shared, class-wide cache of already created `HTMLImageElement`s, keyed by their
+     * source path. Because it lives on the class (static) rather than on each instance,
+     * identical images (e.g. enemy animation frames used by many instances) are created
+     * and downloaded only once and then reused everywhere. This drastically reduces the
+     * number of `Image` objects and network requests.
+     *
+     * @type {Object<string, HTMLImageElement>}
+     */
+    static sharedImageCache = {};
+
+
+    /**
+     * Returns a cached `HTMLImageElement` for the given path, creating and caching it
+     * (in the shared, class-wide cache) on first use. This guarantees that every unique
+     * image is instantiated only once across the whole game.
+     *
+     * @function getCachedImage
+     * @param {string} path - The path to the image file.
+     * @returns {HTMLImageElement} The cached image element for the given path.
+     */
+    getCachedImage(path) {
+        let cache = DrawableObject.sharedImageCache;
+        if (!cache[path]) {
+            let img = new Image();
+            img.src = path;
+            cache[path] = img;
+        }
+        return cache[path];
+    }
+
 
     /**
      * Loads a single image from the specified path and assigns it to the `img` property.
+     * The image is taken from (or stored in) the shared cache, so it is downloaded only once.
      *
      * @function loadImage
      * @param {string} path - The path to the image file.
      * @returns {void} No return value.
      */
     loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
+        this.img = this.getCachedImage(path);
     }
 
 
@@ -100,9 +131,7 @@ class DrawableObject {
      */
     loadImages(array){
         array.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
+            this.imageCache[path] = this.getCachedImage(path);
         });
     }
 

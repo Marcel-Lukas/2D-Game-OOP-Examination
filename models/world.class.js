@@ -388,14 +388,36 @@ class World {
     }
 
     /**
-     * Iterates over an array of objects and adds each object to the map using {@link addToMap}.
+     * Iterates over an array of objects and adds each visible object to the map
+     * using {@link addToMap}. Objects that lie completely outside the current
+     * viewport are skipped (viewport culling), which avoids unnecessary draw
+     * calls and improves rendering performance on large levels.
      * @param {Object[]} objects - An array of objects to be added to the map.
      * @returns {void} No return value.
      */
     addObjectsToMap(objects) {
         objects.forEach(o => {
-            this.addToMap(o);
+            if (this.isInViewport(o)) {
+                this.addToMap(o);
+            }
         });
+    }
+
+    /**
+     * Determines whether a world object is at least partially visible within the
+     * current camera viewport. A small buffer is added on both sides so objects
+     * are never popped in or out abruptly at the screen edges.
+     * @param {MovableObject} mo - The object to test.
+     * @returns {boolean} True if the object should be drawn, otherwise false.
+     */
+    isInViewport(mo) {
+        if (typeof mo.x !== 'number' || typeof mo.width !== 'number') {
+            return true;
+        }
+        const buffer = 200;
+        const viewLeft = -this.cameraX - buffer;
+        const viewRight = -this.cameraX + this.canvas.width + buffer;
+        return (mo.x + mo.width) >= viewLeft && mo.x <= viewRight;
     }
 
     /**

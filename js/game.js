@@ -19,24 +19,24 @@ function init() {
 
 
 /**
- * Starts the game by hiding the start overlay, initializing the game components,
- * and playing the background sound after a short delay.
- * 
+ * Starts the game by hiding the start overlay and launching the preloaded game
+ * flow (loading screen with progress, then the actual game).
+ *
  * @function startGame
  * @returns {void} No return value.
  */
 function startGame() {
     const startOverlay = document.getElementById("start-overlay");
     startOverlay.classList.add("d-none");
-    init();
-    setTimeout(() => {GAME_SOUND.play();}, 444);
+    runWithLoadingScreen();
 }
 
 
 /**
- * Restarts the game by hiding the "Game Over" and "Win" overlays, re-initializing
- * the game components, and playing the background sound after a short delay.
- * 
+ * Restarts the game by hiding the "Game Over" and "Win" overlays and launching
+ * the preloaded game flow again. On a restart the assets are already cached, so
+ * the loading screen is practically instant.
+ *
  * @function restartGame
  * @returns {void} No return value.
  */
@@ -45,8 +45,75 @@ function restartGame() {
     const winScreen = document.getElementById("win-overlay");
     gameOverOverlay.classList.add("d-none");
     winScreen.classList.add("d-none");
-    init();
-    setTimeout(() => {GAME_SOUND.play();}, 444);
+    runWithLoadingScreen();
+}
+
+
+/**
+ * Shows the loading screen, preloads every image and audio asset in parallel
+ * while updating the progress bar, and only then initializes and reveals the
+ * game. If the preloader is unavailable for any reason, it falls back to the
+ * original immediate-start behaviour so the game always remains playable.
+ *
+ * @function runWithLoadingScreen
+ * @returns {void} No return value.
+ */
+function runWithLoadingScreen() {
+    if (typeof preloadAllAssets !== 'function') {
+        init();
+        setTimeout(() => { GAME_SOUND.play(); }, 444);
+        return;
+    }
+    showLoadingScreen();
+    preloadAllAssets(updateLoadingProgress).then(() => {
+        hideLoadingScreen();
+        init();
+        setTimeout(() => { GAME_SOUND.play(); }, 200);
+    });
+}
+
+
+/**
+ * Reveals the loading overlay and resets its progress to 0%.
+ *
+ * @function showLoadingScreen
+ * @returns {void} No return value.
+ */
+function showLoadingScreen() {
+    const overlay = document.getElementById("loading-overlay");
+    if (overlay) {
+        updateLoadingProgress(0);
+        overlay.classList.remove("d-none");
+    }
+}
+
+
+/**
+ * Hides the loading overlay.
+ *
+ * @function hideLoadingScreen
+ * @returns {void} No return value.
+ */
+function hideLoadingScreen() {
+    const overlay = document.getElementById("loading-overlay");
+    if (overlay) {
+        overlay.classList.add("d-none");
+    }
+}
+
+
+/**
+ * Updates the loading screen's progress bar and percentage text.
+ *
+ * @function updateLoadingProgress
+ * @param {number} percent - The loading progress as a value between 0 and 100.
+ * @returns {void} No return value.
+ */
+function updateLoadingProgress(percent) {
+    const fill = document.getElementById("loading-bar-fill");
+    const text = document.getElementById("loading-text");
+    if (fill) fill.style.width = percent + "%";
+    if (text) text.textContent = "Loading… " + percent + "%";
 }
 
 
